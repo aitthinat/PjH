@@ -1,0 +1,56 @@
+body{
+    background-color: lavender;
+    padding: 20px;
+}
+@font-face {
+	font-family: 'Conv_Bangnampueng';
+	src: url('CSS/fonts/Bangnampueng.eot');
+	src: local('☺'), url('CSS/fonts/Bangnampueng.woff') format('woff'), url('CSS/fonts/Bangnampueng.ttf') format('truetype'), url('CSS/fonts/Bangnampueng.svg') format('svg');
+	font-weight: normal;
+	font-style: normal;
+}
+
+.hello{
+    font-size: 20px;
+    
+}
+.data{
+    background-color: #F0F8FF;
+    width: 98%;
+    height: 80%;
+    margin: auto;
+    padding: 20px;
+    border: none; 
+    border-radius: 25px;
+}
+input[type=number]{
+    width: 50%;
+    padding: 5px 10px;
+    margin: 8px 0;
+    box-sizing: border-box;
+    border: none;
+    border-bottom: 2px solid #00BFFF;
+    background: #F0F8FF;
+    
+}
+input[type=text] {
+    width: 70%;
+    box-sizing: border-box;
+    border: none;
+    border-bottom: 2px solid #00BFFF;
+    background: #FFFFFF;
+    
+}
+.btn{
+    margin-top: 10px;
+    position: relative; left: 1080px;
+    display: inline-block;
+    
+}
+.btn1{
+    margin-top: 10px;
+    position: relative; left: 240px;
+    border-radius: 4px;
+    border: none;
+}
+
