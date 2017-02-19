@@ -12,14 +12,63 @@
         document.getElementById("TE2").disabled = false;
         document.getElementById("TE3").disabled = false;
     }
+    function validateForm() {
+     var sys = document.forms["myForm"]["SYS"].value;
+     var bg = document.forms["myForm"]["BloodGroup"].value;
+     var dia = document.forms["myForm"]["DIA"].value;
+     var w = document.forms["myForm"]["weight"].value;
+     var h = document.forms["myForm"]["height"].value;
+     var d = document.forms["myForm"]["Drink"].value;
+     var s = document.forms["myForm"]["Smoke"].value;
+     var ex = document.forms["myForm"]["exercise"].value;
+     var tex = document.forms["myForm"]["time-exercise"].value;
+     if ( sys == null || sys == "" ) {
+      alert("กรุณากรอกข้อมูลให้ครบถ้วน");
+      return false;
+  } 
+  if ( bg == null || bg == "" ) {
+      alert("กรุณากรอกข้อมูลให้ครบถ้วน");
+      return false;
+  }
+  if ( dia == null || dia == "" ) {
+      alert("กรุณากรอกข้อมูลให้ครบถ้วน");
+      return false;
+  }
+  if ( w == null || w == "" ) {
+      alert("กรุณากรอกข้อมูลให้ครบถ้วน");
+      return false;
+  }
+  if ( h == null || h == "" ) {
+      alert("กรุณากรอกข้อมูลให้ครบถ้วน");
+      return false;
+  }
+  if ( d == null || d == "" ) {
+      alert("กรุณากรอกข้อมูลให้ครบถ้วน");
+      return false;
+  }
+  if ( s == null || s == "" ) {
+      alert("กรุณากรอกข้อมูลให้ครบถ้วน");
+      return false;
+  }
+  if ( ex == null || ex == "" ) {
+      alert("กรุณากรอกข้อมูลให้ครบถ้วน");
+      return false;
+  }
+  if (( ex == "1" || ex == "2" )&&(tex == null || tex =="")) {
+      alert("กรุณากรอกข้อมูลให้ครบถ้วน");
+      return false;
+  }
+
+}
+
 </script>
-<div style="background:#86e8db">
-    <div class="container" style="background:#f7fffd">
+<div style="background:#d8e9f3">
+    <div class="container" style="background:#f2f3f4">
         <div class="row">
             <div class="col-lg-12">
                 <div style="width:100%" >
                     <div align="center" style="padding-top:10px;padding-bottom:20px"><h1>บันทึกข้อมูลการตรวจสุขภาพ</h1></div>
-                    <form action="accept_adddata.php" method="POST">
+                    <form name="myForm" action="accept_adddata.php" method="POST" onsubmit="return validateForm()">
                         <div class="form-check form-group row" style="margin-left:10%">
                             <label class="col-2 col-form-label">ชื่อ - สกุล</label>
                             <label class="form-check-label">
@@ -44,13 +93,13 @@
                         <div class="form-group row" style="margin-left:10%;margin-right:10%">
                             <label class="col-2 col-form-label">ความดันโลหิต</label>
                             <div class="col-10">
-                                <input class="form-control" type="number" id="SYS" name="SYS" placeholder="SYS" min="1" pattern=".{1,}">
-                                <input class="form-control" type="number" id="DIA" name="DIA"  placeholder="DIA" min="1"  pattern=".{1,}">
+                                <input class="form-control" type="number" id="SYS" name="SYS" placeholder="SYS" min="1" pattern=".{1,5}">
+                                <input class="form-control" type="number" id="DIA" name="DIA"  placeholder="DIA" min="1"  pattern=".{1,5}">
                             </div>
                         </div>
                         <div class="form-group row" style="margin-left:10%;margin-right:10%">
-                         <label class="col-2 col-form-label">น้ำหนัก</label>
-                         <div class="col-10">
+                           <label class="col-2 col-form-label">น้ำหนัก</label>
+                           <div class="col-10">
                             <input class="form-control" type="number" id="weight" name="weight" placeholder="kilogram" min="1"  pattern=".{1,}">
                         </div>
                         <label class="col-2 col-form-label">ส่วนสูง</label>

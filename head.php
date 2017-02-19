@@ -43,7 +43,8 @@
                     <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
                         <span class="sr-only">Toggle navigation</span> Menu <i class="fa fa-bars"></i>
                     </button>
-                    <a class="navbar-brand" href="#page-top"><i class="fa fa-home"></i>HOME</a>
+                    <a class="navbar-brand" href="index.php"><i class="fa fa-home"></i>HOME</a>
+                    <a class="navbar-brand mb-0" href="#page-top"><i class="fa fa-arrow-up"></i>TOP</a>
                 </div>
 
                 <!-- Collect the nav links, forms, and other content for toggling -->
@@ -53,7 +54,7 @@
                             <a href="#page-top"></a>
                         </li>
                         <li class="page-scroll">
-                            <a href="#portfolio">LOGIN <i class="fa fa-user"></i></a>
+                            <a href="#">LOGIN <i class="fa fa-user"></i></a>
                         </li>
                     </ul>
                 </div>

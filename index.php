@@ -10,7 +10,7 @@
       </div>
       <div class="col align-self-center" style="margin-right: -60px;margin-left: -60px">
     <div><center><img class="img-responsive" src="img/2.png"></center></div>
-    <div><center><img class="img-responsive" src="img/5.png"></center></div>
+    <div><center><a href="add_edd.php"><img class="img-responsive" src="img/5.png"></a></center></div>
       </div>
       <div class="col align-self-end">
     <div><img class="img-responsive" src="img/3.png" align="left"></div>
