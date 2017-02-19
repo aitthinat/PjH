@@ -14,7 +14,7 @@
       </div>
       <div class="col align-self-end">
     <div><img class="img-responsive" src="img/3.png" align="left"></div>
-    <div><img class="img-responsive" src="img/6.png" align="left"></div>
+    <div><a href="s_risk.php"><img class="img-responsive" src="img/6.png" align="left"></a></div>
       </div>
     </div>
   </div>

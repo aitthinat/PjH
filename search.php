@@ -5,6 +5,7 @@
 
         <div>
             <div style="padding-bottom: 20px"><center><img class="img-responsive" src="img/onpage_2.png" height="100" width="200"></center></div>
+            <!-- Please Edit!! -->
             <form name="myForm" onsubmit="return validateForm()" action="info_edd.php" method="POST" >
             <!-- House ID -->
               <div class="form-group row" style="margin-left:27%;margin-right:10%">
@@ -51,7 +52,6 @@
           </select>
         </div>
         </div>
-
 
 
           <div class="form-check form-group row" style="margin-left:10%;margin-right:10%" align="center">
