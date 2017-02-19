@@ -21,15 +21,15 @@
                     </label><br/>
 
                     <label class="form-check-label" style="margin-left:27%;margin-right:10%">
-                        <input class="form-check-input" type="checkbox" id="selectDis2" name="selectDis2" value="1" aria-label="...">ความดันโลหิตสูง
+                        <input class="form-check-input" type="checkbox" id="selectDis2" name="selectDis2" value="2" aria-label="...">ความดันโลหิตสูง
                     </label><br/>
 
                     <label class="form-check-label" style="margin-left:27%;margin-right:10%">
-                        <input class="form-check-input" type="checkbox" id="selectDis3" name="selectDis3" value="1" aria-label="...">โรคหัวใจ
+                        <input class="form-check-input" type="checkbox" id="selectDis3" name="selectDis3" value="3" aria-label="...">โรคหัวใจ
                     </label><br/>
 
                     <label class="form-check-label" style="margin-left:27%;margin-right:10%">
-                        <input class="form-check-input" type="checkbox" id="selectDis4" name="selectDis4" value="1" aria-label="...">โรคตับ
+                        <input class="form-check-input" type="checkbox" id="selectDis4" name="selectDis4" value="4" aria-label="...">โรคตับ
                     </label><br/>
 
 
