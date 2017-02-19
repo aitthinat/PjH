@@ -1,135 +1,15 @@
 <?php include "head.php" ?>
-<!-- <script type="text/javascript"> 
-    function keyup(obj,e){
-        var keynum;
-        var keychar;
-        var id = '';
-    if(window.event) {// IE
-      keynum = e.keyCode;
-  }
-    else if(e.which) {// Netscape/Firefox/Opera
-      keynum = e.which;
-  }
-  keychar= String.fromCharCode(keynum); 
-
-  var tagInput = document.getElementsByTagName('input');
-  for(i=0;i<=tagInput.length;i++){
-    if(tagInput[i] == obj){ 
-        var prevObj = tagInput[i-1];
-        var nextObj = tagInput[i+1];
-        break;
-    }
-} 
-if(obj.value.length == 0 && keynum == 8) prevObj.focus();
-
-if(obj.value.length == obj.getAttribute('maxlength')){ 
-    for(i=0;i<=tagInput.length;i++){
-        if(tagInput[i].id.substring(0,5) == 'txtID'){ 
-            if(tagInput[i].value.length == tagInput[i].getAttribute('maxlength')){
-                id += tagInput[i].value;
-                if(tagInput[i].id == 'txtID5') break;
-            }
-            else{
-                tagInput[i].focus();
-                return;
-            }
-        }
-    } 
-    if(checkID(id)) nextObj.focus();
-    else alert('รหัสประชาชนไม่ถูกต้อง');
-    nextObj.focus();
-}
-
-}
-
-function checkID(id){
-    if(id.length != 13) return false;
-    for(i=0, sum=0; i < 12; i++)
-        sum += parseFloat(id.charAt(i))*(13-i); 
-    if((11-sum%11)%10!=parseFloat(id.charAt(12)))
-        return false; 
-    return true;
-}
-// 
-</script>
- -->
-
 <div style="background:#d8e9f3">
-    <div class="form-check form-group row" style="margin-left:10%;margin-bottom:-12px">
-        <h2>
-            <label class="col-3 col-form-label">บ้านเลขที่ :</label>
-            <label class="col-form-label">123 / 123</label>
-        </h2>
-    </div>
-    <div class="form-check form-group row" style="margin-left:10%">
-        <h4>
-            <label class="col-3 col-form-label">เลขที่ประจำบ้าน :</label>
-            <label class="col-form-label">560x-xxxxxx-x</label>
-        </h4>
-    </div>
+
     <div class="container" style="background:#f2f3f4">
         <div class="row">
             <div class="col-lg-12">
                 <div style="width:100%" >
                     <div align="center" style="padding-top:10px;padding-bottom:20px"></div>
                     <form name="myForm" action="accept_adddata.php" method="POST" onsubmit="return validateForm()">
-                       <div class="form-group row" style="margin-left:10%;margin-right:10%">
-                        <label class="col-2 col-form-label">ชื่อ - สกุล</label>
-                        <div class="col-10">
-                            <input class="form-control" type="text" id="fname" name="fname" placeholder="ชื่อ" pattern="[a-zA-Zก-๑]+" title="กรุณาใส่ชื่ออีกครั้ง">
-                            <input class="form-control" type="text" id="lname" name="lname"  placeholder="สกุล"  pattern="[a-zA-Zก-๑]+" title="กรุณาใส่นามสกุลอีกครั้ง">
-                        </div>
-                    </div>
-                    <div class="form-check form-group row" style="margin-left:10%">
-                        <label class="col-2 col-form-label">เพศ</label>
-                        <label class="form-check-label">
-                            <input class="form-check-input" type="radio" name="sex" id="sex" value="M"> ชาย
-                        </label>
-                        <label class="form-check-label" style="margin-left:2%">
-                            <input class="form-check-input" type="radio" name="sex" id="sex" value="W"> หญิง
-                        </label>
-                    </div>
-                    <div class="form-inline row" style="margin-left:10%;margin-right:10%;margin-bottom: 10px">
-                        <label class="col-2 col-form-label">รหัสประจำตัวประชาชน : </label>
-                        <div class="col-10 form-inline">
-                            <div><input class="form-control" type="text" name="txtID1" id="txtID1" size="3px" maxlength=1 onkeyup="keyup(this,event)" onkeypress="return Numbers(event)">-</div>
-                            <div><input class="form-control" type="text" name="txtID2" id="txtID2" size="7px" maxlength=4 onkeyup="keyup(this,event)" onkeypress="return Numbers(event)">-</div>
-                            <div><input class="form-control" type="text" name="txtID3" id="txtID3" size="7px" maxlength=5 onkeyup="keyup(this,event)" onkeypress="return Numbers(event)">-</div>
-                            <div><input class="form-control" type="text" name="txtID4" id="txtID4" size="5px" maxlength=2 onkeyup="keyup(this,event)" onkeypress="return Numbers(event)">-</div>
-                            <div><input class="form-control" type="text" name="txtID5" id="txtID5" size="3px" maxlength=1 onkeyup="keyup(this,event)" onkeypress="return Numbers(event)"></div>
-                        </div>
-                    </div>
-                    <div class="form-group row" style="margin-left:10%;margin-right:10%">
-                      <label for="example-date-input" class="col-2 col-form-label">Date</label>
-                      <div class="col-10">
-                        <input class="form-control" type="date" id="datepicker" >
-                        <p id="demo"></p>
-                    </div>
-                </div>
-                <div class="form-group row" style="margin-left:10%;margin-right:10%">
-                    <label class="col-2 col-form-label">สถานะ</label>
-                    <div class="col-10">
-                        <div class="form-check">
-                           <div class="form-inline style">
-                              <label class="form-check-label">
-                                <input class="form-check-input" type="radio" name="status" id="status1" value="1" checked>
-                                เจ้าบ้าน
-                            </label>
-                        </div>
-                    </div>
-                    <div class="form-check">
-                        <div class="form-inline style">
-                          <label class="form-check-label">
-                            <input class="form-check-input" type="radio" name="status" id="status2" value="2">
-                            ผู้อาศัย
-                        </label>
-                    </div>
-                </div>
-            </div>
-        </div>
         <div class="form-group row" style="margin-left:10%;margin-right:10%">
-         <label class="col-2 col-form-label">การศึกษา</label>
-         <div class="col-10">
+           <label class="col-2 col-form-label">การศึกษา</label>
+           <div class="col-10">
             <select class="form-control form-control-lg">
               <option selected>Open this select menu</option>
               <option value="1">One</option>
@@ -152,8 +32,8 @@ function checkID(id){
 
 </div>
 <div class="form-group row" style="margin-left:10%;margin-right:10%">
- <label class="col-2 col-form-label">รายได้</label>
- <div class="col-10">
+   <label class="col-2 col-form-label">รายได้</label>
+   <div class="col-10">
     <select class="form-control form-control-lg">
       <option selected>Open this select menu</option>
       <option value="1">One</option>
@@ -164,8 +44,8 @@ function checkID(id){
 
 </div>
 <div class="form-group row" style="margin-left:10%;margin-right:10%">
- <label class="col-2 col-form-label">เบอร์โทรศัพท์</label>
- <div class="col-10">
+   <label class="col-2 col-form-label">เบอร์โทรศัพท์</label>
+   <div class="col-10">
     <input class="form-control" type="tel" value="0" maxlength="10" id="example-tel-input" pattern="[0-9]+" title="กรุณาใส่เบอร์โทรศัพท์ใหม่อีกครั้ง">
 </div>
 </div>
@@ -193,53 +73,53 @@ function checkID(id){
         document.getElementById("TE3").disabled = false;
     }
     function validateForm() {
-     var sys = document.forms["myForm"]["SYS"].value;
-     var bg = document.forms["myForm"]["BloodGroup"].value;
-     var dia = document.forms["myForm"]["DIA"].value;
-     var w = document.forms["myForm"]["weight"].value;
-     var h = document.forms["myForm"]["height"].value;
-     var d = document.forms["myForm"]["Drink"].value;
-     var s = document.forms["myForm"]["Smoke"].value;
-     var ex = document.forms["myForm"]["exercise"].value;
-     var tex = document.forms["myForm"]["time-exercise"].value;
-     if ( sys == null || sys == "" ) {
-      alert("กรุณากรอกข้อมูลให้ครบถ้วน");
-      return false;
-  } 
-  if ( bg == null || bg == "" ) {
-      alert("กรุณากรอกข้อมูลให้ครบถ้วน");
-      return false;
-  }
-  if ( dia == null || dia == "" ) {
-      alert("กรุณากรอกข้อมูลให้ครบถ้วน");
-      return false;
-  }
-  if ( w == null || w == "" ) {
-      alert("กรุณากรอกข้อมูลให้ครบถ้วน");
-      return false;
-  }
-  if ( h == null || h == "" ) {
-      alert("กรุณากรอกข้อมูลให้ครบถ้วน");
-      return false;
-  }
-  if ( d == null || d == "" ) {
-      alert("กรุณากรอกข้อมูลให้ครบถ้วน");
-      return false;
-  }
-  if ( s == null || s == "" ) {
-      alert("กรุณากรอกข้อมูลให้ครบถ้วน");
-      return false;
-  }
-  if ( ex == null || ex == "" ) {
-      alert("กรุณากรอกข้อมูลให้ครบถ้วน");
-      return false;
-  }
-  if (( ex == "1" || ex == "2" )&&(tex == null || tex =="")) {
-      alert("กรุณากรอกข้อมูลให้ครบถ้วน");
-      return false;
-  }
+       var sys = document.forms["myForm"]["SYS"].value;
+       var bg = document.forms["myForm"]["BloodGroup"].value;
+       var dia = document.forms["myForm"]["DIA"].value;
+       var w = document.forms["myForm"]["weight"].value;
+       var h = document.forms["myForm"]["height"].value;
+       var d = document.forms["myForm"]["Drink"].value;
+       var s = document.forms["myForm"]["Smoke"].value;
+       var ex = document.forms["myForm"]["exercise"].value;
+       var tex = document.forms["myForm"]["time-exercise"].value;
+       if ( sys == null || sys == "" ) {
+          alert("กรุณากรอกข้อมูลให้ครบถ้วน");
+          return false;
+      } 
+      if ( bg == null || bg == "" ) {
+          alert("กรุณากรอกข้อมูลให้ครบถ้วน");
+          return false;
+      }
+      if ( dia == null || dia == "" ) {
+          alert("กรุณากรอกข้อมูลให้ครบถ้วน");
+          return false;
+      }
+      if ( w == null || w == "" ) {
+          alert("กรุณากรอกข้อมูลให้ครบถ้วน");
+          return false;
+      }
+      if ( h == null || h == "" ) {
+          alert("กรุณากรอกข้อมูลให้ครบถ้วน");
+          return false;
+      }
+      if ( d == null || d == "" ) {
+          alert("กรุณากรอกข้อมูลให้ครบถ้วน");
+          return false;
+      }
+      if ( s == null || s == "" ) {
+          alert("กรุณากรอกข้อมูลให้ครบถ้วน");
+          return false;
+      }
+      if ( ex == null || ex == "" ) {
+          alert("กรุณากรอกข้อมูลให้ครบถ้วน");
+          return false;
+      }
+      if (( ex == "1" || ex == "2" )&&(tex == null || tex =="")) {
+          alert("กรุณากรอกข้อมูลให้ครบถ้วน");
+          return false;
+      }
 
-}
+  }
 
 </script>
 <div style="background:#d8e9f3">
@@ -278,8 +158,8 @@ function checkID(id){
                             </div>
                         </div>
                         <div class="form-group row" style="margin-left:10%;margin-right:10%">
-                           <label class="col-2 col-form-label">น้ำหนัก</label>
-                           <div class="col-10">
+                         <label class="col-2 col-form-label">น้ำหนัก</label>
+                         <div class="col-10">
                             <input class="form-control" type="number" id="weight" name="weight" placeholder="kilogram" min="1"  pattern=".{1,}">
                         </div>
                         <label class="col-2 col-form-label">ส่วนสูง</label>
