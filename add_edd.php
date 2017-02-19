@@ -21,15 +21,15 @@
 }
 
 </script>
-<div>
+<div style="margin-bottom: 50px">
     <div class="container">
 
         <div>
             <div style="padding-bottom: 20px"><center><img class="img-responsive" src="img/onpage_1.png" height="100" width="200"></center></div>
             <form name="myForm" onsubmit="return validateForm()" action="info_edd.php" method="POST" >
-              <div class="form-group row" style="margin-left:27%;margin-right:10%">
+              <div class="form-group row" style="margin-left:5%;margin-right:10%">
                 <label class="col-2 col-form-label">บ้านเลขที่</label>
-                <div class="col-5">
+                <div class="col-10">
                   <input class="form-control" type="text" id="findhome" name="findhome" pattern="[0-9/]+.{1,}" title="กรุณากรอกเลขที่บ้านใหม่อีกครั้ง">
               </div>
           </div>
