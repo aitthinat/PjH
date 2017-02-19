@@ -18,6 +18,15 @@ if (!empty($_POST["homeArea1"])) {
 if (!empty($_POST["homeArea2"])) {
     $homeArea2 = $_POST["homeArea2"];
 }
+if ($exercise == 0) {
+    $tname = "นาง";
+    $fname = "จันทร์";
+    $lname = "คำใหญ่";
+} else {
+    $tname = "นาย";
+    $fname = "คำ";
+    $lname = "หัวดำ";
+}
 ?>
 <script language="Javascript">
     function Finish_Check() {
@@ -41,7 +50,8 @@ if (!empty($_POST["homeArea2"])) {
                     <div class="form-check form-group row" style="margin-left:10%">
                         <label class="col-2 col-form-label">ชื่อ - สกุล</label>
                         <label class="form-check-label">
-                            <h4><label style="padding-right:10px">นาย</label><label style="padding-right:20px">คำ</label><label>หัวดำ</label></h4>
+
+                            <h4><label style="padding-right:10px"><?php echo $tname; ?></label><label style="padding-right:20px"><?php echo $fname; ?></label><label><?php echo $lname; ?></label></h4>
                         </label>
                     </div>
                     <div class="form-check form-group row" style="margin-left:10%">

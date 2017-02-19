@@ -39,7 +39,7 @@
                       <td>จันทร์</td>
                       <td>คำใหญ่</td>
                       <td>หัวหน้าครอบครัว</td>
-                      <td style="color: green">ตรวจแล้ว</td>
+                      <td><a href="adddata-old-case.php" style="color: green">ตรวจแล้ว</a></td>
                       <td><a href=""><button type="button" class="btn btn-primary">Edit</button></a></td>
                   </tr>
                   <tr>
