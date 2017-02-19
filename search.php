@@ -37,16 +37,17 @@
 
             <!-- Age -->
 
-            <div class="form-group row" style="margin-left:10%;margin-right:10%">
+            <div class="form-group row" style="margin-left:27%;margin-right:10%">
            <label class="col-2 col-form-label">อายุ</label>
-           <div class="col-10">
+           <div class="col-5">
             <select name="educate" class="form-control form-control-lg">
               <option selected value="">----- เลือกช่วงอายุ -----</option>
-              <option value="1">ต่ำกว่า 2 ปี</option>
-              <option value="2">2 ปี - 5 ปี</option>
-              <option value="3">6 ปี -  ปี</option>
-              <option value="4">มัธยมศึกษาตอนปลาย หรือ อาชีวะศึกษา</option>
-              <option value="5">อุดมศึกษา</option>
+              <option value="1">น้อยกว่า 1 ปี</option>
+              <option value="2">1 - 10 ปี</option>
+              <option value="3">11 - 20 ปี</option>
+              <option value="4">21 - 40 ปี</option>
+              <option value="5">41 - 60 ปี</option>
+              <option value="5">61 - 100 ปีขึ้นไป</option>
           </select>
         </div>
         </div>
