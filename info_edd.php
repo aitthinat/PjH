@@ -82,7 +82,7 @@
 </div>
 </div>
 </div>
-<div style="padding-right:80px;padding-top: 20px" align="right"><a href="add_inval.php"><img class="img-responsive" src="img/onpage_1-2.png" height="100" width="100"></a></div>
+<div style="padding-right:80px;padding-top: 20px" align="right"><a href="add_inval.php"><img class="img-responsive" src="img/onpage_1-2.png" height="200" width="200"></a></div>
 </div>
 
 <?php include "foot.php" ?>

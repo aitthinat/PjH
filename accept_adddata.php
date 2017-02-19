@@ -17,9 +17,15 @@ if (!empty($_POST["homeArea1"])) {
 }
 if (!empty($_POST["homeArea2"])) {
     $homeArea2 = $_POST["homeArea2"];
-
 }
 ?>
+<script language="Javascript">
+    function Finish_Check() {
+      alert("ยืนยันข้อมูลเสร็จสิ้น กำลังกลับสู่เมนูหลัก");
+}
+
+</script>
+
 
 
 
@@ -63,115 +69,115 @@ if (!empty($_POST["homeArea2"])) {
                         </label>
                     </div>
                     <div class="form-group row" style="margin-left:10%;margin-right:10%">
-                     <div class="col-10">
-                     </div>
-                     <div class="col-10">
-                     </div>
-                 </div>
-                 <div class="form-check form-group row" style="margin-left:10%">
+                       <div class="col-10">
+                       </div>
+                       <div class="col-10">
+                       </div>
+                   </div>
+                   <div class="form-check form-group row" style="margin-left:10%">
                     <label class="col-2 col-form-label">อายุ</label>
                     <label class="form-check-label">
                         <label style="padding-right:10px">58</label><label style="padding-right:20px">ปี</label>
                     </label>
                 </div>
-
                 <div class="form-check form-group row" style="margin-left:10%">
                     <label class="col-8 col-form-label">ข้อมูลในช่วง 1 ปีที่ผ่านมา</label>
                     <div class="form-check form-group row" style="margin-left:10%">
-                    <label class="col-5 col-form-label">พฤติกรรมการดื่มสุา(จำนวนครั้งต่อสัปดาห์)</label>
-                    </div>
-                    <div class="form-check form-group row" style="margin-left:10%">
-                        <label class="form-check-label" style="margin-left:5%">
-                            <input class="form-check-input" type="radio" name="Drink" id="drink0" value="0"> ไม่ดื่ม
-                        </label>
-                        <label class="form-check-label" style="margin-left:2%">
-                            <input class="form-check-input" type="radio" name="Drink" id="drink1" value="1"> 1-5
-                        </label>
-                        <label class="form-check-label" style="margin-left:2%">
-                            <input class="form-check-input" type="radio" name="Drink" id="drink2" value="2"> 6-10
-                        </label>
-                        <label class="form-check-label" style="margin-left:2%">
-                            <input class="form-check-input" type="radio" name="Drink" id="drink3" value="3"> 11-15
-                        </label>
-                        <label class="form-check-label" style="margin-left:2%">
-                            <input class="form-check-input" type="radio" name="Drink" id="drink4" value="4"> 15ครั้งขึ้นไป
+                        <label class="col-5 col-form-label">พฤติกรรมการดื่มสุา(จำนวนครั้งต่อสัปดาห์)</label>
+                        <label class="form-check-label">
+                            <?php
+                            if ($Drink == 0) {
+                                echo "ไม่ดื่มสุรา";
+                            } else if ($Drink == 1) {
+                                echo "1-2 ครั้ง / สัปดาห์";
+                            } else if ($Drink == 2) {
+                                echo "3-5 ครั้ง / สัปดาห์";
+                            } else if ($Drink == 3) {
+                                echo "6 ครั้งขึ้นไป / สัปดาห์";
+                            } 
+                            ?>
                         </label>
                     </div>
                     <div class="form-check form-group row" style="margin-left:10%">
-                    <label class="col-5 col-form-label">พฤติกรรมการสูบบุหรี่(จำนวนมวนต่อวัน)</label>
-                    </div>
-                    <div class="form-check form-group row" style="margin-left:10%">
-                        <label class="form-check-label"  style="margin-left:5%">
-                            <input class="form-check-input" type="radio" name="Smoke" id="Smoke0" value="0"> ไม่สูบ
-                        </label>
-                        <label class="form-check-label" style="margin-left:2%">
-                            <input class="form-check-input" type="radio" name="Smoke" id="Smoke1" value="1"> 1-5
-                        </label>
-                        <label class="form-check-label" style="margin-left:2%">
-                            <input class="form-check-input" type="radio" name="Smoke" id="Smoke2" value="2"> 6-10
-                        </label>
-                        <label class="form-check-label" style="margin-left:2%">
-                            <input class="form-check-input" type="radio" name="Smoke" id="Smoke3" value="3"> 11-19
-                        </label>
-                        <label class="form-check-label" style="margin-left:2%">
-                            <input class="form-check-input" type="radio" name="Smoke" id="Smoke4" value="4"> 1 ซองขึ้นไป
+                        <label class="col-5 col-form-label">พฤติกรรมการสูบบุหรี่(จำนวนมวนต่อวัน)</label>
+                        <label class="form-check-label">
+                            <?php
+                            if ($Smoke == 0) {
+                                echo "ไม่สูบบบุหรี่";
+                            } else if ($Smoke == 1) {
+                                echo "1-5 มวล";
+                            } else if ($Smoke == 2) {
+                                echo "6-10 มวล";
+                            } else if ($Smoke == 3) {
+                                echo "11-19";
+                            } else{
+                                echo "1 ซองขึ้นไป";
+                            }
+                            ?>
                         </label>
                     </div>
                     <div class="form-check form-group row" style="margin-left:10%">
-                    <label class="col-5 col-form-label">พฤติกรรมการออกกำลังกาย (วันต่อสัปดาห์)</label>
+                        <label class="col-5 col-form-label">พฤติกรรมการออกกำลังกาย (วันต่อสัปดาห์)</label>
+                        <label class="form-check-label">
+                            <?php
+                            if ($exercise == 0) {
+                                echo "ไม่ได้ออกกำลังกาย";
+                            } else if ($exercise == 1) {
+                                echo "1-3 ชั่วโมง";
+                            } else if ($exercise == 2) {
+                                echo "มากกว่า 3 ชั่วโมง";
+                            }
+                            ?>
+                            
+                        </label>
                     </div>
                     <div class="form-check form-group row" style="margin-left:10%">
-                        <label class="form-check-label"  style="margin-left:5%">
-                            <input class="form-check-input" type="radio" name="exercise" id="exercise0" value="0" onclick="disabled_TE()">ไม่ได้ออกกำลังกาย
-                        </label>
-                        <label class="form-check-label" style="margin-left:2%">
-                            <input class="form-check-input" type="radio" name="exercise" id="exercise1" value="1" onclick="enabled_TE()">1-3 วัน
-                        </label>
-                        <label class="form-check-label" style="margin-left:2%">
-                            <input class="form-check-input" type="radio" name="exercise" id="exercise2" value="2" onclick="enabled_TE()">มากกว่า 4-7 วัน
-                        </label>
-                    </div>
-                    <div class="form-check" >
-                        <div class="form-check form-group row" style="margin-left:10%">
                         <label class="col-5 col-form-label">จำนวนชั่วโมงในวันที่ออกกำลังกาย</label>
+                        <label class="form-check-label">
+                            <?php
+                            if ($exercise == 0) {
+                                echo "-"; 
+                            } else {
+                                if ($texercise == 0) {
+                                    echo "น้อยกว่า 1 ชั่วโมง";
+                                } else if ($texercise == 1) {
+                                    echo "1-3 ชั่วโมง";
+                                } else {
+                                    echo "มากกว่า 3 ชั่วโมง";
+                                } 
+                            }
+                            
+                            ?></label>
                         </div>
+
                         <div class="form-check form-group row" style="margin-left:10%">
-                            <label class="form-check-label"  style="margin-left:5%">
-                                <input class="form-check-input" type="radio" name="time-exercise" value="0" id="TE1" disabled>น้อยกว่า 1 ชั่วโมง
-                            </label>
-                            <label class="form-check-label" style="margin-left:2%">
-                                <input class="form-check-input" type="radio" name="time-exercise" value="1" id="TE2" disabled>1-3 ชั่วโมง
-                            </label>
-                            <label class="form-check-label" style="margin-left:2%">
-                                <input class="form-check-input" type="radio" name="time-exercise" value="2" id="TE3" disabled>มากกว่า 3 ชั่วโมง
+                            <label class="col-5 col-form-label">สภาพแวดล้อมบริเวณที่เป็นอยู่</label>
+                            <label class="form-check-label">
+                            <?php
+                            if (empty($_POST["homeArea1"]) && empty($_POST["homeArea2"])) {
+                                echo "สภาพแวดล้อมปกติ"; 
+                            } else {
+                                if (!empty($_POST["homeArea1"])) {
+                                    echo "มีแอ่งน้ำ / น้ำขัง ";
+                                }
+                                if (!empty($_POST["homeArea1"]) && !empty($_POST["homeArea2"])) {
+                                    echo "  และ  ";
+                                }
+                                if (!empty($_POST["homeArea2"])) {
+                                    echo "ใกล้โรงงาน";
+                                }
+                            }
+                            ?>
                             </label>
                         </div>
                     </div>
-                    <div class="form-check form-group row" style="margin-left:10%">
-                    <label class="col-5 col-form-label">สภาพแวดล้อมบริเวณที่เป็นอยู่</label>
+                    <div class="form-check form-group row" style="margin-left:10%;margin-right:10%" align="right">
+                        <a href="index.php"><button type="button" class="btn btn-primary" onclick="Finish_Check()">ยืนยันข้อมูล</button></a>
                     </div>
-                    <div class="form-check form-group row" style="margin-left:10%">
-                        <label class="form-check-label"  style="margin-left:5%">
-                            <input class="form-check-input" type="checkbox" id="homearea1" name="homeArea1" value="0" aria-label="...">มีแอ่งน้ำ หรือ พื้นที่น้ำขัง
-                        </label>
-                        <label class="form-check-label" style="margin-left:2%">
-                            <input class="form-check-input" type="checkbox" id="homearea2" name="homeArea2" value="1" aria-label="...">ใกล้โรงงาน
-                        </label>
-                    </div>
-                    
-
-
-                </div>
-
-
-                
-                <div class="form-check form-group row" style="margin-left:10%;margin-right:10%" align="right">
-                    <button type="submit" class="btn btn-primary">Submit</button>
                 </div>
             </div>
         </div>
     </div>
-</div>
 </div>
 
 

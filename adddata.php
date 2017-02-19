@@ -124,16 +124,13 @@
                             <input class="form-check-input" type="radio" name="Drink" id="drink0" value="0"> ไม่ดื่ม
                         </label>
                         <label class="form-check-label" style="margin-left:2%">
-                            <input class="form-check-input" type="radio" name="Drink" id="drink1" value="1"> 1-5
+                            <input class="form-check-input" type="radio" name="Drink" id="drink1" value="1"> 1-2
                         </label>
                         <label class="form-check-label" style="margin-left:2%">
-                            <input class="form-check-input" type="radio" name="Drink" id="drink2" value="2"> 6-10
+                            <input class="form-check-input" type="radio" name="Drink" id="drink2" value="2"> 3-5
                         </label>
                         <label class="form-check-label" style="margin-left:2%">
-                            <input class="form-check-input" type="radio" name="Drink" id="drink3" value="3"> 11-15
-                        </label>
-                        <label class="form-check-label" style="margin-left:2%">
-                            <input class="form-check-input" type="radio" name="Drink" id="drink4" value="4"> 15ครั้งขึ้นไป
+                            <input class="form-check-input" type="radio" name="Drink" id="drink4" value="3"> 6 ครั้งขึ้นไป
                         </label>
                     </div>
                     <div class="form-check form-group row" style="margin-left:10%">
