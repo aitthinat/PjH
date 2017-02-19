@@ -1,6 +1,6 @@
 <?php include "head.php" ?>
-<div style="background:#d8e9f3">
-
+<div>
+<div class="container" style="background: white"> 
     <div class="form-check form-group row" style="margin-left:10%;margin-bottom:-12px">
         <h2>บันทึกข้อมูลสุขภาพ</h2>
     </div>
@@ -14,6 +14,6 @@
 
 
 </div>
-
+</div>
 
 <?php include "foot.php" ?>

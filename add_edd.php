@@ -21,7 +21,7 @@
 }
 
 </script>
-<div style="background:#d8e9f3">
+<div>
     <div class="container">
 
         <div>

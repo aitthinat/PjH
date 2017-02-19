@@ -1,4 +1,4 @@
-<div style="background:#d8e9f3;padding-bottom: 50px; "></div>
+<div style="padding-bottom: 50px; " background="img/bg_pattern.png"></div>
 <!-- Footer -->
 <footer class="text-center">
 <!-- 

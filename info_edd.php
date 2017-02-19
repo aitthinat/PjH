@@ -1,5 +1,5 @@
 <?php include "head.php" ?>
-<div style="background:#d8e9f3">
+<div>
     <div class="form-check form-group row" style="margin-left:10%;margin-bottom:-12px">
         <h2>
             <label class="col-3 col-form-label">บ้านเลขที่ :</label>
@@ -12,7 +12,7 @@
             <label class="col-form-label">560x-xxxxxx-x</label>
         </h4>
     </div>
-    <div class="container" style="background:#f2f3f4">
+    <div class="container" style="background:white">
         <div class="row">
             <div class="col-lg-12">
                 <div style="width:100%" >
@@ -82,7 +82,7 @@
 </div>
 </div>
 </div>
-<div style="padding-bottom: 20px; padding-right:60px" align="right"><a href="add_info_vila.php"><img class="img-responsive" src="img/add-button-copy.png" height="100" width="200"></a></div>
+<div style="padding-bottom: 20px; padding-right:60px" align="right"><a href="add_inval.php"><img class="img-responsive" src="img/add-button-copy.png" height="100" width="200"></a></div>
 </div>
 
 <?php include "foot.php" ?>

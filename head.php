@@ -33,7 +33,7 @@
 
     </head>
 
-    <body id="page-top" class="index">
+    <body id="page-top" class="index" background="img/bg_pattern.png">
 
         <!-- Navigation -->
         <nav id="mainNav" class="navbar navbar-default navbar-fixed-top navbar-custom">
@@ -62,4 +62,4 @@
             </div>
             <!-- /.container-fluid -->
         </nav>
-        <div style="background:#d8e9f3;padding-top: 150px"></div>
+        <div style="padding-top: 150px" ></div>

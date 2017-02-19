@@ -1,6 +1,6 @@
 <?php include "head.php" ?>
-<div style="background:#d8e9f3">
-    <div class="container" style="background:#f2f3f4">
+<div>
+    <div class="container" style="background:white">
         <div class="row">
             <div class="col-lg-12">
                 <div style="width:100%" >

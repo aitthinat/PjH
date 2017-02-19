@@ -1,7 +1,6 @@
 <?php include "head.php" ?>
 <!-- #d8e9f3 -->
 <!-- <div style="background:#d8e9f3"> -->
-<body background="img/bg_pattern.png">
   <div class="container">
     <div class="row">
       <div class="col align-self-start">
@@ -20,5 +19,4 @@
       </div>
     </div>
   </div>
-</body>
 <?php include "foot.php" ?>
