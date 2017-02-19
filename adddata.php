@@ -68,7 +68,7 @@
             <div class="col-lg-12">
                 <div style="width:100%" >
                     <div align="center" style="padding-top:10px;padding-bottom:20px"><h1>บันทึกข้อมูลการตรวจสุขภาพ</h1></div>
-                    <form name="myForm" action="accept_adddata.php" method="POST" onsubmit="return validateForm()">
+                    <form name="myForm" action="accept_adddata.php" method="post" onsubmit="return validateForm()">
                         <div class="form-check form-group row" style="margin-left:10%">
                             <label class="col-2 col-form-label">ชื่อ - สกุล</label>
                             <label class="form-check-label">
@@ -93,18 +93,18 @@
                         <div class="form-group row" style="margin-left:10%;margin-right:10%">
                             <label class="col-2 col-form-label">ความดันโลหิต</label>
                             <div class="col-10">
-                                <input class="form-control" type="number" id="SYS" name="SYS" placeholder="SYS" min="1" pattern=".{1,5}">
-                                <input class="form-control" type="number" id="DIA" name="DIA"  placeholder="DIA" min="1"  pattern=".{1,5}">
+                                <input class="form-control" type="number" id="SYS" name="SYS" placeholder="SYS" min="1" max="999">
+                                <input class="form-control" type="number" id="DIA" name="DIA"  placeholder="DIA" min="1" max="999">
                             </div>
                         </div>
                         <div class="form-group row" style="margin-left:10%;margin-right:10%">
                            <label class="col-2 col-form-label">น้ำหนัก</label>
                            <div class="col-10">
-                            <input class="form-control" type="number" id="weight" name="weight" placeholder="kilogram" min="1"  pattern=".{1,}">
+                            <input class="form-control" type="number" id="weight" name="weight" placeholder="kilogram" min="1" max="999">
                         </div>
                         <label class="col-2 col-form-label">ส่วนสูง</label>
                         <div class="col-10">
-                            <input class="form-control" type="number" id="height" name="height" placeholder="meter" min="1"  pattern=".{1,}">
+                            <input class="form-control" type="number" id="height" name="height" placeholder="meter" min="1" max="999">
                         </div>
                     </div>
                     <div class="form-check form-group row" style="margin-left:10%">
@@ -191,10 +191,10 @@
                     </div>
                     <div class="form-check form-group row" style="margin-left:10%">
                         <label class="form-check-label"  style="margin-left:5%">
-                            <input class="form-check-input" type="checkbox" id="homearea1" name="homeArea1" value="0" aria-label="...">มีแอ่งน้ำ หรือ พื้นที่น้ำขัง
+                            <input class="form-check-input" type="checkbox" id="homearea1" name="homeArea1" value="1" aria-label="...">มีแอ่งน้ำ หรือ พื้นที่น้ำขัง
                         </label>
                         <label class="form-check-label" style="margin-left:2%">
-                            <input class="form-check-input" type="checkbox" id="homearea2" name="homeArea2" value="1" aria-label="...">ใกล้โรงงาน
+                            <input class="form-check-input" type="checkbox" id="homearea2" name="homeArea2" value="2" aria-label="...">ใกล้โรงงาน
                         </label>
                     </div>
                     <div class="form-check form-group row" style="margin-left:10%;margin-right:10%" align="right">

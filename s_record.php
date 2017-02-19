@@ -21,16 +21,16 @@ function validateForm() {
             <!-- Please Edit!! -->
             <form name="myForm" onsubmit="return validateForm()" action="info_edd.php" method="POST">
             <!-- House ID -->
-              <div class="form-group row" style="margin-left:27%;margin-right:10%">
+              <div class="form-group row" style="margin-left:5%;margin-right:10%">
                 <label class="col-2 col-form-label">บ้านเลขที่</label>
-                <div>
+                <div class="col-10">
                   <input class="form-control" type="text" id="findhome" name="findhome" pattern="[0-9/]+.{1,}" title="กรุณากรอกเลขที่บ้านใหม่อีกครั้ง">
               </div>
             </div>
             <!-- Name -->
-            <div class="form-group row" style="margin-left:27%;margin-right:10%">
+            <div class="form-group row" style="margin-left:5%;margin-right:10%">
                 <label class="col-2 col-form-label">ชื่อ-สกุล</label>
-                <div class="col-5">
+                <div class="col-10">
                   <input class="form-control" type="text" id="findFname" name="findFname" placeholder="ชื่อ" pattern="[a-zA-Zก-์]+" title="กรุณากรอกตัวอักษร A-Z, a-z, ก-ฮ และสระในภาษาไทย">
                   <input class="form-control" type="text" id="findLname" name="findLname" placeholder="สกุล" pattern="[a-zA-Zก-์]+" title="กรุณากรอกตัวอักษร A-Z, a-z, ก-ฮ และสระในภาษาไทย">
               </div>

@@ -39,7 +39,7 @@
                       <td>จันทร์</td>
                       <td>คำใหญ่</td>
                       <td>หัวหน้าครอบครัว</td>
-                      <td>ตรวจแล้ว</td>
+                      <td style="color: green">ตรวจแล้ว</td>
                       <td><a href=""><button type="button" class="btn btn-primary">Edit</button></a></td>
                   </tr>
                   <tr>
@@ -48,7 +48,7 @@
                       <td>คำ</td>
                       <td>หัวดำ</td>
                       <td>ผู้อาศัย</td>
-                      <td>ยังไม่ได้ตรวจ</td>
+                      <td><a href="adddata.php" style="color: red">ยังไม่ได้ตรวจ</a></td>
                       <td><a href=""><button type="button" class="btn btn-primary">Edit</button></a></td>
                   </tr>
               </tr>
@@ -82,7 +82,7 @@
 </div>
 </div>
 </div>
-<div style="padding-bottom: 20px; padding-right:60px" align="right"><a href="add_inval.php"><img class="img-responsive" src="img/add-button-copy.png" height="100" width="200"></a></div>
+<div style="padding-right:80px;padding-top: 20px" align="right"><a href="add_inval.php"><img class="img-responsive" src="img/onpage_1-2.png" height="100" width="100"></a></div>
 </div>
 
 <?php include "foot.php" ?>
