@@ -2,7 +2,6 @@
 
 <div style="background:#d8e9f3">
     <div class="container">
-
         <div>
             <div style="padding-bottom: 20px"><center><img class="img-responsive" src="img/onpage_2.png" height="100" width="200"></center></div>
             <!-- Please Edit!! -->

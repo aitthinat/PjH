@@ -4,7 +4,6 @@
     <div class="container">
     <div>
         <div style="padding-bottom: 20px"><center><img class="img-responsive" src="img/onpage_3.png" height="100" width="200"></center></div>
-        <div><center><h1>ตรวจสอบภาวะเสี่ยง</h1></center><br/></div>
             <!-- Please Edit!! form, value, aria-label, selectAll -->
             <form name="myForm" onsubmit="return validateForm()" action="info_edd.php" method="POST" >
             <!-- Select Disease -->
