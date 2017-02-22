@@ -1,9 +1,27 @@
 <?php include "head.php" ?>
+<?php 
+
+if (!empty($_POST["findhome"])) {
+    $findhome = $_POST["findhome"];
+}
+if (!empty($_POST["findFname"])) {
+    $findFname = $_POST["findFname"];
+}
+if (!empty($_POST["findLname"])) {
+    $findLname = $_POST["findLname"];
+}
+if (!empty($_POST["sex"])) {
+    $sex = $_POST["sex"];
+}
+if (!empty($_POST["age"])) {
+    $age = $_POST["age"];
+}
+?>
 <div>
     <div class="form-check form-group row" style="margin-left:10%;margin-bottom:-12px">
         <h2>
             <label class="col-3 col-form-label">บ้านเลขที่ :</label>
-            <label class="col-form-label">123 / 123</label>
+            <label class="col-form-label"><?php echo $findhome; ?></label>
         </h2>
     </div>
     <div class="form-check form-group row" style="margin-left:10%">
@@ -38,7 +56,7 @@
                       <th>นาง</th>
                       <td>จันทร์</td>
                       <td>คำใหญ่</td>
-                      <td>หัวหน้าครอบครัว</td>
+                      <td>เจ้าบ้าน</td>
                       <td><a href="adddata-old-case.php" style="color: green">ตรวจแล้ว</a></td>
                       <td><a href=""><button type="button" class="btn btn-primary">Edit</button></a></td>
                   </tr>

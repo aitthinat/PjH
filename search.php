@@ -10,9 +10,7 @@ function validateForm() {
      if (( findhome == null || findhome == "" ) && ( age == null || age == "" ) && ( sex == null || sex == "" ) && ( findFname == null || findFname == "" ) && ( findLname == null || findLname == "" )) {
       alert("กรุณากรอกข้อมูลอย่างน้อย 1 ช่อง");
       return false;
-  } 
-
-
+  }
 }
 
 </script>

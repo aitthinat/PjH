@@ -60,7 +60,21 @@
   }
 
 }
+<script>
+$(document).ready(function() {
+    $("#type").change(function() {
+        var val = $(this).val();
+        if (val == "item1") {
+            $("#size").html("<option value='test'>item1: test 1</option><option value='test2'>item1: test 2</option>");
+        } else if (val == "item2") {
+            $("#size").html("<option value='test'>item2: test 1</option><option value='test2'>item2: test 2</option>");
+        } else if (val == "item3") {
+            $("#size").html("<option value='test'>item3: test 1</option><option value='test2'>item3: test 2</option>");
+        }
+    });
 
+});
+</script>
 </script>
 <div>
   
@@ -89,7 +103,7 @@
         </div>
       </div>
     </div>
-    <div class="container" style="background-color:#E0E0E0">
+    <div class="container" style="background-color:#E0E0E0;width: 80%; margin-bottom:30px">
             <div class="form-check form-group row" style="margin-left:10%;margin-top: 30px">
                         <label class="col-2 col-form-label">กรุ๊ปเลือด</label>
                         <label class="form-check-label">
@@ -163,8 +177,18 @@
                     <div class="form-check form-group row" style="margin-left:10%;margin-right:10%" align="right">
                         <a href="index.php"><button type="button" class="btn btn-primary" onclick="Finish_Check()">ยืนยันข้อมูล</button></a>
                     </div>
+
                 </div>
     </div>
+
+<select id="type">
+    <option value="item1">item1</option>
+    <option value="item2">item2</option>
+    <option value="item3">item3</option>
+</select>
+<select id="size">
+    <option value="">-- select one -- </option>
+</select>
   </div>
 </div>
 

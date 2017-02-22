@@ -133,7 +133,7 @@ if ($exercise == 0) {
                             if ($exercise == 0) {
                                 echo "ไม่ได้ออกกำลังกาย";
                             } else if ($exercise == 1) {
-                                echo "1-3 ชั่วโมง";
+                                echo "1-3 วัน";
                             } else if ($exercise == 2) {
                                 echo "มากกว่า 3 ชั่วโมง";
                             }

@@ -26,7 +26,7 @@
         <div>
             <div style="padding-bottom: 20px"><center><img class="img-responsive" src="img/onpage_3.png" height="100" width="200"></center></div>
             <!-- Please Edit!! form, value, aria-label, selectAll -->
-            <form name="myForm" onsubmit="return validateForm()" action="info_edd.php" method="POST" >
+            <form name="myForm" onsubmit="return validateForm()" action="risk_report.php" method="POST" >
                 <!-- Select Disease -->
                 <!-- Dis1 : diabetes โรคเบาหวาน -->
                 <!-- Dis2 : hypertension ความดันโลหิตสูง -->
