@@ -11,32 +11,32 @@ function validateForm() {
   } 
 }
 
-  function validateForm() {
-    var sys = document.forms["myForm"]["SYS"].value;
+ //  function validateForm() {
+ //    var sys = document.forms["myForm"]["SYS"].value;
     
-    var sys_oper = 0
+ //    var sys_oper = 0
     
-    if ( sys == null || sys == "" ) {
-      document.getElementById("SYS_DIV").className += " has-danger"
-      document.getElementById("SYS").className += " form-control-danger"
-      document.getElementById("al2").style.visibility = 'visible';    
-      sys_oper = 1;
-    } else {
-      if ( document.getElementById("SYS_DIV").className.match(/(?:^|\s)has-danger(?!\S)/) ){
-        document.getElementById("SYS_DIV").className = document.getElementById("SYS_DIV").className.replace( /(?:^|\s)has-danger(?!\S)/g , " " )
-        document.getElementById("SYS").className = document.getElementById("SYS").className.replace( /(?:^|\s)form-has-danger(?!\S)/g , " " )
-        document.getElementById("SYS_DIV").className += " has-success"
-        document.getElementById("SYS").className += " form-control-success"
-        document.getElementById("al2").style.visibility = 'hidden';    
-        sys_oper = 0;
-      } else {
-        document.getElementById("SYS_DIV").className += " has-success"
-        document.getElementById("SYS").className += " form-control-success"
-        document.getElementById("al2").style.visibility = 'hidden';    
-        sys_oper = 0;
-      }
-    }
- }
+ //    if ( sys == null || sys == "" ) {
+ //      document.getElementById("SYS_DIV").className += " has-danger"
+ //      document.getElementById("SYS").className += " form-control-danger"
+ //      document.getElementById("al2").style.visibility = 'visible';    
+ //      sys_oper = 1;
+ //    } else {
+ //      if ( document.getElementById("SYS_DIV").className.match(/(?:^|\s)has-danger(?!\S)/) ){
+ //        document.getElementById("SYS_DIV").className = document.getElementById("SYS_DIV").className.replace( /(?:^|\s)has-danger(?!\S)/g , " " )
+ //        document.getElementById("SYS").className = document.getElementById("SYS").className.replace( /(?:^|\s)form-has-danger(?!\S)/g , " " )
+ //        document.getElementById("SYS_DIV").className += " has-success"
+ //        document.getElementById("SYS").className += " form-control-success"
+ //        document.getElementById("al2").style.visibility = 'hidden';    
+ //        sys_oper = 0;
+ //      } else {
+ //        document.getElementById("SYS_DIV").className += " has-success"
+ //        document.getElementById("SYS").className += " form-control-success"
+ //        document.getElementById("al2").style.visibility = 'hidden';    
+ //        sys_oper = 0;
+ //      }
+ //    }
+ // }
  function clean_not_int(input){
   var regex = /[^0-9/]/gi;
   input.value = input.value.replace(regex, "");
