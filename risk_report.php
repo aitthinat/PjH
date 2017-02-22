@@ -20,7 +20,12 @@
 <div>
 
         <!-- +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
-        <div class="container" style="background-color:rgba(255,0,0,.1);border-radius:25px;padding-left:2em;padding-right:2em">
+        <div class="container" style="background-color:rgba(255,0,0,.1);border-radius:25px;padding-left:2em;padding-right:2em" id="L1" 
+<?php 
+if (empty($_POST["selectDis1"])) {?>
+    hidden=""
+<?php } ?>
+        >
             <h2>โรคเบาหวาน</h2><br/>
             <table class="myTable">
                       <thead>
@@ -74,7 +79,13 @@
         </div>
     <br/><br/>
         <!-- +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
-        <div class="container" style="background-color:rgba(255,0,0,.1);border-radius:25px;padding-left:2em;padding-right:2em">
+        <div class="container" style="background-color:rgba(255,0,0,.1);border-radius:25px;padding-left:2em;padding-right:2em"
+<?php 
+if (empty($_POST["selectDis2"])) {?>
+    hidden=""
+<?php } ?>
+
+        >
 
             <h2>โรคความดันโลหิตสูง</h2><br/>
             <table class="myTable">
@@ -130,7 +141,12 @@
         </div>
     <br/><br/>
         <!-- +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
-        <div class="container" style="background-color:rgba(255,0,0,.1);border-radius:25px;padding-left:2em;padding-right:2em">
+        <div class="container" style="background-color:rgba(255,0,0,.1);border-radius:25px;padding-left:2em;padding-right:2em"
+<?php 
+if (empty($_POST["selectDis3"])) {?>
+    hidden=""
+<?php } ?>
+        >
             <h2>โรคหัวใจ</h2><br/>
             <table class="myTable">
                       <thead>
@@ -183,7 +199,12 @@
         </div>
     <br/><br/>
         <!-- +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
-        <div class="container" style="background-color:rgba(255,0,0,.1);border-radius:25px;padding-left:2em;padding-right:2em">
+        <div class="container" style="background-color:rgba(255,0,0,.1);border-radius:25px;padding-left:2em;padding-right:2em"
+<?php 
+if (empty($_POST["selectDis4"])) {?>
+    hidden=""
+<?php } ?>
+        >
             <h2>โรคตับ</h2><br/>
             <table class="myTable">
                       <thead>
