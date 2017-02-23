@@ -35,21 +35,21 @@
     var tex_oper = 0
 
     if ( sys == null || sys == "" ) {
-      document.getElementById("SYS_DIV").className += " has-danger"
-      document.getElementById("SYS").className += " form-control-danger"
+      document.getElementById("SYS_DIV").className += " has-danger";
+      document.getElementById("SYS").className += " form-control-danger";
       document.getElementById("al2").style.visibility = 'visible';    
       sys_oper = 1;
     } else {
       if ( document.getElementById("SYS_DIV").className.match(/(?:^|\s)has-danger(?!\S)/) ){
-        document.getElementById("SYS_DIV").className = document.getElementById("SYS_DIV").className.replace( /(?:^|\s)has-danger(?!\S)/g , " " )
-        document.getElementById("SYS").className = document.getElementById("SYS").className.replace( /(?:^|\s)form-has-danger(?!\S)/g , " " )
-        document.getElementById("SYS_DIV").className += " has-success"
-        document.getElementById("SYS").className += " form-control-success"
+        document.getElementById("SYS_DIV").className = document.getElementById("SYS_DIV").className.replace( /(?:^|\s)has-danger(?!\S)/g , " " );
+        document.getElementById("SYS").className = document.getElementById("SYS").className.replace( /(?:^|\s)form-has-danger(?!\S)/g , " " );
+        document.getElementById("SYS_DIV").className += " has-success";
+        document.getElementById("SYS").className += " form-control-success;"
         document.getElementById("al2").style.visibility = 'hidden';    
         sys_oper = 0;
       } else {
-        document.getElementById("SYS_DIV").className += " has-success"
-        document.getElementById("SYS").className += " form-control-success"
+        document.getElementById("SYS_DIV").className += " has-success";
+        document.getElementById("SYS").className += " form-control-success";
         document.getElementById("al2").style.visibility = 'hidden';    
         sys_oper = 0;
       }
@@ -57,70 +57,70 @@
 
 
     if ( bg == null || bg == "" ) {
-      document.getElementById("bg_DIV").className += " has-danger"
+      document.getElementById("bg_DIV").className += " has-danger";
       bg_oper = 1;
     } else {
       if ( document.getElementById("bg_DIV").className.match(/(?:^|\s)has-danger(?!\S)/) ){
-        document.getElementById("bg_DIV").className = document.getElementById("bg_DIV").className.replace( /(?:^|\s)has-danger(?!\S)/g , " " )
-        document.getElementById("bg_DIV").className += " has-success"
+        document.getElementById("bg_DIV").className = document.getElementById("bg_DIV").className.replace( /(?:^|\s)has-danger(?!\S)/g , " " );
+        document.getElementById("bg_DIV").className += " has-success";
         bg_oper = 0;
       } else {
-        document.getElementById("bg_DIV").className += " has-success"
+        document.getElementById("bg_DIV").className += " has-success";
         bg_oper = 0;
       }
     }
 
 
     if ( dia == null || dia == "" ) {
-      document.getElementById("dia_DIV").className += " has-danger"
-      document.getElementById("DIA").className += " form-control-danger"
+      document.getElementById("dia_DIV").className += " has-danger";
+      document.getElementById("DIA").className += " form-control-danger";
       document.getElementById("dl2").style.visibility = 'visible';    
       dia_oper = 1;
     } else {
       if ( document.getElementById("dia_DIV").className.match(/(?:^|\s)has-danger(?!\S)/) ){
         document.getElementById("dia_DIV").className = document.getElementById("dia_DIV").className.replace( /(?:^|\s)has-danger(?!\S)/g , " " )
         document.getElementById("DIA").className = document.getElementById("DIA").className.replace( /(?:^|\s)form-has-danger(?!\S)/g , " " )
-        document.getElementById("dia_DIV").className += " has-success"
-        document.getElementById("DIA").className += " form-control-success"
+        document.getElementById("dia_DIV").className += " has-success";
+        document.getElementById("DIA").className += " form-control-success";
       document.getElementById("dl2").style.visibility = 'hidden';    
         dia_oper = 0;
       } else {
-        document.getElementById("dia_DIV").className += " has-success"
-        document.getElementById("DIA").className += " form-control-success"
+        document.getElementById("dia_DIV").className += " has-success";
+        document.getElementById("DIA").className += " form-control-success";
       document.getElementById("dl2").style.visibility = 'hidden';    
         dia_oper = 0;
       }
     }
 
     if ( w == null || w == "" ) {
-      document.getElementById("w_DIV").className += " has-danger"
-      document.getElementById("weight").className += " form-control-danger"
+      document.getElementById("w_DIV").className += " has-danger";
+      document.getElementById("weight").className += " form-control-danger";
       document.getElementById("wl2").style.visibility = 'visible';    
       w_oper = 1;
     } else {
       if ( document.getElementById("w_DIV").className.match(/(?:^|\s)has-danger(?!\S)/) ){
-        document.getElementById("w_DIV").className = document.getElementById("w_DIV").className.replace( /(?:^|\s)has-danger(?!\S)/g , " " )
-        document.getElementById("weight").className = document.getElementById("weight").className.replace( /(?:^|\s)form-has-danger(?!\S)/g , " " )
-        document.getElementById("w_DIV").className += " has-success"
-        document.getElementById("weight").className += " form-control-success"
+        document.getElementById("w_DIV").className = document.getElementById("w_DIV").className.replace( /(?:^|\s)has-danger(?!\S)/g , " " );
+        document.getElementById("weight").className = document.getElementById("weight").className.replace( /(?:^|\s)form-has-danger(?!\S)/g , " " );
+        document.getElementById("w_DIV").className += " has-success";
+        document.getElementById("weight").className += " form-control-success";
         document.getElementById("wl2").style.visibility = 'hidden';    
         w_oper = 0;
       } else {
-        document.getElementById("w_DIV").className += " has-success"
-        document.getElementById("weight").className += " form-control-success"
+        document.getElementById("w_DIV").className += " has-success";
+        document.getElementById("weight").className += " form-control-success";
         document.getElementById("wl2").style.visibility = 'hidden';    
         dia_oper = 0;
       }
     }
 
     if ( h == null || h == "" ) {
-      document.getElementById("h_DIV").className += " has-danger"
-      document.getElementById("height").className += " form-control-danger"
+      document.getElementById("h_DIV").className += " has-danger";
+      document.getElementById("height").className += " form-control-danger";
       document.getElementById("hl2").style.visibility = 'visible';    
       h_oper = 1;
     } else {
       if ( document.getElementById("h_DIV").className.match(/(?:^|\s)has-danger(?!\S)/) ){
-        document.getElementById("h_DIV").className = document.getElementById("h_DIV").className.replace( /(?:^|\s)has-danger(?!\S)/g , " " )
+        document.getElementById("h_DIV").className = document.getElementById("h_DIV").className.replace( /(?:^|\s)has-danger(?!\S)/g , " " );
         document.getElementById("height").className = document.getElementById("height").className.replace( /(?:^|\s)form-has-danger(?!\S)/g , " " )
         document.getElementById("h_DIV").className += " has-success"
         document.getElementById("height").className += " form-control-success"

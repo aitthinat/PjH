@@ -9,6 +9,7 @@ $height = $_POST["height"];
 $Drink = $_POST["Drink"];
 $Smoke = $_POST["Smoke"];
 $exercise = $_POST["exercise"];
+
 if ($exercise != 0) {
     $texercise = $_POST["time-exercise"]; 
 }
