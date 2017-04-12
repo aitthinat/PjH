@@ -1,4 +1,5 @@
 <?php include "head.php" ?>
+<? php include('connection.php'); ?>
 <div>
 <div class="container" style="background: white"> 
     <div class="form-check form-group row" style="margin-left:10%;margin-bottom:-12px">

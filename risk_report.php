@@ -1,5 +1,5 @@
 <?php include "head.php" ?>
-
+<? php include('connection.php'); ?>
 <style>
 .myTable { 
   width: 100%;

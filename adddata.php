@@ -1,4 +1,5 @@
 <?php include "head.php" ?>
+<? php include('connection.php'); ?>
 <script language="Javascript">
   function disabled_TE()
   {

@@ -1,6 +1,6 @@
 <?php include "head.php" ?>
 <?php 
-
+include('connection.php');
 if (!empty($_POST["findhome"])) {
   $findhome = $_POST["findhome"];
 }
