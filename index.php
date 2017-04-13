@@ -1,5 +1,5 @@
 <?php include "head.php" ?>
-<? php include('connection.php'); ?>
+<?php include('connection.php'); ?>
 <!-- #d8e9f3 -->
 <!-- <div style="background:#d8e9f3"> -->
   <div class="container">
