@@ -11,7 +11,7 @@
     <meta name="author" content="">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
     
-    <title>Freelancer - Start Bootstrap Theme</title>
+    <title>Health</title>
 
     <!--    <link rel="stylesheet" href="CSS/styles.css"> -->
     <!-- Bootstrap Core CSS -->
