@@ -34,7 +34,7 @@
 
     </head>
 
-    <body id="page-top" class="index" background="img/bg_pattern.png">
+    <body id="page-top" class="index" background="img/bg_pattern.jpg" bgproperties="fixed">
 
         <!-- Navigation -->
         <nav id="mainNav" class="navbar navbar-default navbar-fixed-top navbar-custom">

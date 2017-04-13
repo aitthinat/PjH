@@ -27,40 +27,25 @@ if (empty($_POST["selectDis1"])) {?>
 <?php } ?>
         >
             <h2>โรคเบาหวาน</h2><br/>
-            <table class="myTable">
-                      <thead>
-                        <tr>
-                          <th>No.</th>
-                          <th colspan="3"><center>ชื่อ - สกุล</center></th>
-                          <th>บ้านเลขที่</th>
-                      </tr>
-                  </thead>
-                  <tbody>
-                    <tr>
-                      <td scope="row">1</td>
-                      <td>นาง</td>
-                      <td>จันทร์</td>
-                      <td>คำใหญ่</td>
-                      <td>12/1</td>
-                      
-                  </tr>
-                  <tr>
-                      <td scope="row">2</td>
-                      <td>นาย</td>
-                      <td>คำ</td>
-                      <td>หัวดำ</td>
-                      <td>12/1</td>
-                  </tr>
-                  <tr>
-                      <td scope="row">3</td>
-                      <td>นาย</td>
-                      <td>คิม</td>
-                      <td>หัวดำ</td>
-                      <td>12/1</td>
-                  </tr>
-              </tr>
-          </tbody>
-        </table>
+            <!-- waitting -->
+            <!-- ################################## Link Database ##################################-->
+            <?php
+            $sql = "SELECT Title, FirstName, LastName, Village_no FROM person ";
+            $result = mysqli_query($db, $sql);
+
+            if (mysqli_num_rows($result) > 0) {
+                // output data of each row
+                echo "<table class='myTable'><thead><tr><th>ลำดับที่</th><th>คำนำหน้า</th><th>ชื่อ</th><th>นามสกุล</th><th>บ้านเลขที่</th></tr></thead><tbody>";
+                $i = 1;
+                while($row = mysqli_fetch_assoc($result)) {
+                        # code...
+                        echo "<tr><td>" . $i . "</td><td>" . $row["Title"]. "</td><td>" . $row["FirstName"]. "</td><td>" . $row["LastName"]. "</td><td>" . $row["Village_no"]. "</td></tr>";
+
+                      $i+=1;
+                      }
+                echo "</tbody></table>";
+            } ?>
+            <!-- ###################################################################################-->
     <br/><br/>
         <div style="background:rgba(255,0,0,.2); border-radius:25px;">
         <br/>
@@ -88,40 +73,24 @@ if (empty($_POST["selectDis2"])) {?>
         >
 
             <h2>โรคความดันโลหิตสูง</h2><br/>
-            <table class="myTable">
-                      <thead>
-                        <tr>
-                          <th>#</th>
-                          <th colspan="3"><center>ชื่อ - สกุล</center></th>
-                          <th>บ้านเลขที่</th>
-                      </tr>
-                  </thead>
-                  <tbody>
-                    <tr>
-                      <td scope="row">1</td>
-                      <td>นาง</td>
-                      <td>จันทร์</td>
-                      <td>คำใหญ่</td>
-                      <td>12/1</td>
-                      
-                  </tr>
-                  <tr>
-                      <td scope="row">2</td>
-                      <td>นาย</td>
-                      <td>คำ</td>
-                      <td>หัวดำ</td>
-                      <td>12/1</td>
-                  </tr>
-                  <tr>
-                      <td scope="row">3</td>
-                      <td>นาย</td>
-                      <td>คิม</td>
-                      <td>หัวดำ</td>
-                      <td>12/1</td>
-                  </tr>
-              </tr>
-          </tbody>
-        </table>
+            <!-- ################################## Link Database ##################################-->
+            <?php
+            $sql = "SELECT Title, FirstName, LastName, Village_no FROM person ";
+            $result = mysqli_query($db, $sql);
+
+            if (mysqli_num_rows($result) > 0) {
+                // output data of each row
+                echo "<table class='myTable'><thead><tr><th>ลำดับที่</th><th>คำนำหน้า</th><th>ชื่อ</th><th>นามสกุล</th><th>บ้านเลขที่</th></tr></thead><tbody>";
+                $i = 1;
+                while($row = mysqli_fetch_assoc($result)) {
+                        # code...
+                        echo "<tr><td>" . $i . "</td><td>" . $row["Title"]. "</td><td>" . $row["FirstName"]. "</td><td>" . $row["LastName"]. "</td><td>" . $row["Village_no"]. "</td></tr>";
+
+                      $i+=1;
+                      }
+                echo "</tbody></table>";
+            } ?>
+            <!-- ###################################################################################-->
     <br/><br/>
         <div style="background: rgba(255,0,0,.2); border-radius:25px;">
         <br/>
@@ -148,40 +117,24 @@ if (empty($_POST["selectDis3"])) {?>
 <?php } ?>
         >
             <h2>โรคหัวใจ</h2><br/>
-            <table class="myTable">
-                      <thead>
-                        <tr>
-                          <th>#</th>
-                          <th colspan="3"><center>ชื่อ - สกุล</center></th>
-                          <th>บ้านเลขที่</th>
-                      </tr>
-                  </thead>
-                  <tbody>
-                    <tr>
-                      <td scope="row">1</td>
-                      <td>นาง</td>
-                      <td>จันทร์</td>
-                      <td>คำใหญ่</td>
-                      <td>12/1</td>
-                      
-                  </tr>
-                  <tr>
-                      <td scope="row">2</td>
-                      <td>นาย</td>
-                      <td>คำ</td>
-                      <td>หัวดำ</td>
-                      <td>12/1</td>
-                  </tr>
-                  <tr>
-                      <td scope="row">3</td>
-                      <td>นาย</td>
-                      <td>คิม</td>
-                      <td>หัวดำ</td>
-                      <td>12/1</td>
-                  </tr>
-              </tr>
-          </tbody>
-        </table>
+            <!-- ################################## Link Database ##################################-->
+            <?php
+            $sql = "SELECT Title, FirstName, LastName, Village_no FROM person ";
+            $result = mysqli_query($db, $sql);
+
+            if (mysqli_num_rows($result) > 0) {
+                // output data of each row
+                echo "<table class='myTable'><thead><tr><th>ลำดับที่</th><th>คำนำหน้า</th><th>ชื่อ</th><th>นามสกุล</th><th>บ้านเลขที่</th></tr></thead><tbody>";
+                $i = 1;
+                while($row = mysqli_fetch_assoc($result)) {
+                        # code...
+                        echo "<tr><td>" . $i . "</td><td>" . $row["Title"]. "</td><td>" . $row["FirstName"]. "</td><td>" . $row["LastName"]. "</td><td>" . $row["Village_no"]. "</td></tr>";
+
+                      $i+=1;
+                      }
+                echo "</tbody></table>";
+            } ?>
+            <!-- ###################################################################################-->
     <br/><br/>
         <div style="background:rgba(255,0,0,.2); border-radius:25px;">
         <br/>
@@ -206,40 +159,24 @@ if (empty($_POST["selectDis4"])) {?>
 <?php } ?>
         >
             <h2>โรคตับ</h2><br/>
-            <table class="myTable">
-                      <thead>
-                        <tr>
-                          <th>#</th>
-                          <th colspan="3"><center>ชื่อ - สกุล</center></th>
-                          <th>บ้านเลขที่</th>
-                      </tr>
-                  </thead>
-                  <tbody>
-                    <tr>
-                      <td scope="row">1</td>
-                      <td>นาง</td>
-                      <td>จันทร์</td>
-                      <td>คำใหญ่</td>
-                      <td>12/1</td>
-                      
-                  </tr>
-                  <tr>
-                      <td scope="row">2</td>
-                      <td>นาย</td>
-                      <td>คำ</td>
-                      <td>หัวดำ</td>
-                      <td>12/1</td>
-                  </tr>
-                  <tr>
-                      <td scope="row">3</td>
-                      <td>นาย</td>
-                      <td>คิม</td>
-                      <td>หัวดำ</td>
-                      <td>12/1</td>
-                  </tr>
-              </tr>
-          </tbody>
-        </table>
+            <!-- ################################## Link Database ##################################-->
+            <?php
+            $sql = "SELECT Title, FirstName, LastName, Village_no FROM person ";
+            $result = mysqli_query($db, $sql);
+
+            if (mysqli_num_rows($result) > 0) {
+                // output data of each row
+                echo "<table class='myTable'><thead><tr><th>ลำดับที่</th><th>คำนำหน้า</th><th>ชื่อ</th><th>นามสกุล</th><th>บ้านเลขที่</th></tr></thead><tbody>";
+                $i = 1;
+                while($row = mysqli_fetch_assoc($result)) {
+                        # code...
+                        echo "<tr><td>" . $i . "</td><td>" . $row["Title"]. "</td><td>" . $row["FirstName"]. "</td><td>" . $row["LastName"]. "</td><td>" . $row["Village_no"]. "</td></tr>";
+
+                      $i+=1;
+                      }
+                echo "</tbody></table>";
+            } ?>
+            <!-- ###################################################################################-->
     <br/><br/>
         <div style="background:rgba(255,0,0,.2); border-radius:25px;">
         <br/>
