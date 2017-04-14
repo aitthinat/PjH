@@ -24,7 +24,9 @@ if (!empty($_POST["age"])) {
       <label class="col-form-label"><?php 
 
         if (empty($_POST["findhome"])) {
-          echo "123/123"; 
+            $sql = "select Village_no from home";
+            $result = mysql_query($sql);
+          echo "$result"; 
         } else {
           echo $findhome; }
 
