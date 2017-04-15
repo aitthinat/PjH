@@ -24,22 +24,24 @@ if (!empty($_POST["age"])) {
       <label class="col-form-label"><?php 
 
         if (empty($_POST["findhome"])) {
-            $sql = "select Village_no from home";
-            $result = mysql_query($sql);
+            $sql = "select Village_no from home ";
+            $result = mysqli_query($sql);
           echo "$result"; 
         } else {
           echo $findhome; }
-
-
-
-
           ?></label>
         </h2>
       </div>
       <div class="form-check form-group row" style="margin-left:10%">
         <h4>
           <label class="col-3 col-form-label">เลขที่ประจำบ้าน :</label>
-          <label class="col-form-label">560x-xxxxxx-x</label>
+            
+          <label class="col-form-label"><?php
+              $idh = "select ID_house from Home";
+              $result_idh = mysqli_query($idh);
+            echo "$result_idh";
+              ?>
+            </label>
         </h4>
       </div>
       <div class="container" style="background:white">
@@ -64,7 +66,18 @@ if (!empty($_POST["age"])) {
                 </thead>
                 <tbody>
                   <tr>
-                    <th scope="row">1</th>
+                    <?php 
+                      $qeury = "SELECT p.Title,p.FirstName,p.LastName,h.Status FROM person AS p,home AS h WHERE p.ID_house = h.ID_house"or die("Error:" . mysqli_error()); 
+                      $result = mysqli_query($con,$query);
+                      $i = 1;
+                      while($row = mysqli_fetch_array($result)){
+                        echo "<th scope="row">i</th>";
+                        echo "<th>" .$row["Title"] . "</th>";  
+                        echo "<td>" .$row["FirstName"] . "</td>";
+                        echo "<td>" .$row["LastName"] . "</td>";
+                        echo "<td>" .$row["Status"] . "</td>";
+                        $i++;
+                      }
                     <th>นาง</th>
                     <td>จันทร์</td>
                     <td>คำใหญ่</td>
