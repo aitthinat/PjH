@@ -4,33 +4,37 @@
 .myTable { 
   width: 100%;
   text-align: left;
-  /*lemonchiffon */
   border-collapse: collapse;
   }
 .myTable th { 
-  background-color: rgba(255,0,0,.3);
-  color: lemonchiffon; 
+  background-color: rgba(32,178,170,.3);
+  color: #008B8B; 
   }
 .myTable td, 
 .myTable th { 
   padding: 10px;
-  border: 1px solid lemonchiffon; 
+  border: 1px solid #008B8B; 
   }
 </style>
 <div>
 
         <!-- +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
-        <div class="container" style="background-color:rgba(255,0,0,.1);border-radius:25px;padding-left:2em;padding-right:2em" id="L1" 
+        <center><h1>ประมวลผลภาวะเสี่ยง</h1></center><br/>
+
+        <div class="container" style="background-color:rgba(255,255,255,.3);border-radius:25px;padding-left:2em;padding-right:2em" id="L1" 
 <?php 
 if (empty($_POST["selectDis1"])) {?>
     hidden=""
 <?php } ?>
         >
-            <h2>โรคเบาหวาน</h2><br/>
+            <h3>โรคเบาหวาน</h3><br/>
+
+            <center><img src="img/diabet1.jpg"></center>
             <!-- waitting -->
             <!-- ################################## Link Database ##################################-->
+            <br/>
             <?php
-            $sql = "SELECT Title, FirstName, LastName, Village_no FROM person ";
+            $sql = "SELECT Title, Fname, Lname, HomeNo FROM person, home WHERE person.Hid=home.HomeID ";
             $result = mysqli_query($db, $sql);
 
             if (mysqli_num_rows($result) > 0) {
@@ -39,7 +43,7 @@ if (empty($_POST["selectDis1"])) {?>
                 $i = 1;
                 while($row = mysqli_fetch_assoc($result)) {
                         # code...
-                        echo "<tr><td>" . $i . "</td><td>" . $row["Title"]. "</td><td>" . $row["FirstName"]. "</td><td>" . $row["LastName"]. "</td><td>" . $row["Village_no"]. "</td></tr>";
+                        echo "<tr><td>" . $i . "</td><td>" . $row["Title"]. "</td><td>" . $row["Fname"]. "</td><td>" . $row["Lname"]. "</td><td>" . $row["HomeNo"]. "</td></tr>";
 
                       $i+=1;
                       }
@@ -47,7 +51,7 @@ if (empty($_POST["selectDis1"])) {?>
             } ?>
             <!-- ###################################################################################-->
     <br/><br/>
-        <div style="background:rgba(255,0,0,.2); border-radius:25px;">
+        <div style="background:rgba(32,178,170,.2); border-radius:25px;">
         <br/>
         <h4 style="padding-left:2em; color: red">ข้อแนะนำ</h4>
         <h5 style="padding-left:5em;padding-right:5em">1.ต้องหาแรงจูงใจ
@@ -64,7 +68,7 @@ if (empty($_POST["selectDis1"])) {?>
         </div>
     <br/><br/>
         <!-- +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
-        <div class="container" style="background-color:rgba(255,0,0,.1);border-radius:25px;padding-left:2em;padding-right:2em"
+        <div class="container" style="background-color:rgba(255,255,255,.3);border-radius:25px;padding-left:2em;padding-right:2em"
 <?php 
 if (empty($_POST["selectDis2"])) {?>
     hidden=""
@@ -72,10 +76,11 @@ if (empty($_POST["selectDis2"])) {?>
 
         >
 
-            <h2>โรคความดันโลหิตสูง</h2><br/>
+            <h3>โรคความดันโลหิตสูง</h3><br/>
             <!-- ################################## Link Database ##################################-->
+            <br/>
             <?php
-            $sql = "SELECT Title, FirstName, LastName, Village_no FROM person ";
+            $sql = "SELECT Title, Fname, Lname, HomeNo FROM person, home WHERE person.Hid=home.HomeID ";
             $result = mysqli_query($db, $sql);
 
             if (mysqli_num_rows($result) > 0) {
@@ -84,7 +89,7 @@ if (empty($_POST["selectDis2"])) {?>
                 $i = 1;
                 while($row = mysqli_fetch_assoc($result)) {
                         # code...
-                        echo "<tr><td>" . $i . "</td><td>" . $row["Title"]. "</td><td>" . $row["FirstName"]. "</td><td>" . $row["LastName"]. "</td><td>" . $row["Village_no"]. "</td></tr>";
+                        echo "<tr><td>" . $i . "</td><td>" . $row["Title"]. "</td><td>" . $row["Fname"]. "</td><td>" . $row["Lname"]. "</td><td>" . $row["HomeNo"]. "</td></tr>";
 
                       $i+=1;
                       }
@@ -92,7 +97,7 @@ if (empty($_POST["selectDis2"])) {?>
             } ?>
             <!-- ###################################################################################-->
     <br/><br/>
-        <div style="background: rgba(255,0,0,.2); border-radius:25px;">
+        <div style="background: rgba(32,178,170,.2); border-radius:25px;">
         <br/>
             <h4 style="padding-left:2em; color: red">ข้อแนะนำ</h4>
             <h5 style="padding-left:5em;padding-right:5em">1. ถ้าอ้วน ควรควบคุมน้ำหนักตัวให้อยู่ในเกณฑ์ที่เหมาะสม โดยกินอาหารให้ครบ 5 หมู่ และหลากหลาย เพิ่มอาหารที่เส้นใย เช่น ผัก ผลไม้ที่มีรสหวานน้อย ข้าวก้อง ถั่วเมล็ดแห้ง เป็นต้น และหลีกเลี่ยงอาหารที่มีไขมันสูง เช่น หมูสามชั้น หนังเป็ด หนังไก่ อาหารใส่กะทิ ขนมหวาน อาหารที่โคเลสเตอรอลสูง เช่น สมองสัตว์ ปลาหมึกใหญ่ ไข่แดง ไข่นกกระทา เครื่องในสัตว์ หอยนางรม เป็นต้น
@@ -110,16 +115,17 @@ if (empty($_POST["selectDis2"])) {?>
         </div>
     <br/><br/>
         <!-- +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
-        <div class="container" style="background-color:rgba(255,0,0,.1);border-radius:25px;padding-left:2em;padding-right:2em"
+        <div class="container" style="background-color:rgba(255,255,255,.3);border-radius:25px;padding-left:2em;padding-right:2em"
 <?php 
 if (empty($_POST["selectDis3"])) {?>
     hidden=""
 <?php } ?>
         >
-            <h2>โรคหัวใจ</h2><br/>
+            <h3>โรคหัวใจ</h3><br/>
             <!-- ################################## Link Database ##################################-->
+            <br/>
             <?php
-            $sql = "SELECT Title, FirstName, LastName, Village_no FROM person ";
+            $sql = "SELECT Title, Fname, Lname, HomeNo FROM person, home WHERE person.Hid=home.HomeID ";
             $result = mysqli_query($db, $sql);
 
             if (mysqli_num_rows($result) > 0) {
@@ -128,7 +134,7 @@ if (empty($_POST["selectDis3"])) {?>
                 $i = 1;
                 while($row = mysqli_fetch_assoc($result)) {
                         # code...
-                        echo "<tr><td>" . $i . "</td><td>" . $row["Title"]. "</td><td>" . $row["FirstName"]. "</td><td>" . $row["LastName"]. "</td><td>" . $row["Village_no"]. "</td></tr>";
+                        echo "<tr><td>" . $i . "</td><td>" . $row["Title"]. "</td><td>" . $row["Fname"]. "</td><td>" . $row["Lname"]. "</td><td>" . $row["HomeNo"]. "</td></tr>";
 
                       $i+=1;
                       }
@@ -136,7 +142,7 @@ if (empty($_POST["selectDis3"])) {?>
             } ?>
             <!-- ###################################################################################-->
     <br/><br/>
-        <div style="background:rgba(255,0,0,.2); border-radius:25px;">
+        <div style="background:rgba(32,178,170,.2); border-radius:25px;">
         <br/>
         <h4 style="padding-left:2em; color: red">ข้อแนะนำ</h4>
         <h5 style="padding-left:5em;padding-right:5em">1. สังเกตความผิดปกติของตัวเองอยู่เสมอ โดยเฉพาะอาการผิดปกติที่เกิดขึ้นเฉียบพลัน เช่น ดูว่าอัตราการเต้นของหัวใจปกติดีหรือไม่ เจ็บหน้าอก ใจสั่นบ่อย ๆ หรือเปล่า เป็นต้น      
@@ -152,16 +158,17 @@ if (empty($_POST["selectDis3"])) {?>
         </div>
     <br/><br/>
         <!-- +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
-        <div class="container" style="background-color:rgba(255,0,0,.1);border-radius:25px;padding-left:2em;padding-right:2em"
+        <div class="container" style="background-color:rgba(255,255,255,.3);border-radius:25px;padding-left:2em;padding-right:2em"
 <?php 
 if (empty($_POST["selectDis4"])) {?>
     hidden=""
 <?php } ?>
         >
-            <h2>โรคตับ</h2><br/>
+            <h3>โรคตับ</h3><br/>
             <!-- ################################## Link Database ##################################-->
+            <br/>
             <?php
-            $sql = "SELECT Title, FirstName, LastName, Village_no FROM person ";
+            $sql = "SELECT Title, Fname, Lname, HomeNo FROM person, home WHERE person.Hid=home.HomeID ";
             $result = mysqli_query($db, $sql);
 
             if (mysqli_num_rows($result) > 0) {
@@ -170,7 +177,7 @@ if (empty($_POST["selectDis4"])) {?>
                 $i = 1;
                 while($row = mysqli_fetch_assoc($result)) {
                         # code...
-                        echo "<tr><td>" . $i . "</td><td>" . $row["Title"]. "</td><td>" . $row["FirstName"]. "</td><td>" . $row["LastName"]. "</td><td>" . $row["Village_no"]. "</td></tr>";
+                        echo "<tr><td>" . $i . "</td><td>" . $row["Title"]. "</td><td>" . $row["Fname"]. "</td><td>" . $row["Lname"]. "</td><td>" . $row["HomeNo"]. "</td></tr>";
 
                       $i+=1;
                       }
@@ -178,7 +185,7 @@ if (empty($_POST["selectDis4"])) {?>
             } ?>
             <!-- ###################################################################################-->
     <br/><br/>
-        <div style="background:rgba(255,0,0,.2); border-radius:25px;">
+        <div style="background:rgba(32,178,170,.2); border-radius:25px;">
         <br/>
         <h4 style="padding-left:2em; color: red">ข้อแนะนำ</h4>
         <h5 style="padding-left:5em;padding-right:5em">1. หลีกเลี่ยงการดื่มเครื่องดื่มแอลกอฮอล์ในปริมาณมาก และถ้าตรวจพบว่าเป็นพาหะของเชื้อไวรัสตับอักเสบบีหรือซี ควรงดดื่มโดยเด็ดขาด
