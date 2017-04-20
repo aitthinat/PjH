@@ -83,6 +83,7 @@
        var s = document.forms["myForm"]["Smoke"].value;
        var ex = document.forms["myForm"]["exercise"].value;
        var tex = document.forms["myForm"]["time-exercise"].value;
+    var fbs = document.forms["myForm"]["FBS"].value;
        if ( sys == null || sys == "" ) {
           alert("กรุณากรอกข้อมูลให้ครบถ้วน");
           return false;
@@ -119,6 +120,10 @@
           alert("กรุณากรอกข้อมูลให้ครบถ้วน");
           return false;
       }
+        if( fbs == null || fbs == ""){
+            alert("กรุณากรอกข้อมูลให้ครบถ้วน");
+            return false;
+        }
 
   }
 
@@ -156,6 +161,12 @@
                             <div class="col-10">
                                 <input class="form-control" type="number" id="SYS" name="SYS" placeholder="SYS" min="1" pattern=".{1,5}">
                                 <input class="form-control" type="number" id="DIA" name="DIA"  placeholder="DIA" min="1"  pattern=".{1,5}">
+                            </div>
+                        </div>
+                        <div class="form-group row" style="margin-left:10%;margin-right:10%">
+                            <label class="col-2 col-form-label">ระดับน้ำตาลในเลือด</label>
+                            <div class="col-10">
+                                <input class="form-control" type="number" id="FBS" name="FBS" placeholder="FBS" min="1" max="999" value="119">
                             </div>
                         </div>
                         <div class="form-group row" style="margin-left:10%;margin-right:10%">

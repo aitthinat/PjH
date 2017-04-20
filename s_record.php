@@ -11,6 +11,11 @@
     return false;
   } 
 }
+<?php session_start();
+    $_SESSION["findhome"] = $findhome;
+    $_SESSION["findFname"] = $findFname;
+    $_SESSION["findLname"] = $findLname;
+?>
 function clean_not_int(input){
  var regex = /[0-9/]/gi;
  if (input.value.match(regex)) {

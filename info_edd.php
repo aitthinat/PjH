@@ -24,7 +24,7 @@ if (!empty($_POST["age"])) {
       <label class="col-form-label"><?php 
 
         if (empty($_POST["findhome"])) {
-            $sql = "select Village_no from home ";
+            $sql = "SELECT Village_no FROM home WHERE Village_no = $findhome ";
             $result = mysqli_query($sql);
           echo "$result"; 
         } else {
@@ -37,9 +37,14 @@ if (!empty($_POST["age"])) {
           <label class="col-3 col-form-label">เลขที่ประจำบ้าน :</label>
             
           <label class="col-form-label"><?php
-              $idh = "select ID_house from Home";
-              $result_idh = mysqli_query($idh);
-            echo "$result_idh";
+              if (empty($_POST["findhome"])){
+                  $idh = "SELECT ID_house FROM Home WHERE Village_no = $findhome ";
+                  $result_idh = mysqli_query($con,$idh);
+                  echo "$result_idh";
+              }else{
+                  echo "";
+              }
+              
               ?>
             </label>
         </h4>
@@ -67,34 +72,27 @@ if (!empty($_POST["age"])) {
                 <tbody>
                   <tr>
                     <?php 
-                      $qeury = "SELECT p.Title,p.FirstName,p.LastName,h.Status FROM person AS p,home AS h WHERE p.ID_house = h.ID_house"or die("Error:" . mysqli_error()); 
+                      $query = "SELECT Title,FirstName,LastName,Status FROM person,home WHERE ID_house = Hnum"or die("Error:" . mysqli_error()); 
                       $result = mysqli_query($con,$query);
                       $i = 1;
                       while($row = mysqli_fetch_array($result)){
-                        echo "<th scope="row">i</th>";
-                        echo "<th>" .$row["Title"] . "</th>";  
-                        echo "<td>" .$row["FirstName"] . "</td>";
-                        echo "<td>" .$row["LastName"] . "</td>";
-                        echo "<td>" .$row["Status"] . "</td>";
-                        $i++;
-                      }
-                    <th>นาง</th>
-                    <td>จันทร์</td>
-                    <td>คำใหญ่</td>
-                    <td>เจ้าบ้าน</td>
-                    <td><a href="adddata-old-case.php" style="color: green">ตรวจแล้ว</a></td>
-                    <td><a href=""><button type="button" class="btn btn-primary">Edit</button></a></td>
+                            echo "<tr>";
+                                echo "<th >". $i ."</th>";
+                                echo "<th>" .$row["Title"] . "</th>";  
+                                echo "<td>" .$row["FirstName"] . "</td>";
+                                echo "<td>" .$row["LastName"] . "</td>";
+                                echo "<td>" .$row["Status"] . "</td>";
+                                if(!empty[]){
+                                    echo "<td><a href='adddata-old-case.php' style='color: green'>ตรวจแล้ว</a></td>";
+                                }else{
+                                   echo "<td><a href='adddata-old-case.php' style='color: green'>ไม่ได้ตรวจ</a></td>"; 
+                                }
+                                echo "<td><a href='adddata-old-case-edit.php'><button type='button' class='btn btn-primary'>Edit</button></a></td>";
+                                $i++;
+                            echo "</tr>";
+                          mysqli_close($con);
+                          }?>
                   </tr>
-                  <tr>
-                    <th scope="row">2</th>
-                    <th>นาย</th>
-                    <td>คำ</td>
-                    <td>หัวดำ</td>
-                    <td>ผู้อาศัย</td>
-                    <td><a href="adddata.php" style="color: red">ยังไม่ได้ตรวจ</a></td>
-                    <td><a href=""><button type="button" class="btn btn-primary">Edit</button></a></td>
-                  </tr>
-                </tr>
               </tbody>
             </table>
             <div class="form-check form-group row " style="margin-left:8px;margin-bottom:-12px">

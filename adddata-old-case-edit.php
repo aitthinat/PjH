@@ -1,4 +1,5 @@
 <?php include "head.php" ?>
+<?php include "connection.php" ?>
 <script language="Javascript">
   function disabled_TE()
   {
@@ -22,6 +23,7 @@
    var s = document.forms["myForm"]["Smoke"].value;
    var ex = document.forms["myForm"]["exercise"].value;
    var tex = document.forms["myForm"]["time-exercise"].value;
+   var fbs = document.forms["myForm"]["FBS"].value;
    if ( sys == null || sys == "" ) {
     alert("กรุณากรอกข้อมูลให้ครบถ้วน");
     return false;
@@ -33,6 +35,10 @@
   if ( dia == null || dia == "" ) {
     alert("กรุณากรอกข้อมูลให้ครบถ้วน");
     return false;
+  }
+  if ( fbs == null || fbs == "" ){
+      alert("กรุณากรอกข้อมูลให้ครบถ้วน");
+      return false;
   }
   if ( w == null || w == "" ) {
     alert("กรุณากรอกข้อมูลให้ครบถ้วน");
@@ -62,6 +68,9 @@
 }
 
 </script>
+<?php 
+    $sql = "UPDATE health_info SET ";
+?>
 <div>
 <div class="row">
 <div class="form-check form-group col" style="margin-left:10%">
@@ -106,6 +115,12 @@
                 </div>
               </div>
               <div class="form-group row" style="margin-left:10%;margin-right:10%">
+                  <label class="col-2 col-form-label">ระดับน้ำตาลในเลือด</label>
+                <div class="col-10">
+                  <input class="form-control" type="number" id="FBS" name="FBS" placeholder="FBS" min="1" max="999" value="119">
+                </div>
+              </div>
+              <div class="form-group row" style="margin-left:10%;margin-right:10%">
                <label class="col-2 col-form-label">น้ำหนัก</label>
                <div class="col-10">
                 <input class="form-control" type="number" id="weight" name="weight" placeholder="kilogram" min="1" max="999" value="160">
@@ -121,6 +136,35 @@
                 <label style="padding-right:10px">46</label><label style="padding-right:20px">ปี</label>
               </label>
             </div>
+            <div class="form-group row" style="margin-left:10%;margin-right:10%" id="fname_div">
+              <label class="col-2 col-form-label">โรคประจำตัว</label>
+              <div class="col-10">
+                <input class="form-control" type="text" id="chr" name="chr" placeholder="โรคประจำตัว" onkeyup="clean_not_char(this)" onkeydown="clean_not_char(this)">
+              </div>
+          </div>
+          <div class="form-group row" style="margin-left:10%;margin-right:10%" id="fname_div">
+              <label class="col-2 col-form-label">การแพ้ยา</label>
+              <div class="col-10">
+                <input class="form-control" type="text" id="into" name="into" placeholder="การแพ้ยา" onkeyup="clean_not_char(this)" onkeydown="clean_not_char(this)">
+              </div>
+          </div>
+          <div class="form-group row" style="margin-left:10%;margin-right:10%" id="fname_div">
+              <label class="col-2 col-form-label">อาหารที่แพ้</label>
+              <div class="col-10">
+                <input class="form-control" type="text" id="food" name="food" placeholder="อาหารที่แพ้" onkeyup="clean_not_char(this)" onkeydown="clean_not_char(this)">
+              </div>
+          </div>
+           <div class="form-check form-group row" style="margin-left:10%" id="d_DIV">
+            <label class="col-8 col-form-label">ความสามารถในการช่วยเหลือตนเอง</label>
+          </div>
+          <div class="form-check form-group row" style="margin-left:10%" id="dsub_DIV">
+            <label class="form-check-label" style="margin-left:5%">
+              <input class="form-check-input" type="radio" name="disa" id="disa0" value="0"> ช่วยเหลือตัวเองไม่ได้
+            </label>
+            <label class="form-check-label" style="margin-left:2%">
+              <input class="form-check-input" type="radio" name="disa" id="disa1" value="1"> ช่วยเหลือตัวเองได้
+            </label>
+          </div>
             <div class="form-check form-group row" style="margin-left:10%">
               <label class="col-8 col-form-label">ข้อมูลในช่วง 1 ปีที่ผ่านมา</label>
             </div>

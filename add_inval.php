@@ -1,4 +1,5 @@
 <?php include "head.php" ?>
+<?php include "connection.php" ?>
 <script type="text/javascript"> 
   function keyup(obj,e){
     var keynum;
@@ -395,6 +396,12 @@ function validateID(input){
             <label class="col-2 col-form-label" id="al" style="visibility: hidden;"></label>
             <div class="col-10"  style="visibility: hidden;color: red"  id="al6">*กรุณาตรวจสอบใหม่อีกครั้ง</div>
           </div>
+          <div class="form-group row" style="margin-left:10%;margin-right:10%" id="lname_div">
+            <label class="col-2 col-form-label">วันเดือนปีเกิด</label>
+            <div class="col-10">
+              <input class="form-control" type="date" class="form-control" id="date" placeholder="Date of Birth">
+            </div>
+            </div>
           <div class="form-group row" style="margin-left:10%;margin-right:10%" id="status_div">
             <label class="col-2 col-form-label">สถานะ</label>
             <div class="col-10">
@@ -466,7 +473,7 @@ function validateID(input){
     <div class="form-group row" style="margin-left:10%;margin-right:10%" id="tel_div">
      <label class="col-2 col-form-label">เบอร์โทรศัพท์</label>
      <div class="col-10">
-      <input class="form-control" type="tel" id="tel" name="tel" onkeyup="validatetel(this)" onkeydown="validatetel(this)">
+      <input class="form-control" type="tel" id="tel" name="tel" placeholder="0960000xxx" onkeyup="validatetel(this)" onkeydown="validatetel(this)">
     </div>
     <label class="col-2 col-form-label" id="al" style="visibility: hidden;"></label>
     <div class="col-10"  style="visibility: hidden;color: red"  id="al5">*กรุณาตรวจสอบใหม่อีกครั้ง หากไม่มี ให้ใส่เครื่องหมาย -</div>

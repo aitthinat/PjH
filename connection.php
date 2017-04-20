@@ -1,4 +1,4 @@
 <?php
-    $db = mysqli_connect("127.0.0.1","root","","health") or die ("Error: . mysqli_connect($db)");
-    mysqli_query($db, "SET NAMES 'utf8' ");
+    $con = mysqli_connect("127.0.0.1","root","","health") or die ("Error: . mysqli_connect($con)");
+    mysqli_query($con, "SET NAMES 'utf8' ");
 ?>

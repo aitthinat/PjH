@@ -1,7 +1,9 @@
 <?php include "head.php" ?>
-
+<?php include "connection.php" ?>
 <?php 
-$blood = $_POST["BloodGroup"]; 
+ 
+$blood = isset($_POST['BloodGroup']) ? $_POST['BloodGroup'] : '';
+#$Hcid = $_POST["BloodGroup"];
 $SYS = $_POST["SYS"];
 $DIA = $_POST["DIA"];
 $weight = $_POST["weight"];
@@ -9,7 +11,18 @@ $height = $_POST["height"];
 $Drink = $_POST["Drink"];
 $Smoke = $_POST["Smoke"];
 $exercise = $_POST["exercise"];
+$food = $_POST["food"];
+$into = $_POST["into"];
+$disa = $_POST["disa"];
+$chr = $_POST["chr"];
+$Ehours = $_POST["Ehours"];
+$year = $_POST["year"];
+$sex = $_POST["sex"];
 
+
+if(isset($_POST["insert"])){
+    $query = "INSERT INTO health_info VALUES ('$Hcid','$year','$date','$weight','$height','$blood','$Environment','$disa','$into','$food','$SYS','$DIA','$chr','$sex','$Smoke','$Drink','$exercise','$Ehours')";
+}
 if ($exercise != 0) {
     $texercise = $_POST["time-exercise"]; 
 }
@@ -35,12 +48,6 @@ if ($exercise == 0) {
 }
 
 </script>
-
-
-
-
-
-
 <div>
     <div class="container" style="background:white">
         <div class="row">
@@ -91,6 +98,36 @@ if ($exercise == 0) {
                         <label style="padding-right:10px">58</label><label style="padding-right:20px">ปี</label>
                     </label>
                 </div>
+                <div class="form-check form-group row" style="margin-left:10%">
+                        <label class="col-2 col-form-label">โรคประจำตัว</label>
+                        <label class="form-check-label">
+                            <?php echo $chr; ?>
+                        </label>
+                    </div>
+                    <div class="form-check form-group row" style="margin-left:10%">
+                        <label class="col-2 col-form-label">การแพ้ยา</label>
+                        <label class="form-check-label">
+                            <?php echo $into; ?>
+                        </label>
+                    </div>
+                    <div class="form-check form-group row" style="margin-left:10%">
+                        <label class="col-2 col-form-label">อาหารที่แพ้</label>
+                        <label class="form-check-label">
+                            <?php echo $food; ?>
+                        </label>
+                    </div>
+                    <div class="form-check form-group row" style="margin-left:10%">
+                        <label class="col-5 col-form-label">ความสามารถในการช่วยเหลือตนเอง</label>
+                        <label class="form-check-label">
+                            <?php
+                            if ($disa == 0) {
+                                echo "ช่วยเหลือตนเองไม่ได้";
+                            } else if ($disa == 1) {
+                                echo "ช่วยเหลือตนเองได้";
+                            } 
+                            ?>
+                        </label>
+                    </div>
                 <div class="form-check form-group row" style="margin-left:10%">
                     <label class="col-8 col-form-label">ข้อมูลในช่วง 1 ปีที่ผ่านมา</label>
                     <div class="form-check form-group row" style="margin-left:10%">

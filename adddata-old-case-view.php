@@ -1,4 +1,5 @@
 <?php include "head.php" ?>
+<?php include "connection.php" ?>
 <script language="Javascript">
   function disabled_TE()
   {
@@ -22,6 +23,7 @@
    var s = document.forms["myForm"]["Smoke"].value;
    var ex = document.forms["myForm"]["exercise"].value;
    var tex = document.forms["myForm"]["time-exercise"].value;
+   var fbs = document.forms["myForm"]["FBS"].value;
    if ( sys == null || sys == "" ) {
     alert("กรุณากรอกข้อมูลให้ครบถ้วน");
     return false;
@@ -57,6 +59,10 @@
   if (( ex == "1" || ex == "2" )&&(tex == null || tex =="")) {
     alert("กรุณากรอกข้อมูลให้ครบถ้วน");
     return false;
+  }
+  if ( fbs == null || fbs == "" ){
+      alert("กรุณากรอกข้อมูลให้ครบถ้วน");
+      return false;
   }
 
 }

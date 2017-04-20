@@ -24,6 +24,11 @@
     var s = document.forms["myForm"]["Smoke"].value;
     var ex = document.forms["myForm"]["exercise"].value;
     var tex = document.forms["myForm"]["time-exercise"].value;
+    var food = document.forms["myForm"]["Food"].value;
+    var into = document.forms["myForm"]["into"].value;
+    var disa = document.forms["myForm"]["disa"].value;
+    var date = document.forms["myForm"]["date"].value;
+    var chr = document.forms["myForm"]["chr"].value;
 
     var sys_oper = 0
     var bg_oper = 0
@@ -218,7 +223,19 @@
   input.value = input.value.replace(regex, "");
 }
 </script>
-
+<?php
+    $BloddGroup = isset($_POST['BloodGroup']) ? $_POST['BloodGroup'] : '';
+    if(isset($_POS["insert"])){
+        $sql = "INSERT INTO health_info ('$Blood_group','$BP_SYS','$BP_DIA','$Weight','$Height','$BOA','$BOS','$Exercise','$Ehours','$Environment','$Food_allergise','$Intolerance','$Disability','$Chronic_Disease') VALUES (' ".$_POST["BloodGroup"]." ', '".$_POST["SYS"]."', '".$_POST["DIA"]." ', '".$_POST["weight"]."','".$_POST["height"]."','".$_POST["Drink"]."','".$_POST["Smoke"]."','".$_POST["exercise"]."','".$_POST["time-exercise"]."','".$_POST["homearea"]."','".$_POST["food"]."','".$_POST["into"]."','".$_POST["disa"]."','".$_POST["chr"]."')";
+        $query = mysqli_query($con, $sql);
+        if($query){
+            echo "<script>alert('เพิ่มข้อมูลเรียบร้อย'); location.href = 'index.php';</script>";
+        }else{
+            echo "<script>alert('ไม่สามารถเพิ่มข้อมูลได้'); location.href='adddata.php'; </script>";
+        }
+    }
+    mysqli_close($con);
+?>
 <div> 
   <div class="container" style="background:white">
     <div class="row">
@@ -229,7 +246,10 @@
             <div class="form-check form-group row" style="margin-left:10%">
               <label class="col-2 col-form-label">ชื่อ - สกุล</label>
               <label class="form-check-label">
-                <h4><label style="padding-right:10px">นาย</label><label style="padding-right:20px">คำ</label><label>หัวดำ</label></h4>
+                <h4><label style="padding-right:10px"><?php
+                    $sql = "SELECT Title FROM person";
+                    ?>
+                    </label><label style="padding-right:20px">คำ</label><label>หัวดำ</label></h4>
               </label>
             </div>
             <div class="form-check form-group row" style="margin-left:10%" id="bg_DIV">
@@ -283,6 +303,35 @@
             <label class="col-2 col-form-label">อายุ</label>
             <label class="form-check-label">
               <label style="padding-right:10px">58</label><label style="padding-right:20px">ปี</label>
+            </label>
+          </div>
+           <div class="form-group row" style="margin-left:10%;margin-right:10%" id="fname_div">
+              <label class="col-2 col-form-label">โรคประจำตัว</label>
+              <div class="col-10">
+                <input class="form-control" type="text" id="chr" name="chr" placeholder="โรคประจำตัว" onkeyup="clean_not_char(this)" onkeydown="clean_not_char(this)">
+              </div>
+          </div>
+          <div class="form-group row" style="margin-left:10%;margin-right:10%" id="fname_div">
+              <label class="col-2 col-form-label">การแพ้ยา</label>
+              <div class="col-10">
+                <input class="form-control" type="text" id="into" name="into" placeholder="การแพ้ยา" onkeyup="clean_not_char(this)" onkeydown="clean_not_char(this)">
+              </div>
+          </div>
+          <div class="form-group row" style="margin-left:10%;margin-right:10%" id="fname_div">
+              <label class="col-2 col-form-label">อาหารที่แพ้</label>
+              <div class="col-10">
+                <input class="form-control" type="text" id="food" name="food" placeholder="อาหารที่แพ้" onkeyup="clean_not_char(this)" onkeydown="clean_not_char(this)">
+              </div>
+          </div>
+           <div class="form-check form-group row" style="margin-left:10%" id="d_DIV">
+            <label class="col-8 col-form-label">ความสามารถในการช่วยเหลือตนเอง</label>
+          </div>
+          <div class="form-check form-group row" style="margin-left:10%" id="dsub_DIV">
+            <label class="form-check-label" style="margin-left:5%">
+              <input class="form-check-input" type="radio" name="disa" id="disa0" value="0"> ช่วยเหลือตัวเองไม่ได้
+            </label>
+            <label class="form-check-label" style="margin-left:2%">
+              <input class="form-check-input" type="radio" name="disa" id="disa1" value="1"> ช่วยเหลือตัวเองได้
             </label>
           </div>
           <div class="form-check form-group row" style="margin-left:10%">
@@ -370,7 +419,7 @@
             <button type="submit" class="btn btn-primary">Submit</button>
           </div>
         </form>
-
+        
       </div>
     </div>
   </div>

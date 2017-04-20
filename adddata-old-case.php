@@ -1,4 +1,5 @@
 <?php include "head.php" ?>
+<?php include "connection.php" ?>
 <script language="Javascript">
   function disabled_TE()
   {
@@ -16,6 +17,7 @@
    var sys = document.forms["myForm"]["SYS"].value;
    var bg = document.forms["myForm"]["BloodGroup"].value;
    var dia = document.forms["myForm"]["DIA"].value;
+   var fbs = document.forms["myForm"]["FBS"].value; 
    var w = document.forms["myForm"]["weight"].value;
    var h = document.forms["myForm"]["height"].value;
    var d = document.forms["myForm"]["Drink"].value;
@@ -33,6 +35,10 @@
   if ( dia == null || dia == "" ) {
     alert("กรุณากรอกข้อมูลให้ครบถ้วน");
     return false;
+  }
+  if ( fbs == null || fbs == "" ){
+      alert("กรุณากรอกข้อมูลให้ครบถ้วน");
+      return false;
   }
   if ( w == null || w == "" ) {
     alert("กรุณากรอกข้อมูลให้ครบถ้วน");
@@ -80,7 +86,19 @@
               <div class="form-check form-group row" style="margin-left:10%">
                 <label class="col-2 col-form-label">ชื่อ - สกุล</label>
                 <label class="form-check-label">
-                  <h4><label style="padding-right:10px">นาง</label><label style="padding-right:20px">จันทร์</label><label>คำใหญ่</label></h4>
+                  <h4><label style="padding-right:10px">
+                      <?php 
+                        $sql = "SELECT Title FROM person WHERE "; 
+                      ?>
+                      </label><label style="padding-right:20px">
+                      <?php 
+                        $sql = "SELECT Fname FROM person WHERE "; 
+                      ?>
+                      </label><label>
+                      <?php 
+                        $sql = "SELECT Lname FROM person WHERE "; 
+                      ?>
+                      </label></h4>
                 </label>
               </div>
               <div class="form-check form-group row" style="margin-left:10%">
@@ -106,6 +124,12 @@
                 </div>
               </div>
               <div class="form-group row" style="margin-left:10%;margin-right:10%">
+                  <label class="col-2 col-form-label">ระดับน้ำตาลในเลือด</label>
+                <div class="col-10">
+                  <input disabled="" class="form-control" type="number" id="FBS" name="FBS" placeholder="FBS" min="1" max="999" value="119">
+                </div>
+              </div>
+              <div class="form-group row" style="margin-left:10%;margin-right:10%">
                <label class="col-2 col-form-label">น้ำหนัก</label>
                <div class="col-10">
                 <input disabled="" class="form-control" type="number" id="weight" name="weight" placeholder="kilogram" min="1" max="999" value="49">
@@ -118,7 +142,11 @@
             <div class="form-check form-group row" style="margin-left:10%">
               <label class="col-2 col-form-label">อายุ</label>
               <label class="form-check-label">
-                <label style="padding-right:10px">46</label><label style="padding-right:20px">ปี</label>
+                <label style="padding-right:10px">
+                    <?php 
+                        $sql = "SELECT YEAR(CURRENT_TIMESTAMP) - YEAR(Birth_date)-(RIGHT(CURRENT_TIMESTAMP), 5) < RIGHT(Birth_date) FROM person WHERE fname = ";
+                    ?>
+                  </label><label style="padding-right:20px">ปี</label>
               </label>
             </div>
             <div class="form-check form-group row" style="margin-left:10%">
