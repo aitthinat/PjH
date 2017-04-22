@@ -399,7 +399,7 @@ function validateID(input){
           <div class="form-group row" style="margin-left:10%;margin-right:10%" id="lname_div">
             <label class="col-2 col-form-label">วันเดือนปีเกิด</label>
             <div class="col-10">
-              <input class="form-control" type="date" class="form-control" id="date" placeholder="Date of Birth">
+              <input class="form-control" type="date" class="form-control" id="date" placeholder="Date of Birth" maxlength="0">
             </div>
             </div>
           <div class="form-group row" style="margin-left:10%;margin-right:10%" id="status_div">

@@ -123,6 +123,12 @@ $(document).ready(function() {
                         </label>
                     </div>
                     <div class="form-check form-group row" style="margin-left:10%">
+                        <label class="col-2 col-form-label">ระดับน้ำตาลในเลือด</label>
+                        <label class="form-check-label">
+                              
+                        </label>
+                    </div>
+                    <div class="form-check form-group row" style="margin-left:10%">
                         <label class="col-2 col-form-label">น้ำหนัก</label>
                         <label class="form-check-label">
                             49
@@ -149,7 +155,7 @@ $(document).ready(function() {
                 <div class="form-check form-group row" style="margin-left:10%">
                     <label class="col-8 col-form-label">ข้อมูลในช่วง 1 ปีที่ผ่านมา</label>
                     <div class="form-check form-group row" style="margin-left:10%">
-                        <label class="col-5 col-form-label">พฤติกรรมการดื่มสุา(จำนวนครั้งต่อสัปดาห์)</label>
+                        <label class="col-5 col-form-label">พฤติกรรมการดื่มสุรา(จำนวนครั้งต่อสัปดาห์)</label>
                         <label class="form-check-label">
                             1-2 ครั้ง / สัปดาห์
                         </label>
@@ -181,7 +187,7 @@ $(document).ready(function() {
                         </div>
                     </div>
                     <div class="form-check form-group row" style="margin-left:10%;margin-right:10%" align="right">
-                        <a href="index.php"><button type="button" class="btn btn-primary" onclick="Finish_Check()">ยืนยันข้อมูล</button></a>
+                        <a href="index.php"><button type="button" class="btn btn-primary" onclick="Finish_Check()">กลับ</button></a>
                     </div>
 
                 </div>

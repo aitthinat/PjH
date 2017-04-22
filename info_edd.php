@@ -1,6 +1,8 @@
 <?php include "head.php" ?>
+
 <?php 
-include('connection.php');
+session_start();
+include "connection.php";
 if (!empty($_POST["findhome"])) {
   $findhome = $_POST["findhome"];
 }
@@ -23,9 +25,9 @@ if (!empty($_POST["age"])) {
       <label class="col-3 col-form-label">บ้านเลขที่ :</label>
       <label class="col-form-label"><?php 
 
-        if (empty($_POST["findhome"])) {
-            $sql = "SELECT Village_no FROM home WHERE Village_no = $findhome ";
-            $result = mysqli_query($sql);
+        if (!empty($_POST["findhome"])) {
+            $sql = "SELECT 'HomeNo' FROM 'home' WHERE 'HomeNo' = '".$_POST["findhome"]."' ";
+            $result = mysqli_query($con,$sql);
           echo "$result"; 
         } else {
           echo $findhome; }
@@ -38,7 +40,7 @@ if (!empty($_POST["age"])) {
             
           <label class="col-form-label"><?php
               if (empty($_POST["findhome"])){
-                  $idh = "SELECT ID_house FROM Home WHERE Village_no = $findhome ";
+                  $idh = "SELECT 'HomeID' FROM 'Home' WHERE HomeNo = ".$findhome." ";
                   $result_idh = mysqli_query($con,$idh);
                   echo "$result_idh";
               }else{
@@ -72,26 +74,29 @@ if (!empty($_POST["age"])) {
                 <tbody>
                   <tr>
                     <?php 
-                      $query = "SELECT Title,FirstName,LastName,Status FROM person,home WHERE ID_house = Hnum"or die("Error:" . mysqli_error()); 
+                      $query = "SELECT Title,FName,LName,Status FROM person,home WHERE HomeID = Hid and HomeNo = ".$findhome.""or die("Error:" . mysqli_error()); 
                       $result = mysqli_query($con,$query);
                       $i = 1;
-                      while($row = mysqli_fetch_array($result)){
-                            echo "<tr>";
-                                echo "<th >". $i ."</th>";
-                                echo "<th>" .$row["Title"] . "</th>";  
-                                echo "<td>" .$row["FirstName"] . "</td>";
-                                echo "<td>" .$row["LastName"] . "</td>";
-                                echo "<td>" .$row["Status"] . "</td>";
-                                if(!empty[]){
-                                    echo "<td><a href='adddata-old-case.php' style='color: green'>ตรวจแล้ว</a></td>";
-                                }else{
-                                   echo "<td><a href='adddata-old-case.php' style='color: green'>ไม่ได้ตรวจ</a></td>"; 
-                                }
-                                echo "<td><a href='adddata-old-case-edit.php'><button type='button' class='btn btn-primary'>Edit</button></a></td>";
-                                $i++;
-                            echo "</tr>";
-                          mysqli_close($con);
-                          }?>
+                      #if (mysqli_num_rows($result) > 0){
+                          
+                          while($row = mysqli_fetch_array($result)){
+                                echo "<tr>";
+                                    echo "<th >". $i ."</th>";
+                                    echo "<th>" .$row["Title"] . "</th>";  
+                                    echo "<td>" .$row["FName"] . "</td>";
+                                    echo "<td>" .$row["LName"] . "</td>";
+                                    echo "<td>" .$row["Status"] . "</td>";
+                                    if(!empty($_POST["findhome"])){
+                                        echo "<td><a href='adddata-old-case.php' style='color: green'>ตรวจแล้ว</a></td>";
+                                    }else{
+                                       echo "<td><a href='adddata-old-case.php' style='color: green'>ไม่ได้ตรวจ</a></td>"; 
+                                    }
+                                    echo "<td><a href='adddata-old-case-edit.php'><button type='button' class='btn btn-primary'>Edit</button></a></td>";
+                                    $i++;
+                                echo "</tr>";
+                              #mysqli_close($con);
+                              #}
+                      }?>
                   </tr>
               </tbody>
             </table>
@@ -124,6 +129,6 @@ if (!empty($_POST["age"])) {
     </div>
   </div>
   <div style="padding-right:80px;padding-top: 20px" align="right"><a href="add_inval.php"><img class="img-responsive" src="img/onpage_1-2.png" height="200" width="200"></a></div>
-</div>
+<!--</div>-->
 
-<?php include "foot.php" ?>
+<!--?php include "foot.php" ?>

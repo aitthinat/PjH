@@ -1,5 +1,6 @@
 <?php include "head.php" ?>
 <?php include('connection.php'); ?>
+<?php session_start(); ?>
 <script language="Javascript">
   function disabled_TE()
   {
@@ -226,7 +227,7 @@
 <?php
     $BloddGroup = isset($_POST['BloodGroup']) ? $_POST['BloodGroup'] : '';
     if(isset($_POS["insert"])){
-        $sql = "INSERT INTO health_info ('$Blood_group','$BP_SYS','$BP_DIA','$Weight','$Height','$BOA','$BOS','$Exercise','$Ehours','$Environment','$Food_allergise','$Intolerance','$Disability','$Chronic_Disease') VALUES (' ".$_POST["BloodGroup"]." ', '".$_POST["SYS"]."', '".$_POST["DIA"]." ', '".$_POST["weight"]."','".$_POST["height"]."','".$_POST["Drink"]."','".$_POST["Smoke"]."','".$_POST["exercise"]."','".$_POST["time-exercise"]."','".$_POST["homearea"]."','".$_POST["food"]."','".$_POST["into"]."','".$_POST["disa"]."','".$_POST["chr"]."')";
+        $sql = "INSERT INTO health_info (Blood_group,BP_SYS,BP_DIA,Weight,Height,BOA,BOS,Exercise,Ehours,Environment,Food_allergise,Intolerance,Disabilit,Chronic_Disease) VALUES (' ".$_POST["BloodGroup"]." ', '".$_POST["SYS"]."', '".$_POST["DIA"]." ', '".$_POST["weight"]."','".$_POST["height"]."','".$_POST["Drink"]."','".$_POST["Smoke"]."','".$_POST["exercise"]."','".$_POST["time-exercise"]."','".$_POST["homearea"]."','".$_POST["food"]."','".$_POST["into"]."','".$_POST["disa"]."','".$_POST["chr"]."')";
         $query = mysqli_query($con, $sql);
         if($query){
             echo "<script>alert('เพิ่มข้อมูลเรียบร้อย'); location.href = 'index.php';</script>";
@@ -234,7 +235,6 @@
             echo "<script>alert('ไม่สามารถเพิ่มข้อมูลได้'); location.href='adddata.php'; </script>";
         }
     }
-    mysqli_close($con);
 ?>
 <div> 
   <div class="container" style="background:white">
@@ -247,7 +247,9 @@
               <label class="col-2 col-form-label">ชื่อ - สกุล</label>
               <label class="form-check-label">
                 <h4><label style="padding-right:10px"><?php
-                    $sql = "SELECT Title FROM person";
+                    $sql = "SELECT 'Title' FROM 'person', 'home' WHERE 'HomeNo' = '".$_POST["findhome"]."' ";
+                    $result = mysqli_query($con,$sql);
+                    echo "$result";
                     ?>
                     </label><label style="padding-right:20px">คำ</label><label>หัวดำ</label></h4>
               </label>
@@ -279,6 +281,14 @@
               <label class="col-2 col-form-label"></label>
               <div class="col-10">
                 <input class="form-control" type="number" id="DIA" name="DIA" onkeyup="clean(this)" onkeydown="clean(this)" placeholder="DIA" min="1" max="999">
+              </div>
+              <label class="col-2 col-form-label" id="dl" style="visibility: hidden;"></label>
+              <div class="col-10" id="dl2"  style="visibility: hidden;color: red">*กรุณากรอกเฉพาะตัวเลข</div>
+            </div>
+              <div class="form-group row" style="margin-left:10%;margin-right:10%" id="dia_DIV">
+              <label class="col-2 col-form-label">ระดับน้ำตาลในเลือด</label>
+              <div class="col-10">
+                <input class="form-control" type="number" id="FBS" name="FBS" onkeyup="clean(this)" onkeydown="clean(this)" placeholder="FBS" min="1" max="999">
               </div>
               <label class="col-2 col-form-label" id="dl" style="visibility: hidden;"></label>
               <div class="col-10" id="dl2"  style="visibility: hidden;color: red">*กรุณากรอกเฉพาะตัวเลข</div>
@@ -323,16 +333,29 @@
                 <input class="form-control" type="text" id="food" name="food" placeholder="อาหารที่แพ้" onkeyup="clean_not_char(this)" onkeydown="clean_not_char(this)">
               </div>
           </div>
-           <div class="form-check form-group row" style="margin-left:10%" id="d_DIV">
-            <label class="col-8 col-form-label">ความสามารถในการช่วยเหลือตนเอง</label>
+              <div class="form-check form-group row" style="margin-left:10%" id="dis_DIV">
+            <label class="col-8 col-form-label">ความพิการ</label>
           </div>
-          <div class="form-check form-group row" style="margin-left:10%" id="dsub_DIV">
-            <label class="form-check-label" style="margin-left:5%">
-              <input class="form-check-input" type="radio" name="disa" id="disa0" value="0"> ช่วยเหลือตัวเองไม่ได้
+          <div class="form-check form-group row" style="margin-left:10%" id="dissub_DIV">
+            <label class="form-check-label"  style="margin-left:5%">
+              <input class="form-check-input" type="radio" name="disa" id="disa0" value="0" onclick="disabled_TE()">ไม่พิการ
             </label>
             <label class="form-check-label" style="margin-left:2%">
-              <input class="form-check-input" type="radio" name="disa" id="disa1" value="1"> ช่วยเหลือตัวเองได้
+              <input class="form-check-input" type="radio" name="disa" id="disa1" value="1" onclick="enabled_TE()">พิการ
             </label>
+          </div>
+          <div class="form-check" id="sh_DIV">
+            <div class="form-check form-group row" style="margin-left:10%">
+              <label class="col-8 col-form-label">ความสามารถในการช่วยเหลือตนเอง</label>
+            </div>
+            <div class="form-check form-group row" style="margin-left:10%">
+              <label class="form-check-label"  style="margin-left:5%">
+                <input class="form-check-input" type="radio" name="selfhelp" value="0" id="TE1" disabled>ช่วยเหลือตนเองไม่ได้
+              </label>
+              <label class="form-check-label" style="margin-left:2%">
+                <input class="form-check-input" type="radio" name="selfhelp" value="1" id="TE2" disabled>ช่วยเหลือตนเองได้
+              </label>
+            </div>
           </div>
           <div class="form-check form-group row" style="margin-left:10%">
             <label class="col-8 col-form-label">ข้อมูลในช่วง 1 ปีที่ผ่านมา</label>

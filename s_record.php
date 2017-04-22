@@ -1,5 +1,18 @@
 <?php include "head.php" ?>
 <?php include('connection.php'); ?>
+<?php session_start();
+//$findhome=isset($_POST['findhome']) ? $_POST['findhome'] : "";
+//$findFname=isset($_POST['findFname']) ? $_POST['findFname'] : "";
+//$findLname=isset($_POST['findLname']) ? $_POST['findLname'] : "";
+//$findhome = $_POST["findhome"];
+//$findFname = $_POST["findFname"];
+//$findLname = $_POST["findLname"];
+    if(isset($_POST['btnsearch'])){
+        $_SESSION["findhome"] = $_POST["findhome"]; 
+        $_SESSION["findFname"] = $_POST["findFname"];
+        $_SESSION["findLname"] = $_POST["findLname"];
+    }
+?>
 <script language="Javascript">
   function validateForm() {
    var findhome = document.forms["myForm"]["findhome"].value;
@@ -11,11 +24,6 @@
     return false;
   } 
 }
-<?php session_start();
-    $_SESSION["findhome"] = $findhome;
-    $_SESSION["findFname"] = $findFname;
-    $_SESSION["findLname"] = $findLname;
-?>
 function clean_not_int(input){
  var regex = /[0-9/]/gi;
  if (input.value.match(regex)) {
@@ -78,7 +86,7 @@ function clean_not_char2(input){
         </div>
 
         <div class="form-check form-group row" style="margin-left:10%;margin-right:10%" align="center">
-          <button type="submit" class="btn btn-primary">Search</button>
+          <button type="submit" name = "btnsearch" class="btn btn-primary">Search</button>
         </div>
       </form>
     </div>

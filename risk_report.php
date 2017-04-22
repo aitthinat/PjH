@@ -35,7 +35,7 @@ if (empty($_POST["selectDis1"])) {?>
             <br/>
             <?php
             $sql = "SELECT Title, Fname, Lname, HomeNo FROM person, home WHERE person.Hid=home.HomeID ";
-            $result = mysqli_query($db, $sql);
+            $result = mysqli_query($con, $sql);
 
             if (mysqli_num_rows($result) > 0) {
                 // output data of each row
@@ -81,7 +81,7 @@ if (empty($_POST["selectDis2"])) {?>
             <br/>
             <?php
             $sql = "SELECT Title, Fname, Lname, HomeNo FROM person, home WHERE person.Hid=home.HomeID ";
-            $result = mysqli_query($db, $sql);
+            $result = mysqli_query($con, $sql);
 
             if (mysqli_num_rows($result) > 0) {
                 // output data of each row
@@ -126,7 +126,7 @@ if (empty($_POST["selectDis3"])) {?>
             <br/>
             <?php
             $sql = "SELECT Title, Fname, Lname, HomeNo FROM person, home WHERE person.Hid=home.HomeID ";
-            $result = mysqli_query($db, $sql);
+            $result = mysqli_query($con, $sql);
 
             if (mysqli_num_rows($result) > 0) {
                 // output data of each row
@@ -169,7 +169,7 @@ if (empty($_POST["selectDis4"])) {?>
             <br/>
             <?php
             $sql = "SELECT Title, Fname, Lname, HomeNo FROM person, home WHERE person.Hid=home.HomeID ";
-            $result = mysqli_query($db, $sql);
+            $result = mysqli_query($con, $sql);
 
             if (mysqli_num_rows($result) > 0) {
                 // output data of each row

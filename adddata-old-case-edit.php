@@ -1,5 +1,6 @@
 <?php include "head.php" ?>
 <?php include "connection.php" ?>
+<?php session_start(); ?>
 <script language="Javascript">
   function disabled_TE()
   {
@@ -68,16 +69,13 @@
 }
 
 </script>
-<?php 
-    $sql = "UPDATE health_info SET ";
-?>
 <div>
 <div class="row">
 <div class="form-check form-group col" style="margin-left:10%">
     <label class="col-form-label"><a href="#" style="color: red"><u>แก้ไขข้อมูล</u></a></label>
   </div>
   <div class="form-check form-group col" style="margin-right:10%" align="right">
-    <label class="col-form-label"><a href="#" style="color: red"><u>ดูข้อมูลย้อนหลัง</u></a></label>
+    <label class="col-form-label"><a href="adddata-old-case-view.php" style="color: red"><u>ดูข้อมูลย้อนหลัง</u></a></label>
   </div>
 </div>
     <div class="container" style="background:white" d>
