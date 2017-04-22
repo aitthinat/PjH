@@ -1,4 +1,5 @@
 <?php include "head.php" ?>
+<?php include('connection.php') ?>
 <script language="Javascript">
     function disabled_TE()
     {
@@ -113,11 +114,53 @@
                             <label style="padding-right:10px">58</label><label style="padding-right:20px">ปี</label>
                         </label>
                     </div>
+                        <div class="form-group row" style="margin-left:10%;margin-right:10%" id="fname_div">
+              <label class="col-2 col-form-label">โรคประจำตัว</label>
+              <div class="col-10">
+                <input class="form-control" type="text" id="chr" name="chr" placeholder="โรคประจำตัว" onkeyup="clean_not_char(this)" onkeydown="clean_not_char(this)">
+              </div>
+          </div>
+          <div class="form-group row" style="margin-left:10%;margin-right:10%" id="fname_div">
+              <label class="col-2 col-form-label">การแพ้ยา</label>
+              <div class="col-10">
+                <input class="form-control" type="text" id="into" name="into" placeholder="การแพ้ยา" onkeyup="clean_not_char(this)" onkeydown="clean_not_char(this)">
+              </div>
+          </div>
+          <div class="form-group row" style="margin-left:10%;margin-right:10%" id="fname_div">
+              <label class="col-2 col-form-label">อาหารที่แพ้</label>
+              <div class="col-10">
+                <input class="form-control" type="text" id="food" name="food" placeholder="อาหารที่แพ้" onkeyup="clean_not_char(this)" onkeydown="clean_not_char(this)">
+              </div>
+          </div>
+              <div class="form-check form-group row" style="margin-left:10%" id="dis_DIV">
+            <label class="col-8 col-form-label">ความพิการ</label>
+          </div>
+          <div class="form-check form-group row" style="margin-left:10%" id="dissub_DIV">
+            <label class="form-check-label"  style="margin-left:5%">
+              <input class="form-check-input" type="radio" name="disa" id="disa0" value="0" onclick="disabled_TE()">ไม่พิการ
+            </label>
+            <label class="form-check-label" style="margin-left:2%">
+              <input class="form-check-input" type="radio" name="disa" id="disa1" value="1" onclick="enabled_TE()">พิการ
+            </label>
+          </div>
+          <div class="form-check" id="sh_DIV">
+            <div class="form-check form-group row" style="margin-left:10%">
+              <label class="col-8 col-form-label">ความสามารถในการช่วยเหลือตนเอง</label>
+            </div>
+            <div class="form-check form-group row" style="margin-left:10%">
+              <label class="form-check-label"  style="margin-left:5%">
+                <input class="form-check-input" type="radio" name="selfhelp" value="0" id="TE1" disabled>ช่วยเหลือตนเองไม่ได้
+              </label>
+              <label class="form-check-label" style="margin-left:2%">
+                <input class="form-check-input" type="radio" name="selfhelp" value="1" id="TE2" disabled>ช่วยเหลือตนเองได้
+              </label>
+            </div>
+          </div>
                     <div class="form-check form-group row" style="margin-left:10%">
                         <label class="col-8 col-form-label">ข้อมูลในช่วง 1 ปีที่ผ่านมา</label>
                     </div>
                     <div class="form-check form-group row" style="margin-left:10%">
-                        <label class="col-8 col-form-label">พฤติกรรมการดื่มสุา(จำนวนครั้งต่อสัปดาห์)</label>
+                        <label class="col-8 col-form-label">พฤติกรรมการดื่มสุรา(จำนวนครั้งต่อสัปดาห์)</label>
                     </div>
                     <div class="form-check form-group row" style="margin-left:10%">
                         <label class="form-check-label" style="margin-left:5%">

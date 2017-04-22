@@ -1,5 +1,5 @@
 <?php include "head.php" ?>
-
+<?php include "connection.php" ?>
 <?php 
 
 $fname = $_POST["fname"]; 

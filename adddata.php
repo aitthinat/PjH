@@ -1,6 +1,24 @@
 <?php include "head.php" ?>
 <?php include('connection.php'); ?>
-<?php session_start(); ?>
+<?php 
+session_start();
+
+if (!empty($_POST["findhome"])) {
+  $findhome = $_POST["findhome"];
+}
+if (!empty($_POST["findFname"])) {
+  $findFname = $_POST["findFname"];
+}
+if (!empty($_POST["findLname"])) {
+  $findLname = $_POST["findLname"];
+}
+if (!empty($_POST["sex"])) {
+  $sex = $_POST["sex"];
+}
+if (!empty($_POST["age"])) {
+  $age = $_POST["age"];
+}
+?>
 <script language="Javascript">
   function disabled_TE()
   {
@@ -30,6 +48,8 @@
     var disa = document.forms["myForm"]["disa"].value;
     var date = document.forms["myForm"]["date"].value;
     var chr = document.forms["myForm"]["chr"].value;
+    var fbs = document.forms["myForm"]["FBS"].value;
+    var selfh = document.forms["myForm"]["sh"].value;
 
     var sys_oper = 0
     var bg_oper = 0
@@ -40,6 +60,13 @@
     var s_oper = 0
     var ex_oper = 0
     var tex_oper = 0
+    var fbs_oper = 0;
+    var food_oper = 0;
+    var disa_oper = 0;
+    var chr_oper = 0;
+    var into_oper = 0;
+    var date_oper = 0;
+    var sh_opers = 0;
 
     if ( sys == null || sys == "" ) {
       document.getElementById("SYS_DIV").className += " has-danger";
@@ -214,7 +241,27 @@
         bg_oper = 0;
       }
     }
-    if (sys_oper || bg_oper || dia_oper || w_oper || h_oper || d_oper || s_oper || ex_oper || tex_oper){
+      if ( fbs == null || fbs == "" ) {
+      document.getElementById("FBS_DIV").className += " has-danger";
+      document.getElementById("FBS").className += " form-control-danger";
+      document.getElementById("fl2").style.visibility = 'visible';    
+      fbs_oper = 1;
+    } else {
+      if ( document.getElementById("FBS_DIV").className.match(/(?:^|\s)has-danger(?!\S)/) ){
+        document.getElementById("FBS_DIV").className = document.getElementById("FBS_DIV").className.replace( /(?:^|\s)has-danger(?!\S)/g , " " );
+        document.getElementById("FBS").className = document.getElementById("FBS").className.replace( /(?:^|\s)form-has-danger(?!\S)/g , " " );
+        document.getElementById("FBS_DIV").className += " has-success";
+        document.getElementById("FBS").className += " form-control-success;"
+        document.getElementById("fl2").style.visibility = 'hidden';    
+        fbs_oper = 0;
+      } else {
+        document.getElementById("FBS_DIV").className += " has-success";
+        document.getElementById("FBS").className += " form-control-success";
+        document.getElementById("fl2").style.visibility = 'hidden';    
+        fbs_oper = 0;
+      }
+    }
+    if (sys_oper || bg_oper || dia_oper || w_oper || h_oper || d_oper || s_oper || ex_oper || tex_oper || fbs_oper){
      alert("กรุณากรอกข้อมูลให้ครบถ้วน");
      return false;
    }
@@ -243,13 +290,19 @@
         <div style="width:100%" >
           <div align="center" style="padding-top:10px;padding-bottom:20px"><h1>บันทึกข้อมูลการตรวจสุขภาพ</h1></div>
           <form name="myForm" action="accept_adddata.php" method="post" onsubmit="return validateForm()">
-            <div class="form-check form-group row" style="margin-left:10%">
+              <div class="form-group row" style="margin-left:10%;margin-right:10%" id="lname_div">
+            <label class="col-2 col-form-label">วันที่</label>
+            <div class="col-10">
+              <input class="form-control" type="date" class="form-control" id="date" placeholder="Date" maxlength="0">
+            </div>
+            </div>
+              <div class="form-check form-group row" style="margin-left:10%">
               <label class="col-2 col-form-label">ชื่อ - สกุล</label>
               <label class="form-check-label">
                 <h4><label style="padding-right:10px"><?php
-                    $sql = "SELECT 'Title' FROM 'person', 'home' WHERE 'HomeNo' = '".$_POST["findhome"]."' ";
+                    $sql = "SELECT Title FROM person, home WHERE HomeNo = '$findhome' ";
                     $result = mysqli_query($con,$sql);
-                    echo "$result";
+                    echo $result;
                     ?>
                     </label><label style="padding-right:20px">คำ</label><label>หัวดำ</label></h4>
               </label>
@@ -285,13 +338,13 @@
               <label class="col-2 col-form-label" id="dl" style="visibility: hidden;"></label>
               <div class="col-10" id="dl2"  style="visibility: hidden;color: red">*กรุณากรอกเฉพาะตัวเลข</div>
             </div>
-              <div class="form-group row" style="margin-left:10%;margin-right:10%" id="dia_DIV">
+              <div class="form-group row" style="margin-left:10%;margin-right:10%" id="FBS_DIV">
               <label class="col-2 col-form-label">ระดับน้ำตาลในเลือด</label>
               <div class="col-10">
                 <input class="form-control" type="number" id="FBS" name="FBS" onkeyup="clean(this)" onkeydown="clean(this)" placeholder="FBS" min="1" max="999">
               </div>
-              <label class="col-2 col-form-label" id="dl" style="visibility: hidden;"></label>
-              <div class="col-10" id="dl2"  style="visibility: hidden;color: red">*กรุณากรอกเฉพาะตัวเลข</div>
+              <label class="col-2 col-form-label" id="fl" style="visibility: hidden;"></label>
+              <div class="col-10" id="fl2"  style="visibility: hidden;color: red">*กรุณากรอกเฉพาะตัวเลข</div>
             </div>
             <div class="form-group row" style="margin-left:10%;margin-right:10%" id="w_DIV">
              <label class="col-2 col-form-label">น้ำหนัก</label>

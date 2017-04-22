@@ -23,7 +23,12 @@
    var s = document.forms["myForm"]["Smoke"].value;
    var ex = document.forms["myForm"]["exercise"].value;
    var tex = document.forms["myForm"]["time-exercise"].value;
-   var fbs = document.forms["myForm"]["FBS"].value;
+    var food = document.forms["myForm"]["Food"].value;
+    var into = document.forms["myForm"]["into"].value;
+    var disa = document.forms["myForm"]["disa"].value;
+    var date = document.forms["myForm"]["date"].value;
+    var chr = document.forms["myForm"]["chr"].value;
+    var fbs = document.forms["myForm"]["FBS"].value;
    if ( sys == null || sys == "" ) {
     alert("กรุณากรอกข้อมูลให้ครบถ้วน");
     return false;
@@ -152,6 +157,7 @@ $(document).ready(function() {
                         <label style="padding-right:10px">58</label><label style="padding-right:20px">ปี</label>
                     </label>
                 </div>
+                
                 <div class="form-check form-group row" style="margin-left:10%">
                     <label class="col-8 col-form-label">ข้อมูลในช่วง 1 ปีที่ผ่านมา</label>
                     <div class="form-check form-group row" style="margin-left:10%">

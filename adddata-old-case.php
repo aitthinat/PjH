@@ -1,5 +1,6 @@
 <?php include "head.php" ?>
 <?php include "connection.php" ?>
+<?php session_start(); ?>
 <script language="Javascript">
   function disabled_TE()
   {
@@ -24,6 +25,13 @@
    var s = document.forms["myForm"]["Smoke"].value;
    var ex = document.forms["myForm"]["exercise"].value;
    var tex = document.forms["myForm"]["time-exercise"].value;
+   var fbs = documet.forms["myForm"]["FBS"].value;
+   var food = document.forms["myForm"]["Food"].value;
+   var into = document.forms["myForm"]["into"].value;
+   var disa = document.forms["myForm"]["disa"].value;
+   var date = document.forms["myForm"]["date"].value;
+   var chr = document.forms["myForm"]["chr"].value;
+   var selfh = document.forms["myForm"]["sh"].value;
    if ( sys == null || sys == "" ) {
     alert("กรุณากรอกข้อมูลให้ครบถ้วน");
     return false;
@@ -64,6 +72,14 @@
     alert("กรุณากรอกข้อมูลให้ครบถ้วน");
     return false;
   }
+  if ( disa == null || disa == "" ) {
+    alert("กรุณากรอกข้อมูลให้ครบถ้วน");
+    return false;
+  }
+  if (( disa == "1")&&(selfh == null || selfh =="")) {
+    alert("กรุณากรอกข้อมูลให้ครบถ้วน");
+    return false;
+  }
 
 }
 
@@ -83,20 +99,29 @@
           <div style="width:100%" >
             <div align="center" style="padding-top:10px;padding-bottom:20px"><h1>บันทึกข้อมูลการตรวจสุขภาพ</h1></div>
             <form name="myForm" action="accept_adddata.php" method="post" onsubmit="return validateForm()">
+              <div class="form-group row" style="margin-left:10%;margin-right:10%" id="lname_div">
+            <label class="col-2 col-form-label">วันที่</label>
+            <div class="col-10">
+              <input disabled ="" class="form-control" type="date" class="form-control" id="date" placeholder="Date" maxlength="0">
+            </div>
+            </div>
               <div class="form-check form-group row" style="margin-left:10%">
                 <label class="col-2 col-form-label">ชื่อ - สกุล</label>
                 <label class="form-check-label">
                   <h4><label style="padding-right:10px">
                       <?php 
-                        $sql = "SELECT Title FROM person WHERE "; 
+                        $sql = "SELECT Title FROM person,Home WHERE HomeNo = '$findhome' "; 
+                        $result = mysqli_query($con,$sql);
                       ?>
                       </label><label style="padding-right:20px">
                       <?php 
-                        $sql = "SELECT Fname FROM person WHERE "; 
+                        $sql = "SELECT Fname FROM person,Home WHERE HomeNo = '$findhome ";
+                        $result = mysqli_query($con,$sql);
                       ?>
                       </label><label>
                       <?php 
-                        $sql = "SELECT Lname FROM person WHERE "; 
+                        $sql = "SELECT Lname FROM person,Home WHERE HomeNo = '$findhome' "; 
+                        $result = mysqli_query($con,$sql);
                       ?>
                       </label></h4>
                 </label>
@@ -145,10 +170,53 @@
                 <label style="padding-right:10px">
                     <?php 
                         $sql = "SELECT YEAR(CURRENT_TIMESTAMP) - YEAR(Birth_date)-(RIGHT(CURRENT_TIMESTAMP), 5) < RIGHT(Birth_date) FROM person WHERE fname = ";
+                        $result = mysqli_query($con,$sql);
                     ?>
                   </label><label style="padding-right:20px">ปี</label>
               </label>
             </div>
+                <div class="form-group row" style="margin-left:10%;margin-right:10%" id="fname_div">
+              <label class="col-2 col-form-label">โรคประจำตัว</label>
+              <div class="col-10">
+                <input disabled="" class="form-control" type="text" id="chr" name="chr" placeholder="โรคประจำตัว" onkeyup="clean_not_char(this)" onkeydown="clean_not_char(this)">
+              </div>
+          </div>
+          <div class="form-group row" style="margin-left:10%;margin-right:10%" id="fname_div">
+              <label class="col-2 col-form-label">การแพ้ยา</label>
+              <div class="col-10">
+                <input disabled="" class="form-control" type="text" id="into" name="into" placeholder="การแพ้ยา" onkeyup="clean_not_char(this)" onkeydown="clean_not_char(this)">
+              </div>
+          </div>
+          <div class="form-group row" style="margin-left:10%;margin-right:10%" id="fname_div">
+              <label class="col-2 col-form-label">อาหารที่แพ้</label>
+              <div class="col-10">
+                <input disabled="" class="form-control" type="text" id="food" name="food" placeholder="อาหารที่แพ้" onkeyup="clean_not_char(this)" onkeydown="clean_not_char(this)">
+              </div>
+          </div>
+              <div class="form-check form-group row" style="margin-left:10%" >
+            <label class="col-8 col-form-label">ความพิการ</label>
+          </div>
+          <div class="form-check form-group row" style="margin-left:10%" >
+            <label class="form-check-label"  style="margin-left:5%">
+              <input disabled="" class="form-check-input" type="radio" name="disa" id="disa0" value="0" onclick="disabled_TE()">ไม่พิการ
+            </label>
+            <label class="form-check-label" style="margin-left:2%">
+              <input disabled="" class="form-check-input" type="radio" name="disa" id="disa1" value="1" onclick="enabled_TE()">พิการ
+            </label>
+          </div>
+          <div class="form-check">
+            <div class="form-check form-group row" style="margin-left:10%">
+              <label class="col-8 col-form-label">ความสามารถในการช่วยเหลือตนเอง</label>
+            </div>
+            <div class="form-check form-group row" style="margin-left:10%">
+              <label class="form-check-label"  style="margin-left:5%">
+                <input disabled="" class="form-check-input" type="radio" name="selfhelp" value="0" id="TE1" disabled>ช่วยเหลือตนเองไม่ได้
+              </label>
+              <label class="form-check-label" style="margin-left:2%">
+                <input disabled="" class="form-check-input" type="radio" name="selfhelp" value="1" id="TE2" disabled>ช่วยเหลือตนเองได้
+              </label>
+            </div>
+          </div>
             <div class="form-check form-group row" style="margin-left:10%">
               <label class="col-8 col-form-label">ข้อมูลในช่วง 1 ปีที่ผ่านมา</label>
             </div>

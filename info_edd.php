@@ -26,11 +26,11 @@ if (!empty($_POST["age"])) {
       <label class="col-form-label"><?php 
 
         if (!empty($_POST["findhome"])) {
-            $sql = "SELECT 'HomeNo' FROM 'home' WHERE 'HomeNo' = '".$_POST["findhome"]."' ";
+            $sql = "SELECT HomeNo FROM home WHERE HomeNo = '$findhome' ";
             $result = mysqli_query($con,$sql);
-          echo "$result"; 
+          echo mysqli_fetch_array($result); 
         } else {
-          echo $findhome; }
+          echo mysqli_fetch_array($findhome); }
           ?></label>
         </h2>
       </div>
@@ -40,9 +40,9 @@ if (!empty($_POST["age"])) {
             
           <label class="col-form-label"><?php
               if (empty($_POST["findhome"])){
-                  $idh = "SELECT 'HomeID' FROM 'Home' WHERE HomeNo = ".$findhome." ";
+                  $idh = "SELECT HomeID FROM Home WHERE HomeNo = '$findhome' ";
                   $result_idh = mysqli_query($con,$idh);
-                  echo "$result_idh";
+                  echo mysqli_fetch_array($result_idh);
               }else{
                   echo "";
               }
@@ -68,13 +68,14 @@ if (!empty($_POST["age"])) {
                     <th colspan="3"><center>ชื่อ - สกุล</center></th>
                     <th>สถานะ</th>
                     <th>ตรวจสุขภาพ</th>
-                    <th>Edit</th>
+                    <th>แก้ไขข้อมูล</th>
+                    <th>ลบข้อมูล</th>
                   </tr>
                 </thead>
                 <tbody>
                   <tr>
                     <?php 
-                      $query = "SELECT Title,FName,LName,Status FROM person,home WHERE HomeID = Hid and HomeNo = ".$findhome.""or die("Error:" . mysqli_error()); 
+                      $query = "SELECT Title,FName,LName,Status FROM person,home WHERE HomeID = Hid and HomeNo = '$findhome'"or die("Error:" . mysqli_error()); 
                       $result = mysqli_query($con,$query);
                       $i = 1;
                       #if (mysqli_num_rows($result) > 0){
@@ -91,12 +92,13 @@ if (!empty($_POST["age"])) {
                                     }else{
                                        echo "<td><a href='adddata-old-case.php' style='color: green'>ไม่ได้ตรวจ</a></td>"; 
                                     }
-                                    echo "<td><a href='adddata-old-case-edit.php'><button type='button' class='btn btn-primary'>Edit</button></a></td>";
-                                    $i++;
+                                    echo "<td><a href='adddata-old-case-edit.php'><button type='button' class='btn btn-primary'>แก้ไขข้อมูล</button></a></td>";
+                                    echo "<td><a href='adddata-old-case-edit.php'><button type='button' class='btn btn-primary'>ลบข้อมูล</button></a></td>";
                                 echo "</tr>";
                               #mysqli_close($con);
                               #}
-                      }?>
+                      }
+                      ?>
                   </tr>
               </tbody>
             </table>
