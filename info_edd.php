@@ -28,7 +28,8 @@ if (!empty($_POST["age"])) {
         if (!empty($_POST["findhome"])) {
             $sql = "SELECT HomeNo FROM home WHERE HomeNo = '$findhome' ";
             $result = mysqli_query($con,$sql);
-          echo mysqli_fetch_array($result); 
+            $res = mysqli_fetch_assoc($result);
+            echo $res["HomeNo"];
         } else {
           echo mysqli_fetch_array($findhome); }
           ?></label>
@@ -39,10 +40,11 @@ if (!empty($_POST["age"])) {
           <label class="col-3 col-form-label">เลขที่ประจำบ้าน :</label>
             
           <label class="col-form-label"><?php
-              if (empty($_POST["findhome"])){
+              if (!empty($_POST["findhome"])){
                   $idh = "SELECT HomeID FROM Home WHERE HomeNo = '$findhome' ";
                   $result_idh = mysqli_query($con,$idh);
-                  echo mysqli_fetch_array($result_idh);
+                  $res = mysqli_fetch_assoc($result_idh);
+                  echo $res["HomeID"];            
               }else{
                   echo "";
               }

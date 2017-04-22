@@ -34,7 +34,7 @@ if (empty($_POST["selectDis1"])) {?>
             <!-- ################################## Link Database ##################################-->
             <br/>
             <?php
-            $sql = "SELECT Title, Fname, Lname, HomeNo FROM person, home WHERE person.Hid=home.HomeID ";
+            $sql = "SELECT Title, Fname, Lname, HomeNo FROM person, home, health_info WHERE person.Hid=home.HomeID AND person.Citizen_ID=health_info.Hcid AND (((Weight/Power((Height*0.01),2)) > 23  AND FBS > 100 AND Exercise=0) OR (BP_SYS >= 120 OR BP_DIA >= 80))" ;
             $result = mysqli_query($con, $sql);
 
             if (mysqli_num_rows($result) > 0) {
@@ -80,7 +80,7 @@ if (empty($_POST["selectDis2"])) {?>
             <!-- ################################## Link Database ##################################-->
             <br/>
             <?php
-            $sql = "SELECT Title, Fname, Lname, HomeNo FROM person, home WHERE person.Hid=home.HomeID ";
+            $sql = "SELECT Title, Fname, Lname, HomeNo FROM person, home, health_info WHERE person.Hid=home.HomeID AND person.Citizen_ID=health_info.Hcid AND (BP_SYS >= 120 OR BP_DIA >= 80)";
             $result = mysqli_query($con, $sql);
 
             if (mysqli_num_rows($result) > 0) {
@@ -125,7 +125,7 @@ if (empty($_POST["selectDis3"])) {?>
             <!-- ################################## Link Database ##################################-->
             <br/>
             <?php
-            $sql = "SELECT Title, Fname, Lname, HomeNo FROM person, home WHERE person.Hid=home.HomeID ";
+            $sql = "SELECT Title, Fname, Lname, HomeNo FROM person, home, health_info WHERE person.Hid=home.HomeID AND person.Citizen_ID=health_info.Hcid AND (((Weight/Power((Height*0.01),2)) > 25 AND FBS > 100 AND Exercise=0) OR (BOA>0 OR BOS>0))";
             $result = mysqli_query($con, $sql);
 
             if (mysqli_num_rows($result) > 0) {
@@ -150,6 +150,7 @@ if (empty($_POST["selectDis3"])) {?>
             <br/><br/>3. ดูแลสุขภาพใจให้ผ่องใสอยู่เสมอ พยายามไม่เครียด รู้จักควบคุมอารมณ์ และพึงระลึกไว้เสมอว่า ความเครียดและความโกรธ เป็นตัวการสำคัญที่ทำให้หัวใจเต้นแรง และทำงานหนักขึ้น
             <br/><br/>4. รับประทานอาหารที่ดีต่อสุขภาพ โดยงดอาหารที่มีไขมันสูง ซึ่งทำให้ความดันโลหิตสูง เกิดภาวะเส้นเลือดหัวใจตีบได้ง่าย และหันไปกินผักผลไม้ให้มากขึ้น        
             <br/><br/>5. ควรไปตรวจสุขภาพเป็นประจำทุกปี เพื่อป้องกันและรักษาโรคร้ายที่อาจคาดไม่ถึง เช่น โรคหัวใจ ซึ่งแฝงอยู่ในตัวเราตั้งแต่เนิ่น ๆ
+            <br/><br/>6. งดการดื่มสุราและสูบบุหรี่
             <br/><br/><p style="text-align:right; font-size:15px;color:gray;"><i>ที่มา : เว็บไซต์กระปุกดอทคอม</i></p> </h5>
 
         <br/>
