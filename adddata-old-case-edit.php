@@ -1,6 +1,12 @@
 <?php include "head.php" ?>
 <?php include "connection.php" ?>
-<?php session_start(); ?>
+<?php session_start(); 
+    $cid = isset($_SESSION['id'])? $_SESSION['id']: '';
+    $title = isset($_SESSION['tt'])? $_SESSION['tt']: '';
+    $fname = isset($_SESSION['fn'])? $_SESSION['fn']: '';
+    $lname = isset($_SESSION['ln'])? $_SESSION['ln']: '';
+    $Age = isset($_SESSION['age'])? $_SESSION['age']: '';
+?>
 <script language="Javascript">
   function disabled_TE()
   {
@@ -101,7 +107,17 @@
               <div class="form-check form-group row" style="margin-left:10%">
                 <label class="col-2 col-form-label">ชื่อ - สกุล</label>
                 <label class="form-check-label">
-                  <h4><label style="padding-right:10px">นาง</label><label style="padding-right:20px">จันทร์</label><label>คำใหญ่</label></h4>
+                  <h4><label style="padding-right:10px"><?php 
+                        echo $title;
+                      ?>
+                      </label><label style="padding-right:20px">
+                      <?php 
+                        echo $fname;
+                      ?>
+                      </label><label>
+                      <?php 
+                        echo $lname;
+                      ?></label></h4>
                 </label>
               </div>
               <div class="form-check form-group row" style="margin-left:10%">
@@ -145,7 +161,9 @@
             <div class="form-check form-group row" style="margin-left:10%">
               <label class="col-2 col-form-label">อายุ</label>
               <label class="form-check-label">
-                <label style="padding-right:10px">46</label><label style="padding-right:20px">ปี</label>
+                <label style="padding-right:10px"><?php
+                    echo $Age;
+                    ?></label><label style="padding-right:20px">ปี</label>
               </label>
             </div>
             <div class="form-group row" style="margin-left:10%;margin-right:10%" id="fname_div">

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 22, 2017 at 12:16 PM
+-- Generation Time: Apr 22, 2017 at 04:57 PM
 -- Server version: 10.1.21-MariaDB
 -- PHP Version: 7.1.1
 
@@ -150,22 +150,20 @@ CREATE TABLE `health_info` (
   `BP_DIA` int(3) NOT NULL,
   `FBS` int(3) NOT NULL,
   `Chronic_Disease` varchar(150) NOT NULL,
-  `Sex` char(1) NOT NULL,
   `BOS` int(1) NOT NULL,
   `BOA` int(1) NOT NULL,
-  `Exercise` int(1) NOT NULL,
-  `Ehours` int(9) NOT NULL
+  `Exercise` int(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `health_info`
 --
 
-INSERT INTO `health_info` (`Hcid`, `Year`, `Date_of_Health`, `Weight`, `Height`, `Blood_group`, `Environment`, `Disability`, `Intolerance`, `Food_allergies`, `BP_SYS`, `BP_DIA`, `FBS`, `Chronic_Disease`, `Sex`, `BOS`, `BOA`, `Exercise`, `Ehours`) VALUES
-('3401343210123', 2013, '2013-02-12', 50, 160, 'A', 'มีแหล่งน้ำ', '0', '0', 'ปลาหมึก', 140, 90, 0, '0', 'F', 2, 2, 0, 0),
-('3400123345510', 2014, '2014-11-30', 63, 150, 'B', 'ใกล้แหล่งอุตสาหกรรม', '0', 'แอสไพริน', '0', 130, 85, 0, 'เบาหวาน', 'M', 0, 1, 0, 0),
-('1120911201921', 2015, '2015-01-08', 45, 152, 'O', 'มีแหล่งน้ำ, ใกล้แหล่งอุตสาหกรรม', 'หูหนวก', '0', '0', 120, 81, 0, '0', 'F', 3, 0, 0, 0),
-('1409901496220', 2016, '2016-06-17', 52, 165, 'A', 'มีแหล่งน้ำ,ใกล้แหล่งอุตสาหกรรม', 'ตาบอด', 'พาราเซตามอล', 'กุ้ง', 120, 80, 0, 'ทาลัสซีเมีย, เบาหวาน', 'M', 0, 0, 0, 0);
+INSERT INTO `health_info` (`Hcid`, `Year`, `Date_of_Health`, `Weight`, `Height`, `Blood_group`, `Environment`, `Disability`, `Intolerance`, `Food_allergies`, `BP_SYS`, `BP_DIA`, `FBS`, `Chronic_Disease`, `BOS`, `BOA`, `Exercise`) VALUES
+('3401343210123', 2013, '2013-02-12', 50, 160, 'A', 'มีแหล่งน้ำ', '0', '0', 'ปลาหมึก', 140, 90, 0, '0', 2, 2, 0),
+('3400123345510', 2014, '2014-11-30', 63, 150, 'B', 'ใกล้แหล่งอุตสาหกรรม', '0', 'แอสไพริน', '0', 130, 85, 0, 'เบาหวาน', 0, 1, 0),
+('1120911201921', 2015, '2015-01-08', 45, 152, 'O', 'มีแหล่งน้ำ, ใกล้แหล่งอุตสาหกรรม', 'หูหนวก', '0', '0', 120, 81, 0, '0', 3, 0, 0),
+('1409901496220', 2016, '2016-06-17', 52, 165, 'A', 'มีแหล่งน้ำ,ใกล้แหล่งอุตสาหกรรม', 'ตาบอด', 'พาราเซตามอล', 'กุ้ง', 120, 80, 0, 'ทาลัสซีเมีย, เบาหวาน', 0, 0, 0);
 
 -- --------------------------------------------------------
 
@@ -304,7 +302,7 @@ ALTER TABLE `food_allegies_health`
 -- Indexes for table `have_health`
 --
 ALTER TABLE `have_health`
-  ADD KEY `FOREIGN KEY` (`Hhcid`,`Rno`),
+  ADD PRIMARY KEY (`Hhcid`,`Rno`),
   ADD KEY `Rno` (`Rno`);
 
 --

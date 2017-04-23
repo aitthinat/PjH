@@ -18,6 +18,7 @@ if (!empty($_POST["sex"])) {
 if (!empty($_POST["age"])) {
   $age = $_POST["age"];
 }
+ 
 ?>
 <div>
   <div class="form-check form-group row" style="margin-left:10%;margin-bottom:-12px">
@@ -77,19 +78,19 @@ if (!empty($_POST["age"])) {
                 <tbody>
                   <tr>
                     <?php 
-                      $query = "SELECT Title,FName,LName,Status FROM person,home WHERE HomeID = Hid and HomeNo = '$findhome'"or die("Error:" . mysqli_error()); 
+                      $query = "SELECT Title,Fname,Lname,Status,Citizen_ID,Age,year FROM person,home,health_info WHERE HomeID = Hid and HomeNo = '$findhome'"or die("Error:" . mysqli_error()); 
                       $result = mysqli_query($con,$query);
                       $i = 1;
-                      #if (mysqli_num_rows($result) > 0){
-                          
                           while($row = mysqli_fetch_array($result)){
                                 echo "<tr>";
                                     echo "<th >". $i ."</th>";
                                     echo "<th>" .$row["Title"] . "</th>";  
-                                    echo "<td>" .$row["FName"] . "</td>";
-                                    echo "<td>" .$row["LName"] . "</td>";
+                                    echo "<td>" .$row["Fname"] . "</td>";
+                                    echo "<td>" .$row["Lname"] . "</td>";
                                     echo "<td>" .$row["Status"] . "</td>";
-                                    if(!empty($_POST["findhome"])){
+                                    $sql = "SELECT year FROM health_info WHERE Hcid = '$row["Citizen_ID"]' " or die("Error:" . mysqli_error()); 
+                                    $result = mysqli_query($con,$sql);
+                                    if($result == ""){
                                         echo "<td><a href='adddata-old-case.php' style='color: green'>ตรวจแล้ว</a></td>";
                                     }else{
                                        echo "<td><a href='adddata-old-case.php' style='color: green'>ไม่ได้ตรวจ</a></td>"; 
@@ -97,8 +98,13 @@ if (!empty($_POST["age"])) {
                                     echo "<td><a href='adddata-old-case-edit.php'><button type='button' class='btn btn-primary'>แก้ไขข้อมูล</button></a></td>";
                                     echo "<td><a href='adddata-old-case-edit.php'><button type='button' class='btn btn-primary'>ลบข้อมูล</button></a></td>";
                                 echo "</tr>";
+                                $i++;
                               #mysqli_close($con);
-                              #}
+                              $_SESSION['id'] = $row["Citizen_ID"];
+                              $_SESSION['tt'] = $row["Title"];
+                              $_SESSION['fn'] = $row["Fname"];
+                              $_SESSION['ln'] = $row["Lname"];
+                              $_SESSION['age'] = $row["Age"];
                       }
                       ?>
                   </tr>

@@ -1,6 +1,12 @@
 <?php include "head.php" ?>
 <?php include "connection.php" ?>
-<?php session_start(); ?>
+<?php session_start(); 
+    $cid = isset($_SESSION['id'])? $_SESSION['id']: '';
+    $title = isset($_SESSION['tt'])? $_SESSION['tt']: '';
+    $fname = isset($_SESSION['fn'])? $_SESSION['fn']: '';
+    $lname = isset($_SESSION['ln'])? $_SESSION['ln']: '';
+    $Age = isset($_SESSION['age'])? $_SESSION['age']: '';
+?>
 <script language="Javascript">
   function disabled_TE()
   {
@@ -110,18 +116,15 @@
                 <label class="form-check-label">
                   <h4><label style="padding-right:10px">
                       <?php 
-                        $sql = "SELECT Title FROM person,Home WHERE HomeNo = '$findhome' "; 
-                        $result = mysqli_query($con,$sql);
+                        echo $title;
                       ?>
                       </label><label style="padding-right:20px">
                       <?php 
-                        $sql = "SELECT Fname FROM person,Home WHERE HomeNo = '$findhome ";
-                        $result = mysqli_query($con,$sql);
+                        echo $fname;
                       ?>
                       </label><label>
                       <?php 
-                        $sql = "SELECT Lname FROM person,Home WHERE HomeNo = '$findhome' "; 
-                        $result = mysqli_query($con,$sql);
+                        echo $lname;
                       ?>
                       </label></h4>
                 </label>
@@ -169,8 +172,7 @@
               <label class="form-check-label">
                 <label style="padding-right:10px">
                     <?php 
-                        $sql = "SELECT YEAR(CURRENT_TIMESTAMP) - YEAR(Birth_date)-(RIGHT(CURRENT_TIMESTAMP), 5) < RIGHT(Birth_date) FROM person WHERE fname = ";
-                        $result = mysqli_query($con,$sql);
+                        echo $Age;
                     ?>
                   </label><label style="padding-right:20px">ปี</label>
               </label>

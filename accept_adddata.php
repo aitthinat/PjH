@@ -1,6 +1,10 @@
 <?php include "head.php" ?>
 <?php include "connection.php" ?>
-<?php session_start(); ?>
+<?php session_start(); 
+    $title = isset($_SESSION['tt'])? $_SESSION['tt']: '';
+    $fname = isset($_SESSION['fn'])? $_SESSION['fn']: '';
+    $lname = isset($_SESSION['ln'])? $_SESSION['ln']: '';
+?>
 <?php 
 #$Hid = isset($_POST[""])
 $blood = $_POST["BloodGroup"];

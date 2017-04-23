@@ -1,12 +1,6 @@
 <?php include "head.php" ?>
 <?php include('connection.php'); ?>
 <?php session_start();
-//$findhome=isset($_POST['findhome']) ? $_POST['findhome'] : "";
-//$findFname=isset($_POST['findFname']) ? $_POST['findFname'] : "";
-//$findLname=isset($_POST['findLname']) ? $_POST['findLname'] : "";
-//$findhome = $_POST["findhome"];
-//$findFname = $_POST["findFname"];
-//$findLname = $_POST["findLname"];
     if(isset($_POST['btnsearch'])){
         $_SESSION["findhome"] = $_POST["findhome"]; 
         $_SESSION["findFname"] = $_POST["findFname"];
@@ -67,6 +61,7 @@ function clean_not_char2(input){
             <input class="form-control" type="text" id="findhome" name="findhome" pattern="[0-9/]+.{1,}" onkeyup="clean_not_int(this)" onkeydown="clean_not_int(this)" placeholder="บ้านเลขที่">
             <label class="col-2 col-form-label" id="al" style="visibility: hidden;"></label>
             <div class="col-10" id="al2"  style="visibility: hidden;color: red">*กรุณากรอกเลขที่บ้านเฉพาะตัวเลข</div>
+           
           </div>
         </div>
         <!-- Name -->

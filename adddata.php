@@ -1,8 +1,13 @@
 <?php include "head.php" ?>
 <?php include('connection.php'); ?>
+<?php session_start(); 
+    $cid = isset($_SESSION['id'])? $_SESSION['id']: '';
+    $title = isset($_SESSION['tt'])? $_SESSION['tt']: '';
+    $fname = isset($_SESSION['fn'])? $_SESSION['fn']: '';
+    $lname = isset($_SESSION['ln'])? $_SESSION['ln']: '';
+    $Age = isset($_SESSION['age'])? $_SESSION['age']: '';
+?>
 <?php 
-session_start();
-
 if (!empty($_POST["findhome"])) {
   $findhome = $_POST["findhome"];
 }
@@ -272,10 +277,10 @@ if (!empty($_POST["age"])) {
 }
 </script>
 <?php
-    $BloddGroup = isset($_POST['BloodGroup']) ? $_POST['BloodGroup'] : '';
+//    $BloddGroup = isset($_POST['BloodGroup']) ? $_POST['BloodGroup'] : '';
     if(isset($_POS["insert"])){
-        $sql = "INSERT INTO health_info (Blood_group,BP_SYS,BP_DIA,Weight,Height,BOA,BOS,Exercise,Ehours,Environment,Food_allergise,Intolerance,Disabilit,Chronic_Disease) VALUES (' ".$_POST["BloodGroup"]." ', '".$_POST["SYS"]."', '".$_POST["DIA"]." ', '".$_POST["weight"]."','".$_POST["height"]."','".$_POST["Drink"]."','".$_POST["Smoke"]."','".$_POST["exercise"]."','".$_POST["time-exercise"]."','".$_POST["homearea"]."','".$_POST["food"]."','".$_POST["into"]."','".$_POST["disa"]."','".$_POST["chr"]."')";
-        $query = mysqli_query($con, $sql);
+        $sql = "INSERT INTO health_info VALUES($cid,year($date),$weight,$height,$BloodGroup,$homearea,$disa,$into,$food,$SYS,$DIA,$FBS,$chr,$Smoke,$Drink,$exercise)";
+        $query = mysqli_query($conn,$sql);
         if($query){
             echo "<script>alert('เพิ่มข้อมูลเรียบร้อย'); location.href = 'index.php';</script>";
         }else{
@@ -293,18 +298,25 @@ if (!empty($_POST["age"])) {
               <div class="form-group row" style="margin-left:10%;margin-right:10%" id="lname_div">
             <label class="col-2 col-form-label">วันที่</label>
             <div class="col-10">
-              <input class="form-control" type="date" class="form-control" id="date" placeholder="Date" maxlength="0">
+              <input class="form-control" type="date" class="form-control" id="date" placeholder="Date" max ="0">
             </div>
             </div>
               <div class="form-check form-group row" style="margin-left:10%">
               <label class="col-2 col-form-label">ชื่อ - สกุล</label>
               <label class="form-check-label">
-                <h4><label style="padding-right:10px"><?php
-                    $sql = "SELECT Title FROM person, home WHERE HomeNo = '$findhome' ";
-                    $result = mysqli_query($con,$sql);
-                    echo $result;
-                    ?>
-                    </label><label style="padding-right:20px">คำ</label><label>หัวดำ</label></h4>
+                <h4><label style="padding-right:10px">
+                      <?php 
+                        echo $title;
+                      ?>
+                      </label><label style="padding-right:20px">
+                      <?php 
+                        echo $fname;
+                      ?>
+                      </label><label>
+                      <?php 
+                        echo $lname;
+                      ?>
+                      </label></h4>
               </label>
             </div>
             <div class="form-check form-group row" style="margin-left:10%" id="bg_DIV">
@@ -485,14 +497,14 @@ if (!empty($_POST["age"])) {
           </div>
           <div class="form-check form-group row" style="margin-left:10%">
             <label class="form-check-label"  style="margin-left:5%">
-              <input class="form-check-input" type="checkbox" id="homearea1" name="homeArea1" value="1" aria-label="...">มีแอ่งน้ำ หรือ พื้นที่น้ำขัง
+              <input class="form-check-input" type="checkbox" id="homearea1" name="homeArea" value="1" aria-label="...">มีแอ่งน้ำ หรือ พื้นที่น้ำขัง
             </label>
             <label class="form-check-label" style="margin-left:2%">
-              <input class="form-check-input" type="checkbox" id="homearea2" name="homeArea2" value="2" aria-label="...">ใกล้โรงงาน
+              <input class="form-check-input" type="checkbox" id="homearea2" name="homeArea" value="2" aria-label="...">ใกล้โรงงาน
             </label>
           </div>
           <div class="form-check form-group row" style="margin-left:10%;margin-right:10%" align="right">
-            <button type="submit" class="btn btn-primary">Submit</button>
+            <button type="submit" name = "insert" class="btn btn-primary">Submit</button>
           </div>
         </form>
         
