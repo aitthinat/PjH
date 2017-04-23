@@ -34,7 +34,7 @@ function clean_not_int(input){
   <div class="container">
     <div>
       <div style="padding-bottom: 20px"><center><img class="img-responsive" src="img/onpage_1.png" height="100" width="200"></center></div>
-      <form name="myForm" onsubmit="return validateForm()" action="info_edd.php" method="POST" >
+      <form name="myForm" onsubmit="return validateForm()" action="home_manu.php" method="POST" >
         <div class="form-group row" style="margin-left:5%;margin-right:10%">
           <label class="col-2 col-form-label">บ้านเลขที่</label>
           <div class="col-10">

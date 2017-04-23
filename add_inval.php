@@ -339,7 +339,16 @@ function validateID(input){
   <div class="form-check form-group row" style="margin-left:10%;margin-bottom:-12px">
     <h2>
       <label class="col-3 col-form-label">บ้านเลขที่ :</label>
-      <label class="col-form-label">123 / 123</label>
+      <label class="col-form-label"><?php 
+
+        if (!empty($_POST["findhome"])) {
+            $sql = "SELECT HomeNo FROM home WHERE HomeNo = '$findhome' ";
+            $result = mysqli_query($con,$sql);
+            $res = mysqli_fetch_assoc($result);
+            echo $res["HomeNo"];
+        } else {
+          echo mysqli_fetch_array($findhome); }
+          ?></label>
     </h2>
   </div>
   <div class="form-check form-group row" style="margin-left:10%">

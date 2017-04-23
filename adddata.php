@@ -280,7 +280,7 @@ if (!empty($_POST["age"])) {
 //    $BloddGroup = isset($_POST['BloodGroup']) ? $_POST['BloodGroup'] : '';
     if(isset($_POS["insert"])){
         $sql = "INSERT INTO health_info VALUES($cid,year($date),$weight,$height,$BloodGroup,$homearea,$disa,$into,$food,$SYS,$DIA,$FBS,$chr,$Smoke,$Drink,$exercise)";
-        $query = mysqli_query($conn,$sql);
+        $query = mysqli_query($con,$sql);
         if($query){
             echo "<script>alert('เพิ่มข้อมูลเรียบร้อย'); location.href = 'index.php';</script>";
         }else{
@@ -298,7 +298,8 @@ if (!empty($_POST["age"])) {
               <div class="form-group row" style="margin-left:10%;margin-right:10%" id="lname_div">
             <label class="col-2 col-form-label">วันที่</label>
             <div class="col-10">
-              <input class="form-control" type="date" class="form-control" id="date" placeholder="Date" max ="0">
+                
+              <input class="form-control" type="date" class="form-control" id="date" placeholder="Date" max="date("Y-m-d")" >
             </div>
             </div>
               <div class="form-check form-group row" style="margin-left:10%">

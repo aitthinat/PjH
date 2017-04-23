@@ -18,7 +18,6 @@ if (!empty($_POST["sex"])) {
 if (!empty($_POST["age"])) {
   $age = $_POST["age"];
 }
- 
 ?>
 <div>
   <div class="form-check form-group row" style="margin-left:10%;margin-bottom:-12px">
@@ -31,8 +30,11 @@ if (!empty($_POST["age"])) {
             $result = mysqli_query($con,$sql);
             $res = mysqli_fetch_assoc($result);
             echo $res["HomeNo"];
+              #echo $no;
         } else {
-          echo mysqli_fetch_array($findhome); }
+          echo mysqli_fetch_array($findhome); 
+            #echo "ไม่มีข้อมูล";
+        }
           ?></label>
         </h2>
       </div>
@@ -45,9 +47,10 @@ if (!empty($_POST["age"])) {
                   $idh = "SELECT HomeID FROM Home WHERE HomeNo = '$findhome' ";
                   $result_idh = mysqli_query($con,$idh);
                   $res = mysqli_fetch_assoc($result_idh);
-                  echo $res["HomeID"];            
+                  echo $res["HomeID"];   
+                  #echo $idhome;
               }else{
-                  echo "";
+                  echo "ไม่มีข้อมูล";
               }
               
               ?>
@@ -78,7 +81,7 @@ if (!empty($_POST["age"])) {
                 <tbody>
                   <tr>
                     <?php 
-                      $query = "SELECT Title,Fname,Lname,Status,Citizen_ID,Age,year FROM person,home,health_info WHERE HomeID = Hid and HomeNo = '$findhome'"or die("Error:" . mysqli_error()); 
+                      $query = "SELECT Title,Fname,Lname,Status,Citizen_ID,Age,year FROM person,home,health_info WHERE Citizen_ID = Hcid and  HomeID = Hid and HomeNo = '$findhome'"or die("Error:" . mysqli_error()); 
                       $result = mysqli_query($con,$query);
                       $i = 1;
                           while($row = mysqli_fetch_array($result)){
@@ -88,12 +91,14 @@ if (!empty($_POST["age"])) {
                                     echo "<td>" .$row["Fname"] . "</td>";
                                     echo "<td>" .$row["Lname"] . "</td>";
                                     echo "<td>" .$row["Status"] . "</td>";
-                                    $sql = "SELECT year FROM health_info WHERE Hcid = '$row["Citizen_ID"]' " or die("Error:" . mysqli_error()); 
-                                    $result = mysqli_query($con,$sql);
-                                    if($result == ""){
-                                        echo "<td><a href='adddata-old-case.php' style='color: green'>ตรวจแล้ว</a></td>";
+//                                    $id = $row["Citizen_ID"];
+//                                    $sql = "SELECT year FROM health_info,person WHERE health_info.Hcid = person.Citizen_ID and year(current_date) = year and Hcid = '$id' " or die("Error:" . mysqli_error()); 
+//                                    $r = mysqli_query($con,$sql);
+                                    if(mysqli_num_rows($result) == 0){
+                                        echo "<td><a href='adddata.php' style='color: red'>ไม่ได้ตรวจ</a></td>"; 
                                     }else{
-                                       echo "<td><a href='adddata-old-case.php' style='color: green'>ไม่ได้ตรวจ</a></td>"; 
+                                       echo "<td><a href='adddata-old-case.php' style='color: green'>ตรวจแล้ว</a></td>";
+                                       
                                     }
                                     echo "<td><a href='adddata-old-case-edit.php'><button type='button' class='btn btn-primary'>แก้ไขข้อมูล</button></a></td>";
                                     echo "<td><a href='adddata-old-case-edit.php'><button type='button' class='btn btn-primary'>ลบข้อมูล</button></a></td>";
