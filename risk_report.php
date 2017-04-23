@@ -34,20 +34,50 @@ if (empty($_POST["selectDis1"])) {?>
             <!-- ################################## Link Database ##################################-->
             <br/>
             <?php
-            $sql = "SELECT Title, Fname, Lname, HomeNo FROM person, home, health_info WHERE person.Hid=home.HomeID AND person.Citizen_ID=health_info.Hcid AND (((Weight/Power((Height*0.01),2)) > 23  AND FBS > 100 AND Exercise=0) OR (BP_SYS >= 120 OR BP_DIA >= 80))" ;
+            $sql = "SELECT Title, Fname, Lname, HomeNo, Citizen_ID FROM person, home, health_info WHERE person.Hid=home.HomeID AND person.Citizen_ID=health_info.Hcid AND (((Weight/Power((Height*0.01),2)) > 23  AND FBS > 100 AND Exercise=0) OR (BP_SYS >= 120 OR BP_DIA >= 80))";
             $result = mysqli_query($con, $sql);
+            $result_t = mysqli_query($con, $sql);
+            // ==============ADD IN ARRAY=============
+            // $numOfRows = mysqli_num_rows($result_t);
+
+            // for ($c = 0; $c < $numOfRows; $c++) 
+            // { 
+            //     $row_arr = mysqli_fetch_array($result_t); 
+            //     $result_array[$c] = $row_arr["Citizen_ID"]; 
+            //     echo "add";
+            // }
+            // =======================================
 
             if (mysqli_num_rows($result) > 0) {
                 // output data of each row
                 echo "<table class='myTable'><thead><tr><th>ลำดับที่</th><th>คำนำหน้า</th><th>ชื่อ</th><th>นามสกุล</th><th>บ้านเลขที่</th></tr></thead><tbody>";
                 $i = 1;
                 while($row = mysqli_fetch_assoc($result)) {
+                        $ci = $row["Citizen_ID"];
                         # code...
                         echo "<tr><td>" . $i . "</td><td>" . $row["Title"]. "</td><td>" . $row["Fname"]. "</td><td>" . $row["Lname"]. "</td><td>" . $row["HomeNo"]. "</td></tr>";
-
+                        $sql_check = "SELECT Rno FROM have_health, person WHERE have_health.Hhcid=person.Citizen_ID AND person.Citizen_ID='$ci' AND Rno='01'";
+                        $re = mysqli_query($con, $sql_check);
+                        if (mysqli_num_rows($re) == 0) {
+                            // echo "Insert" . mysqli_num_rows($re) . $row["Citizen_ID"];
+                            $sql_in = "INSERT INTO have_health VALUES('$ci', '01')";
+                            $re_in = mysqli_query($con, $sql_in);
+                        } else {
+                            // ถ้ามีข้อมูลแล้วยังเสี่ยงอยู่/หายเสี่ยงแล้ว
+                            echo "Update";
+                        }
+                        mysqli_free_result($re);
                       $i+=1;
                       }
                 echo "</tbody></table>";
+            // =======DELETE=======
+            // $sql_de = "SELECT * FROM have_health WHERE Hhcid NOT IN ($result_array)";
+            // $re_de = mysqli_query($con, $sql_de);
+            // if (mysqli_num_rows($re_de) == 0){
+            //    echo "ok";
+            //     # code...
+            // }
+
             } ?>
             <!-- ###################################################################################-->
     <br/><br/>
