@@ -28,7 +28,17 @@ function clean_not_int(input){
     document.getElementById("al2").style.visibility = 'visible';
   }
 }
-
+function isNumber(evt, value) {
+    if (value.length + 1 > 9) {
+        return false;
+    }
+    evt = (evt) ? evt : window.event;
+    var charCode = (evt.which) ? evt.which : evt.keyCode;
+    if (charCode > 31 && (charCode < 47 || charCode > 57)) {
+        return false;
+    }
+    return true;
+}
 </script>
 <div style="margin-bottom: 50px">
   <div class="container">
@@ -38,7 +48,7 @@ function clean_not_int(input){
         <div class="form-group row" style="margin-left:5%;margin-right:10%">
           <label class="col-2 col-form-label">บ้านเลขที่</label>
           <div class="col-10">
-            <input class="form-control" type="text" id="findhome" name="findhome" pattern="[0-9/]+.{1,}" onkeyup="clean_not_int(this)" onkeydown="clean_not_int(this)">
+            <input class="form-control" type="text" id="findhome" name="findhome" pattern="[0-9/]+.{1,}" onkeypress="return isNumber(event,value)">
             <label class="col-2 col-form-label" id="al" style="visibility: hidden;"></label>
             <div class="col-10" id="al2"  style="visibility: hidden;color: red">*กรุณากรอกเลขที่บ้านเฉพาะตัวเลข</div>
           </div>

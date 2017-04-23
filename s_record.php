@@ -47,6 +47,33 @@ function clean_not_char2(input){
     document.getElementById("al4").style.visibility = 'visible';
   }
 }
+function isNumber(evt, value) {
+    if (value.length + 1 > 9) {
+        return false;
+    }
+    evt = (evt) ? evt : window.event;
+    var charCode = (evt.which) ? evt.which : evt.keyCode;
+    if (charCode > 31 && (charCode < 47 || charCode > 57)) {
+        return false;
+    }
+    return true;
+}
+
+function lettersOnly(evt) {
+    evt = (evt) ? evt : event;
+    var charCode = (evt.charCode) ? evt.charCode : ((evt.keyCode) ? evt.keyCode : ((evt.which) ? evt.which : 0));
+if (charCode == 32) {
+    return true;
+}
+if ((charCode >= 3585 && charCode <= 3642) || (charCode >= 3648 && charCode <= 3662)) {
+    return true;
+}
+if (charCode > 31 && (charCode < 65 || charCode > 90) && (charCode < 97 || charCode > 122)) {
+    return false;
+}
+return true;
+}
+
 </script>
 <div>
   <div class="container">
@@ -58,7 +85,7 @@ function clean_not_char2(input){
         <div class="form-group row" style="margin-left:5%;margin-right:10%">
           <label class="col-2 col-form-label">บ้านเลขที่</label>
           <div class="col-10">
-            <input class="form-control" type="text" id="findhome" name="findhome" pattern="[0-9/]+.{1,}" onkeyup="clean_not_int(this)" onkeydown="clean_not_int(this)" placeholder="บ้านเลขที่">
+            <input class="form-control" type="text" id="findhome" name="findhome" pattern="[0-9/]+.{1,}" onkeypress="return isNumber(event,value)" placeholder="บ้านเลขที่">
             <label class="col-2 col-form-label" id="al" style="visibility: hidden;"></label>
             <div class="col-10" id="al2"  style="visibility: hidden;color: red">*กรุณากรอกเลขที่บ้านเฉพาะตัวเลข</div>
            
@@ -68,13 +95,13 @@ function clean_not_char2(input){
         <div class="form-group row" style="margin-left:5%;margin-right:10%">
           <label class="col-2 col-form-label">ชื่อ-สกุล</label>
           <div class="col-10">
-            <input class="form-control" type="text" id="findFname" name="findFname" placeholder="ชื่อ" pattern="[a-zA-Zก-์]+" title="กรุณากรอกตัวอักษร A-Z, a-z, ก-ฮ และสระในภาษาไทย" onkeyup="clean_not_char(this)" onkeydown="clean_not_char(this)">
+            <input class="form-control" type="text" id="findFname" name="findFname" placeholder="ชื่อ" pattern="[a-zA-Zก-์]+" title="กรุณากรอกตัวอักษร A-Z, a-z, ก-ฮ และสระในภาษาไทย" onkeypress="return lettersOnly(event)">
           </div>
           <label class="col-2 col-form-label" id="al" style="visibility: hidden;"></label>
           <div class="col-10" id="al3"  style="visibility: hidden;color: red">*กรุณากรอกเฉพาะตัวอักษร</div>
           <label class="col-2 col-form-label"></label>
           <div class="col-10">
-            <input class="form-control" type="text" id="findLname" name="findLname" placeholder="สกุล" pattern="[a-zA-Zก-์]+" title="กรุณากรอกตัวอักษร A-Z, a-z, ก-ฮ และสระในภาษาไทย" onkeyup="clean_not_char2(this)" onkeydown="clean_not_char2(this)">
+            <input class="form-control" type="text" id="findLname" name="findLname" placeholder="สกุล" pattern="[a-zA-Zก-์]+" title="กรุณากรอกตัวอักษร A-Z, a-z, ก-ฮ และสระในภาษาไทย" onkeypress="return lettersOnly(event)">
           </div>
           <label class="col-2 col-form-label" id="al" style="visibility: hidden;"></label>
           <div class="col-10" id="al4"  style="visibility: hidden;color: red">*กรุณากรอกเฉพาะตัวอักษร</div>
