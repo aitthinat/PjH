@@ -27,16 +27,21 @@ if (empty($_POST["selectDis1"])) {?>
     hidden=""
 <?php } ?>
         >
-            <h3>โรคเบาหวาน</h3><br/>
+            <!-- <center><img src="img/dis1.png"></center> -->
+            <center><h3>โรคเบาหวาน</h3><br/></center>
 
-            <center><img src="img/diabet1.jpg"></center>
             <!-- waitting -->
             <!-- ################################## Link Database ##################################-->
             <br/>
             <?php
-            $sql = "SELECT Title, Fname, Lname, HomeNo, Citizen_ID FROM person, home, health_info WHERE person.Hid=home.HomeID AND person.Citizen_ID=health_info.Hcid AND (((Weight/Power((Height*0.01),2)) > 23  AND FBS > 100 AND Exercise=0) OR (BP_SYS >= 120 OR BP_DIA >= 80))";
+            $sql = "SELECT MAX(year), Title, Fname, Lname, HomeNo, Citizen_ID, Weight, Height, FBS, Exercise, BP_SYS, BP_DIA FROM person, home, health_info WHERE person.Hid=home.HomeID AND person.Citizen_ID=health_info.Hcid GROUP BY Citizen_ID";
+
             $result = mysqli_query($con, $sql);
-            $result_t = mysqli_query($con, $sql);
+
+            // $sql = "SELECT Title, Fname, Lname, HomeNo, Citizen_ID FROM person, home, health_info WHERE person.Hid=home.HomeID AND person.Citizen_ID=health_info.Hcid AND (((Weight/Power((Height*0.01),2)) > 23  AND FBS > 100 AND Exercise=0) OR (BP_SYS >= 120 OR BP_DIA >= 80))";
+
+
+            // $result_t = mysqli_query($con, $sql);
             // ==============ADD IN ARRAY=============
             // $numOfRows = mysqli_num_rows($result_t);
 
@@ -54,8 +59,11 @@ if (empty($_POST["selectDis1"])) {?>
                 $i = 1;
                 while($row = mysqli_fetch_assoc($result)) {
                         $ci = $row["Citizen_ID"];
-                        # code...
-                        echo "<tr><td>" . $i . "</td><td>" . $row["Title"]. "</td><td>" . $row["Fname"]. "</td><td>" . $row["Lname"]. "</td><td>" . $row["HomeNo"]. "</td></tr>";
+
+                        if (((($row["Weight"]/pow(($row["Height"]*0.01),2)) > 23) AND ($row["FBS"] > 100) AND ($row["Exercise"]=0)) OR ($row["BP_SYS"] >= 120 OR $row["BP_DIA"] >= 80)) {
+                            # code...
+                            echo "<tr><td>" . $i . "</td><td>" . $row["Title"]. "</td><td>" . $row["Fname"]. "</td><td>" . $row["Lname"]. "</td><td>" . $row["HomeNo"]. "</td></tr>";
+                        // ================= UPDATE HAVE_HEALTH ====================
                         $sql_check = "SELECT Rno FROM have_health, person WHERE have_health.Hhcid=person.Citizen_ID AND person.Citizen_ID='$ci' AND Rno='01'";
                         $re = mysqli_query($con, $sql_check);
                         if (mysqli_num_rows($re) == 0) {
@@ -64,10 +72,14 @@ if (empty($_POST["selectDis1"])) {?>
                             $re_in = mysqli_query($con, $sql_in);
                         } else {
                             // ถ้ามีข้อมูลแล้วยังเสี่ยงอยู่/หายเสี่ยงแล้ว
-                            echo "Update";
+                            // echo "Update";
                         }
                         mysqli_free_result($re);
+                        //==========================================================
+
                       $i+=1;
+                        }
+                        
                       }
                 echo "</tbody></table>";
             // =======DELETE=======
@@ -106,11 +118,11 @@ if (empty($_POST["selectDis2"])) {?>
 
         >
 
-            <h3>โรคความดันโลหิตสูง</h3><br/>
+            <center><h3>โรคความดันโลหิตสูง</h3><br/></center>
             <!-- ################################## Link Database ##################################-->
             <br/>
             <?php
-            $sql = "SELECT Title, Fname, Lname, HomeNo FROM person, home, health_info WHERE person.Hid=home.HomeID AND person.Citizen_ID=health_info.Hcid AND (BP_SYS >= 120 OR BP_DIA >= 80)";
+            $sql = "SELECT Title, Fname, Lname, HomeNo, Citizen_ID FROM person, home, health_info WHERE person.Hid=home.HomeID AND person.Citizen_ID=health_info.Hcid AND (BP_SYS >= 120 OR BP_DIA >= 80)";
             $result = mysqli_query($con, $sql);
 
             if (mysqli_num_rows($result) > 0) {
@@ -119,8 +131,23 @@ if (empty($_POST["selectDis2"])) {?>
                 $i = 1;
                 while($row = mysqli_fetch_assoc($result)) {
                         # code...
+                        $ci = $row["Citizen_ID"];
                         echo "<tr><td>" . $i . "</td><td>" . $row["Title"]. "</td><td>" . $row["Fname"]. "</td><td>" . $row["Lname"]. "</td><td>" . $row["HomeNo"]. "</td></tr>";
 
+
+                        // ================= UPDATE HAVE_HEALTH ====================
+                        $sql_check = "SELECT Rno FROM have_health, person WHERE have_health.Hhcid=person.Citizen_ID AND person.Citizen_ID='$ci' AND Rno='02'";
+                        $re = mysqli_query($con, $sql_check);
+                        if (mysqli_num_rows($re) == 0) {
+                            // echo "Insert" . mysqli_num_rows($re) . $row["Citizen_ID"];
+                            $sql_in = "INSERT INTO have_health VALUES('$ci', '02')";
+                            $re_in = mysqli_query($con, $sql_in);
+                        } else {
+                            // ถ้ามีข้อมูลแล้วยังเสี่ยงอยู่/หายเสี่ยงแล้ว
+                            // echo "Update";
+                        }
+                        mysqli_free_result($re);
+                        //==========================================================
                       $i+=1;
                       }
                 echo "</tbody></table>";
@@ -151,11 +178,11 @@ if (empty($_POST["selectDis3"])) {?>
     hidden=""
 <?php } ?>
         >
-            <h3>โรคหัวใจ</h3><br/>
+            <center><h3>โรคหัวใจ</h3><br/></center>
             <!-- ################################## Link Database ##################################-->
             <br/>
             <?php
-            $sql = "SELECT Title, Fname, Lname, HomeNo FROM person, home, health_info WHERE person.Hid=home.HomeID AND person.Citizen_ID=health_info.Hcid AND (((Weight/Power((Height*0.01),2)) > 25 AND FBS > 100 AND Exercise=0) OR (BOA>0 OR BOS>0))";
+            $sql = "SELECT Title, Fname, Lname, HomeNo, Citizen_ID FROM person, home, health_info WHERE person.Hid=home.HomeID AND person.Citizen_ID=health_info.Hcid AND (((Weight/Power((Height*0.01),2)) > 25 AND FBS > 100 AND Exercise=0) OR (BOA>0 OR BOS>0))";
             $result = mysqli_query($con, $sql);
 
             if (mysqli_num_rows($result) > 0) {
@@ -164,7 +191,23 @@ if (empty($_POST["selectDis3"])) {?>
                 $i = 1;
                 while($row = mysqli_fetch_assoc($result)) {
                         # code...
+                        $ci = $row["Citizen_ID"];
                         echo "<tr><td>" . $i . "</td><td>" . $row["Title"]. "</td><td>" . $row["Fname"]. "</td><td>" . $row["Lname"]. "</td><td>" . $row["HomeNo"]. "</td></tr>";
+
+                        // ================= UPDATE HAVE_HEALTH ====================
+                        $sql_check = "SELECT Rno FROM have_health, person WHERE have_health.Hhcid=person.Citizen_ID AND person.Citizen_ID='$ci' AND Rno='03'";
+                        $re = mysqli_query($con, $sql_check);
+                        if (mysqli_num_rows($re) == 0) {
+                            // echo "Insert" . mysqli_num_rows($re) . $row["Citizen_ID"];
+                            $sql_in = "INSERT INTO have_health VALUES('$ci', '03')";
+                            $re_in = mysqli_query($con, $sql_in);
+                        } else {
+                            // ถ้ามีข้อมูลแล้วยังเสี่ยงอยู่/หายเสี่ยงแล้ว
+                            // echo "Update";
+                        }
+                        mysqli_free_result($re);
+                        //==========================================================
+
 
                       $i+=1;
                       }
@@ -199,7 +242,7 @@ if (empty($_POST["selectDis4"])) {?>
             <!-- ################################## Link Database ##################################-->
             <br/>
             <?php
-            $sql = "SELECT Title, Fname, Lname, HomeNo FROM person, home WHERE person.Hid=home.HomeID ";
+            $sql = "SELECT Title, Fname, Lname, HomeNo, Citizen_ID FROM person, home WHERE person.Hid=home.HomeID ";
             $result = mysqli_query($con, $sql);
 
             if (mysqli_num_rows($result) > 0) {
@@ -208,7 +251,22 @@ if (empty($_POST["selectDis4"])) {?>
                 $i = 1;
                 while($row = mysqli_fetch_assoc($result)) {
                         # code...
+                        $ci = $row["Citizen_ID"];
                         echo "<tr><td>" . $i . "</td><td>" . $row["Title"]. "</td><td>" . $row["Fname"]. "</td><td>" . $row["Lname"]. "</td><td>" . $row["HomeNo"]. "</td></tr>";
+
+                        // ================= UPDATE HAVE_HEALTH ====================
+                        // $sql_check = "SELECT Rno FROM have_health, person WHERE have_health.Hhcid=person.Citizen_ID AND person.Citizen_ID='$ci' AND Rno='04'";
+                        // $re = mysqli_query($con, $sql_check);
+                        // if (mysqli_num_rows($re) == 0) {
+                        //     // echo "Insert" . mysqli_num_rows($re) . $row["Citizen_ID"];
+                        //     $sql_in = "INSERT INTO have_health VALUES('$ci', '04')";
+                        //     $re_in = mysqli_query($con, $sql_in);
+                        // } else {
+                        //     // ถ้ามีข้อมูลแล้วยังเสี่ยงอยู่/หายเสี่ยงแล้ว
+                        //     // echo "Update";
+                        // }
+                        // mysqli_free_result($re);
+                        //==========================================================
 
                       $i+=1;
                       }

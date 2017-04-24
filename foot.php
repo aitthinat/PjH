@@ -42,7 +42,7 @@
         <div class="container">
             <div class="row">
                 <div class="col-lg-12">
-                    Copyright &copy; Your Website 2016
+                    Copyright &copy; GROUP 15 - 2017
                 </div>
             </div>
         </div>
