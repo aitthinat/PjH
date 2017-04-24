@@ -8,21 +8,21 @@
     $Age = isset($_SESSION['age'])? $_SESSION['age']: '';
 ?>
 <?php 
-    $d = isset($_POST['date'])? $_SESSION['date']: '';
-    $bg = isset($_POST['BloodGroup'])? $_SESSION['BloodGroup']: '';
-    $sys = isset($_SESSION['SYS'])? $_SESSION['SYS']: '';
-    $dia = isset($_SESSION['DIA'])? $_SESSION['DIA']: '';
-    $fbs = isset($_SESSION['FBS'])? $_SESSION['FBS']: '';
-    $w = isset($_SESSION['weight'])? $_SESSION['weight']: '';
-    $h = isset($_SESSION['height'])? $_SESSION['height']: '';
-    $ch = isset($_SESSION['chr'])? $_SESSION['chr']: '';
-    $in = isset($_SESSION['into'])? $_SESSION['into']: '';
-    $di = isset($_SESSION['disa'])? $_SESSION['disa']: '';
-    $f = isset($_SESSION['food'])? $_SESSION['food']: '';
-    $sm = isset($_SESSION['Smoke'])? $_SESSION['Smoke']: '';
-    $dr = isset($_SESSION['Drink'])? $_SESSION['Drink']: '';
-    $envi = isset($_SESSION['env'])? $_SESSION['env']: '';
-    $ex = isset($_SESSION['exercise'])? $_SESSION['exercise']: '';
+    $d = isset($_POST['date'])? $_POST['date']: '';
+    $bg = isset($_POST["BloodGroup"])? $_POST["BloodGroup"]: '';
+    $sys = isset($_POST['SYS'])? $_POST['SYS']: '';
+    $dia = isset($_POST['DIA'])? $_POST['DIA']: '';
+    $fbs = isset($_POST['FBS'])? $_POST['FBS']: '';
+    $w = isset($_POST['weight'])? $_POST['weight']: '';
+    $h = isset($_POST['height'])? $_POST['height']: '';
+    $ch = isset($_POST['chr'])? $_POST['chr']: '';
+    $in = isset($_POST['into'])? $_POST['into']: '';
+    $di = isset($_POST['disa'])? $_POST['disa']: '';
+    $f = isset($_POST['food'])? $_POST['food']: '';
+    $sm = isset($_POST['Smoke'])? $_POST['Smoke']: '';
+    $dr = isset($_POST['Drink'])? $_POST['Drink']: '';
+    $envi = isset($_POST['env'])? $_POST['env']: '';
+    $ex = isset($_POST['exercise'])? $_POST['exercise']: '';
 ?>
 
 <!--?php 

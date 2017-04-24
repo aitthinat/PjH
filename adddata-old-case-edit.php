@@ -324,7 +324,7 @@
               </label>
             </div>
             <div class="form-check form-group row" style="margin-left:10%;margin-right:10%" align="right">
-              <button type="submit" class="btn btn-primary">Submit</button>
+              <button type="submit" name = "send" class="btn btn-primary">Submit</button>
             </div>
             <?php 
                 if(isset($_POST["send"])){
