@@ -243,7 +243,7 @@
   }
   var regex3 = /[-]/gi;
   var regex4 = /[0-9]/gi;
-  if ((tel.match(regex4) && tel.length == 10) || (tel.length == 0)){ 
+  if ((tel.match(regex4) && tel.length == 10) || (tel.match(regex3) && tel.length == 1)){ 
    if ( document.getElementById("tel_div").className.match(/(?:^|\s)has-danger(?!\S)/) ){
     document.getElementById("tel_div").className = document.getElementById("tel_div").className.replace( /(?:^|\s)has-danger(?!\S)/g , " " );
     document.getElementById("tel").className = document.getElementById("tel").className.replace( /(?:^|\s)form-has-danger(?!\S)/g , " " );
@@ -303,8 +303,8 @@ function clean_not_char2(input){
 }
 function validatetel(input){
   var regex = /[0-9]/gi;
-
-  if ((input.value.match(regex) && input.value.length == 10) || (input.value.length == 0)) {
+  var regex2 = /[-]/gi;
+  if ((input.value.match(regex) && input.value.length == 10) || (input.value.match(regex2) && input.value.length == 1)) {
    if ( document.getElementById("tel_div").className.match(/(?:^|\s)has-danger(?!\S)/) ){
     document.getElementById("tel_div").className = document.getElementById("tel_div").className.replace( /(?:^|\s)has-danger(?!\S)/g , " " );
     document.getElementById("tel").className = document.getElementById("tel").className.replace( /(?:^|\s)form-has-danger(?!\S)/g , " " );
@@ -334,6 +334,17 @@ function validateID(input){
     document.getElementById("al5").style.visibility = 'visible';
   }
 }
+function isNumber(evt, value) {
+    if (value.length + 1 > 10) {
+        return false;
+    }
+    evt = (evt) ? evt : window.event;
+    var charCode = (evt.which) ? evt.which : evt.keyCode;
+    if (charCode > 31 && (charCode < 48 || charCode > 57 || charCode = 45)) {
+        return false;
+    }
+    return true;
+}
 
 function lettersOnly(evt) {
     evt = (evt) ? evt : event;
@@ -350,17 +361,6 @@ if (charCode > 31 && (charCode < 65 || charCode > 90) && (charCode < 97 || charC
 return true;
 }
 
-function isNumber(evt, value) {
-    if (value.length + 1 > 10) {
-        return false;
-    }
-    evt = (evt) ? evt : window.event;
-    var charCode = (evt.which) ? evt.which : evt.keyCode;
-    if (charCode > 31 && (charCode < 47 || charCode > 57)) {
-        return false;
-    }
-    return true;
-}
 </script>
 <div>
   <div class="form-check form-group row" style="margin-left:10%;margin-bottom:-12px">
@@ -402,7 +402,7 @@ function isNumber(evt, value) {
           <div class="form-group row" style="margin-left:10%;margin-right:10%" id="lname_div">
             <label class="col-2 col-form-label"></label>
             <div class="col-10">
-              <input class="form-control" type="text" id="lname" name="lname"  placeholder="สกุล" onkeyup="clean_not_char2(this)" onkeydown="clean_not_char2(this)" onkeypress="return lettersOnly(event)">
+              <input class="form-control" type="text" id="lname" name="lname"  placeholder="สกุล" onkeyup="clean_not_char2(this)" onkeydown="clean_not_char2(this)" onkeypress="return lettersOnly(event)"> 
             </div>
             <label class="col-2 col-form-label" id="al" style="visibility: hidden;"></label>
             <div class="col-10" id="al4"  style="visibility: hidden;color: red">*กรุณากรอกเฉพาะตัวอักษร</div>
@@ -509,10 +509,10 @@ function isNumber(evt, value) {
     <div class="form-group row" style="margin-left:10%;margin-right:10%" id="tel_div">
      <label class="col-2 col-form-label">เบอร์โทรศัพท์</label>
      <div class="col-10">
-      <input class="form-control" type="tel" id="tel" name="tel" placeholder="0960000xxx" onkeyup="validatetel(this)" onkeydown="validatetel(this)">
+      <input class="form-control" type="tel" id="tel" name="tel" placeholder="0960000xxx" onkeyup="validatetel(this)" onkeydown="validatetel(this)" onkeypress="return isNumber(event,value)">
     </div>
     <label class="col-2 col-form-label" id="al" style="visibility: hidden;"></label>
-    <div class="col-10"  style="visibility: hidden;color: red"  id="al5">*กรุณาตรวจสอบใหม่อีกครั้ง หากไม่มี ให้เว้นไว้</div>
+    <div class="col-10"  style="visibility: hidden;color: red"  id="al5">*กรุณาตรวจสอบใหม่อีกครั้ง หากไม่มี ให้ใส่เครื่องหมาย -</div>
   </div>
   <div class="form-check form-group row" style="margin-left:10%;margin-right:10%" align="right">
     <button type="submit" class="btn btn-primary">Submit</button>
