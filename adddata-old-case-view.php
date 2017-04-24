@@ -1,11 +1,7 @@
 <?php include "head.php" ?>
 <?php include "connection.php" ?>
-<?php session_start(); 
-    $cid = isset($_SESSION['id'])? $_SESSION['id']: '';
-    $title = isset($_SESSION['tt'])? $_SESSION['tt']: '';
-    $fname = isset($_SESSION['fn'])? $_SESSION['fn']: '';
-    $lname = isset($_SESSION['ln'])? $_SESSION['ln']: '';
-    $Age = isset($_SESSION['age'])? $_SESSION['age']: '';
+<?php
+    $id = $_GET['id'];
 ?>
 <script language="Javascript">
   function disabled_TE()
@@ -94,7 +90,15 @@ $(document).ready(function() {
 
 });
 </script>
-
+<?php 
+    $sql = "SELECT Title,Fname,Lname FROM person WHERE Citizen_ID = '$id'";
+    $result = mysqli_query($con,$sql);
+    while($row = mysqli_fetch_array($result)){
+        $title = $row["Title"];
+        $fname = $row["Fname"];
+        $lname = $row["Lname"];
+    }
+?>
 <div>
   
   <div class="container" style="background:white" >
@@ -124,12 +128,13 @@ $(document).ready(function() {
             <label class="form-check-label"><?php
                 $sql = "SELECT * FROM health_info WHERE Hcid = '$cid'";
                 $re = mysqli_query($con,$sql);
-                while($res = mysqli_fetch_array($re)){  
-                    echo "<select class='custom-select'>";
-                    echo "<option selected>-----กรุณาเลือกปีที่ต้องการทราบ-----</option>";
-                    echo "<option value='$res[Hcid]'>$re[year]</option>";
-                    echo "</select>";
+                echo "<select class='custom-select'>";
+                echo "<option selected>-----กรุณาเลือกปีที่ต้องการทราบ-----</option>";
+                    while($res = mysqli_fetch_array($re)){  
+                        echo "<option value='$res[Hcid]'>$re[year]</option>";
                 }
+                echo "</select>";
+                
                 ?>
             </label>
           </div>

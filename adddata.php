@@ -1,11 +1,7 @@
 <?php include "head.php" ?>
 <?php include('connection.php'); ?>
-<?php session_start(); 
-    $cid = isset($_SESSION['id'])? $_SESSION['id']: '';
-    $title = isset($_SESSION['tt'])? $_SESSION['tt']: '';
-    $fname = isset($_SESSION['fn'])? $_SESSION['fn']: '';
-    $lname = isset($_SESSION['ln'])? $_SESSION['ln']: '';
-    $Age = isset($_SESSION['age'])? $_SESSION['age']: '';
+<?php
+    $id = $_GET['id'];
 ?>
 <?php 
 if (!empty($_POST["findhome"])) {
@@ -25,24 +21,7 @@ if (!empty($_POST["age"])) {
 }
 ?>
 
-<?php 
-    $d = isset($_POST['date'])? $_POST['date']: '';
-    echo "$d";
-    $bg = isset($_POST['BloodGroup'])? $_POST['BloodGroup']: '';
-    $sys = isset($_POST['SYS'])? $_POST['SYS']: '';
-    $dia = isset($_POST['DIA'])? $_POST['DIA']: '';
-    $fbs = isset($_POST['FBS'])? $_POST['FBS']: '';
-    $w = isset($_POST['weight'])? $_POST['weight']: '';
-    $h = isset($_POST['height'])? $_POST['height']: '';
-    $ch = isset($_POST['chr'])? $_POST['chr']: '';
-    $in = isset($_POST['into'])? $_POST['into']: '';
-    $di = isset($_POST['disa'])? $_POST['disa']: '';
-    $f = isset($_POST['food'])? $_POST['food']: '';
-    $sm = isset($_POST['Smoke'])? $_POST['Smoke']: '';
-    $dr = isset($_POST['Drink'])? $_POST['Drink']: '';
-    $envi = isset($_POST['homearea'])? $_POST['homearea']: '';
-    $ex = isset($_POST['exercise'])? $_POST['exercise']: '';
-?>
+
 <script language="Javascript">
   function disabled_TE()
   {
@@ -295,31 +274,30 @@ if (!empty($_POST["age"])) {
   input.value = input.value.replace(regex, "");
 }
 </script>
-<?php
-    if(isset($_POST["insert"])){
-        $sql = "INSERT INTO health_info VALUES($cid,year($d),$d,$w,$h,$bg,$envi,$di,$in,$f,$sys,$dia,$fbs,$ch,$sm,$dr,$ex)";
-        $query = mysqli_query($con,$sql);
-        if($query){
-            echo "<script>alert('เพิ่มข้อมูลเรียบร้อย'); location.href = 'index.php';</script>";
-        }else{
-            echo "<script>alert('ไม่สามารถเพิ่มข้อมูลได้'); location.href='adddata.php'; </script>";
-        }
-    }
-?>
+
 <div> 
   <div class="container" style="background:white">
     <div class="row">
       <div class="col-lg-12">
         <div style="width:100%" >
           <div align="center" style="padding-top:10px;padding-bottom:20px"><h1>บันทึกข้อมูลการตรวจสุขภาพ</h1></div>
-          <form name="myForm" onsubmit="return validateForm()">
+          <form name="myForm" action = "insert_health.php" onsubmit="return validateForm()">
               <div class="form-group row" style="margin-left:10%;margin-right:10%" id="lname_div">
             <label class="col-2 col-form-label">วันที่</label>
             <div class="col-10">
                 
-              <input class="form-control" type="date" class="form-control" id="date"name = "date" placeholder="Date" max="date("Y-m-d")" >
+              <input class="form-control" type="date" class="form-control" id="date" name = "date" placeholder="Date" >
             </div>
             </div>
+            <?php 
+                $sql = "SELECT Title,Fname,Lname FROM person WHERE Citizen_ID = '$id'";
+                $result = mysqli_query($con,$sql);
+                while($row = mysqli_fetch_array($result)){
+                    $title = $row["Title"];
+                    $fname = $row["Fname"];
+                    $lname = $row["Lname"];
+                }
+            ?>
               <div class="form-check form-group row" style="margin-left:10%">
               <label class="col-2 col-form-label">ชื่อ - สกุล</label>
               <label class="form-check-label">
@@ -522,10 +500,10 @@ if (!empty($_POST["age"])) {
           </div>
           <div class="form-check form-group row" style="margin-left:10%">
             <label class="form-check-label"  style="margin-left:5%">
-              <input class="form-check-input" type="checkbox" id="homearea1" name="homeArea" value="1" aria-label="...">มีแอ่งน้ำ หรือ พื้นที่น้ำขัง
+              <input class="form-check-input" type="checkbox" id="homearea1" name="homeArea1" value="1" aria-label="...">มีแอ่งน้ำ หรือ พื้นที่น้ำขัง
             </label>
             <label class="form-check-label" style="margin-left:2%">
-              <input class="form-check-input" type="checkbox" id="homearea2" name="homeArea" value="2" aria-label="...">ใกล้โรงงาน
+              <input class="form-check-input" type="checkbox" id="homearea2" name="homeArea2" value="2" aria-label="...">ใกล้โรงงาน
             </label>
           </div>
           <div class="form-check form-group row" style="margin-left:10%;margin-right:10%" align="right">

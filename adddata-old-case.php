@@ -1,40 +1,8 @@
 <?php include "head.php" ?>
 <?php include "connection.php" ?>
-<?php session_start(); 
-    $cid = isset($_SESSION['id'])? $_SESSION['id']: '';
-    $title = isset($_SESSION['tt'])? $_SESSION['tt']: '';
-    $fname = isset($_SESSION['fn'])? $_SESSION['fn']: '';
-    $lname = isset($_SESSION['ln'])? $_SESSION['ln']: '';
-    $Age = isset($_SESSION['age'])? $_SESSION['age']: '';
+<?php
+    $id = $_GET['id'];
 ?>
-<?php 
-    $d = isset($_POST['date'])? $_POST['date']: '';
-    $bg = isset($_POST["BloodGroup"])? $_POST["BloodGroup"]: '';
-    $sys = isset($_POST['SYS'])? $_POST['SYS']: '';
-    $dia = isset($_POST['DIA'])? $_POST['DIA']: '';
-    $fbs = isset($_POST['FBS'])? $_POST['FBS']: '';
-    $w = isset($_POST['weight'])? $_POST['weight']: '';
-    $h = isset($_POST['height'])? $_POST['height']: '';
-    $ch = isset($_POST['chr'])? $_POST['chr']: '';
-    $in = isset($_POST['into'])? $_POST['into']: '';
-    $di = isset($_POST['disa'])? $_POST['disa']: '';
-    $f = isset($_POST['food'])? $_POST['food']: '';
-    $sm = isset($_POST['Smoke'])? $_POST['Smoke']: '';
-    $dr = isset($_POST['Drink'])? $_POST['Drink']: '';
-    $envi = isset($_POST['env'])? $_POST['env']: '';
-    $ex = isset($_POST['exercise'])? $_POST['exercise']: '';
-?>
-
-<!--?php 
-    $d = $_POST['cid'];
-    $sql = "SELECT Title,Fname,Lname FROM person WHERE Citizen_ID = '$cid'";
-    $res = mysqli_query($con,$sql);
-    while($r = mysqli_fetch_array($res)){
-        $title = $r["Title"];
-        $fname = $r["Fname"];
-        $lname = $r["Lname"];
-    }
-?-->
 <?php 
     $derr ="";
     $bgerr= "";
@@ -184,9 +152,8 @@
 </script>
 
 <?php 
-    $sql = "SELECT * FROM health_info WHERE Hcid = '$cid' ";
+    $sql = "SELECT * FROM health_info WHERE Hcid = '$id' ";
     $result = mysqli_query($con,$sql);
-    #echo mysqli_num_rows($result);
     while($row = mysqli_fetch_array($result)){
         $id = $row["Hcid"];
         $y = $row["Year"];
@@ -194,7 +161,6 @@
         $w = $row["Weight"];
         $h = $row["Height"];
         $bg = $row["Blood_group"];
-        $env = $row["Environment"];
         $dis= $row["Disability"];
         $into = $row["Intolerance"];
         $food = $row["Food_allergies"];
@@ -205,6 +171,8 @@
         $bos = $row["BOS"];
         $boa = $row["BOA"];
         $ex = $row["Exercise"];
+        $wa = $row["Water_area"];
+        $nf = $row["Near_factory"];
     }
 ?>
 <?php 
@@ -235,16 +203,23 @@
               <?php echo "<input disabled ='' class='form-control' type='date' class='form-control' id='date' placeholder='Date' maxlength='0' value='$d'>"?>
             </div>
             </div>
+            <?php 
+                $sql = "SELECT Title,Fname,Lname FROM person WHERE Citizen_ID = '$id'";
+                $result = mysqli_query($con,$sql);
+                while($row = mysqli_fetch_array($result)){
+                    $title = $row["Title"];
+                    $fname = $row["Fname"];
+                    $lname = $row["Lname"];
+                }
+            ?>
               <div class="form-check form-group row" style="margin-left:10%">
                 <label class="col-2 col-form-label">ชื่อ - สกุล</label>
                 <label class="form-check-label">
                   <h4><label style="padding-right:10px">
-                      <?php 
-                        echo $title;
-                      ?>
+                    <?php echo $title; ?>
                       </label><label style="padding-right:20px">
                       <?php 
-                        echo $fname;
+                         echo $fname;
                       ?>
                       </label><label>
                       <?php 
@@ -256,16 +231,16 @@
               <div class="form-check form-group row" style="margin-left:10%">
                 <label class="col-2 col-form-label">กรุ๊ปเลือด</label>
                 <label class="form-check-label">
-                  <?php echo"<input disabled='' class='form-check-input' type='radio' name='BloodGroup' id='inlineRadioA' value='$bg' checked> A" ?>
+                  <input disabled="" class="form-check-input" type="radio" name="BloodGroup" id="inlineRadioA" value='$bg' <?php if($bg == 'A') echo "checked"; ?>>A
                 </label>
                 <label class="form-check-label" style="margin-left:2%">
-                  <?php echo"<input disabled='' class='form-check-input' type='radio' name='BloodGroup' id='inlineRadioA' value='$bg'> B" ?>
+                  <input disabled='' class='form-check-input' type='radio' name='BloodGroup' id='inlineRadioA' value='$bg' <?php if($bg == 'B') echo "checked"; ?>>B
                 </label>
                 <label class="form-check-label" style="margin-left:2%">
-                  <?php echo"<input disabled='' class='form-check-input' type='radio' name='BloodGroup' id='inlineRadioA' value='$bg'> AB" ?>
+                  <input disabled='' class='form-check-input' type='radio' name='BloodGroup' id='inlineRadioA' value='$bg'<?php if($bg == 'AB') echo "checked"; ?>>AB
                 </label>
                 <label class="form-check-label" style="margin-left:2%">
-                  <?php echo"<input disabled='' class='form-check-input' type='radio' name='BloodGroup' id='inlineRadioA' value='$bg'> O" ?>
+                  <input disabled='' class='form-check-input' type='radio' name='BloodGroup' id='inlineRadioA' value='$bg' <?php if($bg == 'O') echo "checked";?>>O
                 </label>
               </div>
               <div class="form-group row" style="margin-left:10%;margin-right:10%">
@@ -295,9 +270,9 @@
               <label class="col-2 col-form-label">อายุ</label>
               <label class="form-check-label">
                 <label style="padding-right:10px">
-                    <?php 
+                   <!--  <?php 
                         echo $Age;
-                    ?>
+                    ?>--> 
                   </label><label style="padding-right:20px">ปี</label>
               </label>
             </div>
@@ -324,10 +299,10 @@
           </div>
           <div class="form-check form-group row" style="margin-left:10%" >
             <label class="form-check-label"  style="margin-left:5%">
-              <?php echo "<input disabled='' class='form-check-input' type='radio' name='disa' id='disa0' value='$dis' checked onclick='disabled_TE()'>ไม่พิการ" ?>
+              <input disabled='' class='form-check-input' type='radio' name='disa' id='disa0' value='$dis' <?php if($dis == 0) echo "checked"?>>ไม่พิการ
             </label>
             <label class="form-check-label" style="margin-left:2%">
-              <?php echo "<input disabled='' class='form-check-input' type='radio' name='disa' id='disa1' value='$dis' onclick='enabled_TE()'>พิการ" ?>
+              <input disabled='' class='form-check-input' type='radio' name='disa' id='disa1' value='$dis' <?php if($dis == 1) echo "checked"?>>พิการ
             </label>
           </div>
 <!--
@@ -353,16 +328,16 @@
             </div>
             <div class="form-check form-group row" style="margin-left:10%">
               <label class="form-check-label" style="margin-left:5%">
-                <?php echo "<input disabled='' class='form-check-input' type='radio' name='Drink' id='drink0' value='$boa' checked> ไม่ดื่ม" ?>
+                <input disabled='' class='form-check-input' type='radio' name='Drink' id='drink0' value='$boa' <?php if($boa == 0) echo "checked"?>> ไม่ดื่ม
               </label>
               <label class="form-check-label" style="margin-left:2%">
-                <?php echo "<input disabled='' class='form-check-input' type='radio' name='Drink' id='drink1' value='$boa'> 1-2" ?>
+                <input disabled='' class='form-check-input' type='radio' name='Drink' id='drink1' value='$boa' <?php if($boa == 1) echo "checked"?>> 1-2
               </label>
               <label class="form-check-label" style="margin-left:2%">
-                <?php echo "<input disabled='' class='form-check-input' type='radio' name='Drink' id='drink2' value='$boa'> 3-5" ?>
+                <input disabled='' class='form-check-input' type='radio' name='Drink' id='drink2' value='$boa' <?php if($boa == 2) echo "checked"?>> 3-5
               </label>
               <label class="form-check-label" style="margin-left:2%">
-                <?php echo "<input disabled='' class='form-check-input' type='radio' name='Drink' id='drink3' value='$boa'> 6 ครั้งขึ้นไป" ?>
+                <input disabled='' class='form-check-input' type='radio' name='Drink' id='drink3' value='$boa' <?php if($boa == 3) echo "checked"?>> 6 ครั้งขึ้นไป
               </label>
             </div>
             <div class="form-check form-group row" style="margin-left:10%">
@@ -370,19 +345,19 @@
             </div>
             <div class="form-check form-group row" style="margin-left:10%">
               <label class="form-check-label"  style="margin-left:5%">
-                <?php echo "<input disabled='' class='form-check-input' type='radio' name='Smoke' id='Smoke0' value='$bos' checked> ไม่สูบ" ?>
+                <input disabled='' class='form-check-input' type='radio' name='Smoke' id='Smoke0' value='$bos' <?php if($bos == 0) echo "checked"?>> ไม่สูบ
               </label>
               <label class="form-check-label" style="margin-left:2%">
-                <?php echo "<input disabled='' class='form-check-input' type='radio' name='Smoke' id='Smoke1' value='$bos'> 1-5" ?>
+                <input disabled='' class='form-check-input' type='radio' name='Smoke' id='Smoke1' value='$bos' <?php if($bos == 1) echo "checked"?>> 1-5
               </label>
               <label class="form-check-label" style="margin-left:2%">
-                <?php echo "<input disabled='' class='form-check-input' type='radio' name='Smoke' id='Smoke2' value='$bos'> 6-10" ?>
+                <input disabled='' class='form-check-input' type='radio' name='Smoke' id='Smoke2' value='$bos' <?php if($bos == 2) echo "checked"?>> 6-10
               </label>
               <label class="form-check-label" style="margin-left:2%">
-                <?php echo "<input disabled='' class='form-check-input' type='radio' name='Smoke' id='Smoke3' value='$bos'> 11-19"?>
+                <input disabled='' class='form-check-input' type='radio' name='Smoke' id='Smoke3' value='$bos' <?php if($bos == 3) echo "checked"?>> 11-19
               </label>
               <label class="form-check-label" style="margin-left:2%">
-                <?php echo "<input disabled='' class='form-check-input' type='radio' name='Smoke' id='Smoke4' value='$bos'> 1 ซองขึ้นไป" ?>
+                <input disabled='' class='form-check-input' type='radio' name='Smoke' id='Smoke4' value='$bos'<?php if($bos == 4) echo "checked"?>> 1 ซองขึ้นไป
               </label>
             </div>
             <div class="form-check form-group row" style="margin-left:10%">
@@ -390,13 +365,13 @@
             </div>
             <div class="form-check form-group row" style="margin-left:10%">
               <label class="form-check-label"  style="margin-left:5%">
-                <?php echo "<input disabled='' class='form-check-input' type='radio' name='exercise' id='exercise0' value='$ex' checked  onclick='disabled_TE()'>ไม่ได้ออกกำลังกาย" ?>
+                <input disabled='' class='form-check-input' type='radio' name='exercise' id='exercise0' value='$ex' <?php if($ex == 0) echo "checked" ?>>ไม่ได้ออกกำลังกาย
               </label>
               <label class="form-check-label" style="margin-left:2%">
-                <?php echo "<input disabled='' class='form-check-input' type='radio' name='exercise' id='exercise1' value='$ex' onclick= 'enabled_TE()'>1-3 วัน" ?>
+                <input disabled='' class='form-check-input' type='radio' name='exercise' id='exercise1' value='$ex' <?php if($ex == 1) echo "checked"?>>1-3 วัน
               </label>
               <label class="form-check-label" style="margin-left:2%">
-                <?php echo "<input disabled='' class='form-check-input' type='radio' name='exercise' id='exercise2' value='$ex' onclick='enabled_TE()'>มากกว่า 4-7 วัน"?>
+                <input disabled='' class='form-check-input' type='radio' name='exercise' id='exercise2' value='$ex' <?php if($ex == 2) echo "checked"?>>4-7 วัน
               </label>
             </div>
 <!--
@@ -422,10 +397,10 @@
             </div>
             <div class="form-check form-group row" style="margin-left:10%">
               <label class="form-check-label"  style="margin-left:5%">
-                <?php echo"<input disabled='' class='form-check-input' type='checkbox' id='homearea1' name='homeArea1' value='$env' aria-label='...'>มีแอ่งน้ำ หรือ พื้นที่น้ำขัง" ?>
+                <input disabled='' class='form-check-input' type='checkbox' id='homearea1' name='homeArea1' value='$wa' <?php if($wa == 1) echo "checked"?> aria-label='...'>มีแอ่งน้ำ หรือ พื้นที่น้ำขัง
               </label>
               <label class="form-check-label" style="margin-left:2%">
-                <?php echo "<input disabled='' class='form-check-input' type='checkbox' id='homearea2' name='homeArea2' value='$env' aria-label='...'>ใกล้โรงงาน" ?>
+                <input disabled='' class='form-check-input' type='checkbox' id='homearea2' name='homeArea2' value='$nf' <?php if($nf == 1) echo "checked"?> aria-label='...'>ใกล้โรงงาน
               </label>
             </div>
             <div class="form-check form-group row" style="margin-left:10%;margin-right:10%" align="right">
