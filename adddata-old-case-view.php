@@ -78,6 +78,7 @@
   }
 
 }
+</script>
 <script>
 $(document).ready(function() {
     $("#type").change(function() {
@@ -93,7 +94,7 @@ $(document).ready(function() {
 
 });
 </script>
-</script>
+
 <div>
   
   <div class="container" style="background:white" >
@@ -120,12 +121,16 @@ $(document).ready(function() {
           </div>
           <div class="form-check form-group row" style="margin-left:10%">
           <label class="col-2 col-form-label">ปี (พ.ศ.)</label>
-            <label class="form-check-label">
-              <select class="custom-select">
-                <option selected>-----กรุณาเลือกปีที่ต้องการทราบ-----</option>
-                <option value="1">2560</option>
-              </select>
-
+            <label class="form-check-label"><?php
+                $sql = "SELECT * FROM health_info WHERE Hcid = '$cid'";
+                $re = mysqli_query($con,$sql);
+                while($res = mysqli_fetch_array($re)){  
+                    echo "<select class='custom-select'>";
+                    echo "<option selected>-----กรุณาเลือกปีที่ต้องการทราบ-----</option>";
+                    echo "<option value='$res[Hcid]'>$re[year]</option>";
+                    echo "</select>";
+                }
+                ?>
             </label>
           </div>
         </div>
@@ -225,6 +230,6 @@ $(document).ready(function() {
     <option value="">-- select one -- </option>
 </select>
   </div>
-</div>
+
 
 <?php include "foot.php" ?>

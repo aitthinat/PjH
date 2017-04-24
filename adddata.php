@@ -24,6 +24,25 @@ if (!empty($_POST["age"])) {
   $age = $_POST["age"];
 }
 ?>
+
+<?php 
+    $d = isset($_POST['date'])? $_POST['date']: '';
+    echo "$d";
+    $bg = isset($_POST['BloodGroup'])? $_POST['BloodGroup']: '';
+    $sys = isset($_POST['SYS'])? $_POST['SYS']: '';
+    $dia = isset($_POST['DIA'])? $_POST['DIA']: '';
+    $fbs = isset($_POST['FBS'])? $_POST['FBS']: '';
+    $w = isset($_POST['weight'])? $_POST['weight']: '';
+    $h = isset($_POST['height'])? $_POST['height']: '';
+    $ch = isset($_POST['chr'])? $_POST['chr']: '';
+    $in = isset($_POST['into'])? $_POST['into']: '';
+    $di = isset($_POST['disa'])? $_POST['disa']: '';
+    $f = isset($_POST['food'])? $_POST['food']: '';
+    $sm = isset($_POST['Smoke'])? $_POST['Smoke']: '';
+    $dr = isset($_POST['Drink'])? $_POST['Drink']: '';
+    $envi = isset($_POST['homearea'])? $_POST['homearea']: '';
+    $ex = isset($_POST['exercise'])? $_POST['exercise']: '';
+?>
 <script language="Javascript">
   function disabled_TE()
   {
@@ -277,9 +296,8 @@ if (!empty($_POST["age"])) {
 }
 </script>
 <?php
-//    $BloddGroup = isset($_POST['BloodGroup']) ? $_POST['BloodGroup'] : '';
-    if(isset($_POS["insert"])){
-        $sql = "INSERT INTO health_info VALUES($cid,year($date),$weight,$height,$BloodGroup,$homearea,$disa,$into,$food,$SYS,$DIA,$FBS,$chr,$Smoke,$Drink,$exercise)";
+    if(isset($_POST["insert"])){
+        $sql = "INSERT INTO health_info VALUES($cid,year($d),$d,$w,$h,$bg,$envi,$di,$in,$f,$sys,$dia,$fbs,$ch,$sm,$dr,$ex)";
         $query = mysqli_query($con,$sql);
         if($query){
             echo "<script>alert('เพิ่มข้อมูลเรียบร้อย'); location.href = 'index.php';</script>";
@@ -294,12 +312,12 @@ if (!empty($_POST["age"])) {
       <div class="col-lg-12">
         <div style="width:100%" >
           <div align="center" style="padding-top:10px;padding-bottom:20px"><h1>บันทึกข้อมูลการตรวจสุขภาพ</h1></div>
-          <form name="myForm" action="accept_adddata.php" method="post" onsubmit="return validateForm()">
+          <form name="myForm" onsubmit="return validateForm()">
               <div class="form-group row" style="margin-left:10%;margin-right:10%" id="lname_div">
             <label class="col-2 col-form-label">วันที่</label>
             <div class="col-10">
                 
-              <input class="form-control" type="date" class="form-control" id="date" placeholder="Date" max="date("Y-m-d")" >
+              <input class="form-control" type="date" class="form-control" id="date"name = "date" placeholder="Date" max="date("Y-m-d")" >
             </div>
             </div>
               <div class="form-check form-group row" style="margin-left:10%">
@@ -378,7 +396,9 @@ if (!empty($_POST["age"])) {
           <div class="form-check form-group row" style="margin-left:10%">
             <label class="col-2 col-form-label">อายุ</label>
             <label class="form-check-label">
-              <label style="padding-right:10px">58</label><label style="padding-right:20px">ปี</label>
+              <label style="padding-right:10px"><?php
+                  echo $Age; ?>
+                </label><label style="padding-right:20px">ปี</label>
             </label>
           </div>
            <div class="form-group row" style="margin-left:10%;margin-right:10%" id="fname_div">
@@ -410,6 +430,7 @@ if (!empty($_POST["age"])) {
               <input class="form-check-input" type="radio" name="disa" id="disa1" value="1" onclick="enabled_TE()">พิการ
             </label>
           </div>
+<!--
           <div class="form-check" id="sh_DIV">
             <div class="form-check form-group row" style="margin-left:10%">
               <label class="col-8 col-form-label">ความสามารถในการช่วยเหลือตนเอง</label>
@@ -423,6 +444,7 @@ if (!empty($_POST["age"])) {
               </label>
             </div>
           </div>
+-->
           <div class="form-check form-group row" style="margin-left:10%">
             <label class="col-8 col-form-label">ข้อมูลในช่วง 1 ปีที่ผ่านมา</label>
           </div>
@@ -477,6 +499,7 @@ if (!empty($_POST["age"])) {
               <input class="form-check-input" type="radio" name="exercise" id="exercise2" value="2" onclick="enabled_TE()">มากกว่า 4 วัน
             </label>
           </div>
+<!--
           <div class="form-check" id="tex_DIV">
             <div class="form-check form-group row" style="margin-left:10%">
               <label class="col-8 col-form-label">จำนวนชั่วโมงในวันที่ออกกำลังกาย</label>
@@ -493,6 +516,7 @@ if (!empty($_POST["age"])) {
               </label>
             </div>
           </div>
+-->
           <div class="form-check form-group row" style="margin-left:10%">
             <label class="col-8 col-form-label">สภาพแวดล้อมบริเวณที่เป็นอยู่</label>
           </div>

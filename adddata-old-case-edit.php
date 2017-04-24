@@ -83,6 +83,30 @@
 }
 
 </script>
+<?php 
+    $sql = "SELECT * FROM health_info WHERE Hcid = '$cid' ";
+    $result = mysqli_query($con,$sql);
+    echo mysqli_num_rows($result);
+    while($row = mysqli_fetch_array($result)){
+        $id = $row["Hcid"];
+        $y = $row["Year"];
+        $d = $row["Date_of_Health"];
+        $w = $row["Weight"];
+        $h = $row["Height"];
+        $bg = $row["Blood_group"];
+        $env = $row["Environment"];
+        $dis= $row["Disability"];
+        $into = $row["Intolerance"];
+        $food = $row["Food_allergies"];
+        $sys = $row["BP_SYS"];
+        $dia = $row["BP_DIA"];
+        $fbs = $row["FBS"];
+        $chr = $row["Chronic_Disease"];
+        $bos = $row["BOS"];
+        $boa = $row["BOA"];
+        $ex = $row["Exercise"];
+    }
+?>
 <div>
 <div class="row">
 <div class="form-check form-group col" style="margin-left:10%">
@@ -97,17 +121,20 @@
         <div class="col-lg-12">
           <div style="width:100%" >
             <div align="center" style="padding-top:10px;padding-bottom:20px"><h1>บันทึกข้อมูลการตรวจสุขภาพ</h1></div>
-            <form name="myForm" action="accept_adddata.php" method="post" onsubmit="return validateForm()">
+            <form name="myForm" action="adddata-old-case.php" method="post" onsubmit="return validateForm()">
               <div class="form-group row" style="margin-left:10%;margin-right:10%" id="lname_div">
             <label class="col-2 col-form-label">วันที่</label>
             <div class="col-10">
-              <input class="form-control" type="date" class="form-control" id="date" placeholder="Date" maxlength="0">
+              <?php echo "<input  class='form-control' type='date' class='form-control' id='date' placeholder='Date' maxlength='0' value='$d'>"
+                
+                ?>
             </div>
             </div>
               <div class="form-check form-group row" style="margin-left:10%">
                 <label class="col-2 col-form-label">ชื่อ - สกุล</label>
                 <label class="form-check-label">
-                  <h4><label style="padding-right:10px"><?php 
+                  <h4><label style="padding-right:10px">
+                      <?php 
                         echo $title;
                       ?>
                       </label><label style="padding-right:20px">
@@ -117,97 +144,102 @@
                       </label><label>
                       <?php 
                         echo $lname;
-                      ?></label></h4>
+                      ?>
+                      </label></h4>
                 </label>
               </div>
               <div class="form-check form-group row" style="margin-left:10%">
                 <label class="col-2 col-form-label">กรุ๊ปเลือด</label>
                 <label class="form-check-label">
-                  <input class="form-check-input" type="radio" name="BloodGroup" id="inlineRadioA" value="A"> A
+                  <?php echo"<input  class='form-check-input' type='radio' name='BloodGroup' id='inlineRadioA' value='$bg' checked> A" ?>
                 </label>
                 <label class="form-check-label" style="margin-left:2%">
-                  <input class="form-check-input" type="radio" name="BloodGroup" id="inlineRadioB" value="B"> B
+                  <?php echo"<input  class='form-check-input' type='radio' name='BloodGroup' id='inlineRadioA' value='$bg'> B" ?>
                 </label>
                 <label class="form-check-label" style="margin-left:2%">
-                  <input class="form-check-input" type="radio" name="BloodGroup" id="inlineRadioAB" value="AB" checked=""> AB
+                  <?php echo"<input  class='form-check-input' type='radio' name='BloodGroup' id='inlineRadioA' value='$bg'> AB" ?>
                 </label>
                 <label class="form-check-label" style="margin-left:2%">
-                  <input class="form-check-input" type="radio" name="BloodGroup" id="inlineRadioO" value="O"> O
+                  <?php echo"<input  class='form-check-input' type='radio' name='BloodGroup' id='inlineRadioA' value='$bg'> O" ?>
                 </label>
               </div>
               <div class="form-group row" style="margin-left:10%;margin-right:10%">
                 <label class="col-2 col-form-label">ความดันโลหิต</label>
                 <div class="col-10">
-                  <input class="form-control" type="number" id="SYS" name="SYS" placeholder="SYS" min="1" max="999" value="119">
-                  <input class="form-control" type="number" id="DIA" name="DIA"  placeholder="DIA" min="1" max="999" value="78">
+                  <?php echo "<input class='form-control' type='number' id='SYS' name='SYS' placeholder='SYS' min='1' max='999' value='$sys'>" ?>
+                  <?php echo "<input class='form-control' type='number' id='DIA' name='DIA'  placeholder='DIA' min='1' max='999' value='$dia'>" ?>
                 </div>
               </div>
               <div class="form-group row" style="margin-left:10%;margin-right:10%">
                   <label class="col-2 col-form-label">ระดับน้ำตาลในเลือด</label>
                 <div class="col-10">
-                  <input class="form-control" type="number" id="FBS" name="FBS" placeholder="FBS" min="1" max="999" value="119">
+                  <?php echo "<input  class='form-control' type='number' id='FBS' name='FBS' placeholder='FBS' min='1' max='999' value='$fbs'>" ?>
                 </div>
               </div>
               <div class="form-group row" style="margin-left:10%;margin-right:10%">
                <label class="col-2 col-form-label">น้ำหนัก</label>
                <div class="col-10">
-                <input class="form-control" type="number" id="weight" name="weight" placeholder="kilogram" min="1" max="999" value="160">
+                <?php echo "<input class='form-control' type='number' id='weight' name='weight' placeholder='kilogram' min='1' max='999' value='$w'>" ?>
               </div>
               <label class="col-2 col-form-label">ส่วนสูง</label>
               <div class="col-10">
-                <input class="form-control" type="number" id="height" name="height" placeholder="meter" min="1" max="999" value="49">
+                <?php echo "<input  class='form-control' type='number' id='height' name='height' placeholder='meter' min='1' max='999' value='$h'>" ?>
               </div>
             </div>
             <div class="form-check form-group row" style="margin-left:10%">
               <label class="col-2 col-form-label">อายุ</label>
               <label class="form-check-label">
-                <label style="padding-right:10px"><?php
-                    echo $Age;
-                    ?></label><label style="padding-right:20px">ปี</label>
+                <label style="padding-right:10px">
+                    <?php 
+                        echo $Age;
+                    ?>
+                  </label><label style="padding-right:20px">ปี</label>
               </label>
             </div>
-            <div class="form-group row" style="margin-left:10%;margin-right:10%" id="fname_div">
+                <div class="form-group row" style="margin-left:10%;margin-right:10%" id="chr_div">
               <label class="col-2 col-form-label">โรคประจำตัว</label>
               <div class="col-10">
-                <input class="form-control" type="text" id="chr" name="chr" placeholder="โรคประจำตัว" onkeyup="clean_not_char(this)" onkeydown="clean_not_char(this)">
+                <?php echo"<input class='form-control' type='text' id='chr' name='chr' placeholder='โรคประจำตัว' onkeyup='clean_not_char(this)' onkeydown='clean_not_char(this)' value = '$chr'>" ?>
               </div>
           </div>
-          <div class="form-group row" style="margin-left:10%;margin-right:10%" id="fname_div">
+          <div class="form-group row" style="margin-left:10%;margin-right:10%" id="into_div">
               <label class="col-2 col-form-label">การแพ้ยา</label>
               <div class="col-10">
-                <input class="form-control" type="text" id="into" name="into" placeholder="การแพ้ยา" onkeyup="clean_not_char(this)" onkeydown="clean_not_char(this)">
+                <?php echo "<input  class='form-control' type='text' id='into' name='into' placeholder='การแพ้ยา' onkeyup='clean_not_char(this)' onkeydown='clean_not_char(this)' value = '$into'>" ?>
               </div>
           </div>
-          <div class="form-group row" style="margin-left:10%;margin-right:10%" id="fname_div">
+          <div class="form-group row" style="margin-left:10%;margin-right:10%" id="food_div">
               <label class="col-2 col-form-label">อาหารที่แพ้</label>
               <div class="col-10">
-                <input class="form-control" type="text" id="food" name="food" placeholder="อาหารที่แพ้" onkeyup="clean_not_char(this)" onkeydown="clean_not_char(this)">
+                <?php echo "<input  class='form-control' type='text' id='food' name='food' placeholder='อาหารที่แพ้' onkeyup='clean_not_char(this)' onkeydown='clean_not_char(this)' value='$food'>" ?>
               </div>
           </div>
-              <div class="form-check form-group row" style="margin-left:10%" id="dis_DIV">
+              <div class="form-check form-group row" style="margin-left:10%" >
             <label class="col-8 col-form-label">ความพิการ</label>
           </div>
-          <div class="form-check form-group row" style="margin-left:10%" id="dissub_DIV">
+          <div class="form-check form-group row" style="margin-left:10%" >
             <label class="form-check-label"  style="margin-left:5%">
-              <input class="form-check-input" type="radio" name="disa" id="disa0" value="0" onclick="disabled_TE()">ไม่พิการ
+              <?php echo "<input  class='form-check-input' type='radio' name='disa' id='disa0' value='$dis' checked onclick='disabled_TE()'>ไม่พิการ" ?>
             </label>
             <label class="form-check-label" style="margin-left:2%">
-              <input class="form-check-input" type="radio" name="disa" id="disa1" value="1" onclick="enabled_TE()">พิการ
+              <?php echo "<input class='form-check-input' type='radio' name='disa' id='disa1' value='$dis' onclick='enabled_TE()'>พิการ" ?>
             </label>
           </div>
-          <div class="form-check" id="sh_DIV">
+<!--
+          <div class="form-check">
             <div class="form-check form-group row" style="margin-left:10%">
               <label class="col-8 col-form-label">ความสามารถในการช่วยเหลือตนเอง</label>
             </div>
             <div class="form-check form-group row" style="margin-left:10%">
               <label class="form-check-label"  style="margin-left:5%">
-                <input class="form-check-input" type="radio" name="selfhelp" value="0" id="TE1" disabled>ช่วยเหลือตนเองไม่ได้
+                <input disabled="" class="form-check-input" type="radio" name="selfhelp" value="0" id="TE1" disabled>ช่วยเหลือตนเองไม่ได้
               </label>
               <label class="form-check-label" style="margin-left:2%">
-                <input class="form-check-input" type="radio" name="selfhelp" value="1" id="TE2" disabled>ช่วยเหลือตนเองได้
+                <input disabled="" class="form-check-input" type="radio" name="selfhelp" value="1" id="TE2" disabled>ช่วยเหลือตนเองได้
               </label>
             </div>
           </div>
+-->
             <div class="form-check form-group row" style="margin-left:10%">
               <label class="col-8 col-form-label">ข้อมูลในช่วง 1 ปีที่ผ่านมา</label>
             </div>
@@ -216,16 +248,16 @@
             </div>
             <div class="form-check form-group row" style="margin-left:10%">
               <label class="form-check-label" style="margin-left:5%">
-                <input class="form-check-input" type="radio" name="Drink" id="drink0" value="0"> ไม่ดื่ม
+                <?php echo "<input  class='form-check-input' type='radio' name='Drink' id='drink0' value='$boa' checked> ไม่ดื่ม" ?>
               </label>
               <label class="form-check-label" style="margin-left:2%">
-                <input class="form-check-input" type="radio" name="Drink" id="drink1" value="1" checked=""> 1-2
+                <?php echo "<input class='form-check-input' type='radio' name='Drink' id='drink1' value='$boa'> 1-2" ?>
               </label>
               <label class="form-check-label" style="margin-left:2%">
-                <input class="form-check-input" type="radio" name="Drink" id="drink2" value="2"> 3-5
+                <?php echo "<input class='form-check-input' type='radio' name='Drink' id='drink2' value='$boa'> 3-5" ?>
               </label>
               <label class="form-check-label" style="margin-left:2%">
-                <input class="form-check-input" type="radio" name="Drink" id="drink4" value="3"> 6 ครั้งขึ้นไป
+                <?php echo "<input class='form-check-input' type='radio' name='Drink' id='drink3' value='$boa'> 6 ครั้งขึ้นไป" ?>
               </label>
             </div>
             <div class="form-check form-group row" style="margin-left:10%">
@@ -233,19 +265,19 @@
             </div>
             <div class="form-check form-group row" style="margin-left:10%">
               <label class="form-check-label"  style="margin-left:5%">
-                <input class="form-check-input" type="radio" name="Smoke" id="Smoke0" value="0" checked=""> ไม่สูบ
+                <?php echo "<input  class='form-check-input' type='radio' name='Smoke' id='Smoke0' value='$bos' checked> ไม่สูบ" ?>
               </label>
               <label class="form-check-label" style="margin-left:2%">
-                <input class="form-check-input" type="radio" name="Smoke" id="Smoke1" value="1"> 1-5
+                <?php echo "<input class='form-check-input' type='radio' name='Smoke' id='Smoke1' value='$bos'> 1-5" ?>
               </label>
               <label class="form-check-label" style="margin-left:2%">
-                <input class="form-check-input" type="radio" name="Smoke" id="Smoke2" value="2"> 6-10
+                <?php echo "<input class='form-check-input' type='radio' name='Smoke' id='Smoke2' value='$bos'> 6-10" ?>
               </label>
               <label class="form-check-label" style="margin-left:2%">
-                <input class="form-check-input" type="radio" name="Smoke" id="Smoke3" value="3"> 11-19
+                <?php echo "<input class='form-check-input' type='radio' name='Smoke' id='Smoke3' value='$bos'> 11-19"?>
               </label>
               <label class="form-check-label" style="margin-left:2%">
-                <input class="form-check-input" type="radio" name="Smoke" id="Smoke4" value="4"> 1 ซองขึ้นไป
+                <?php echo "<input class='form-check-input' type='radio' name='Smoke' id='Smoke4' value='$bos'> 1 ซองขึ้นไป" ?>
               </label>
             </div>
             <div class="form-check form-group row" style="margin-left:10%">
@@ -253,15 +285,16 @@
             </div>
             <div class="form-check form-group row" style="margin-left:10%">
               <label class="form-check-label"  style="margin-left:5%">
-                <input class="form-check-input" type="radio" name="exercise" id="exercise0" value="0" onclick="disabled_TE()" checked="">ไม่ได้ออกกำลังกาย
+                <?php echo "<input class='form-check-input' type='radio' name='exercise' id='exercise0' value='$ex' checked onclick='disabled_TE()'>ไม่ได้ออกกำลังกาย"?>
               </label>
               <label class="form-check-label" style="margin-left:2%">
-                <input class="form-check-input" type="radio" name="exercise" id="exercise1" value="1" onclick="enabled_TE()">1-3 วัน
+                <?php echo "<input  class='form-check-input' type='radio' name='exercise' id='exercise1' value='$ex' onclick= 'enabled_TE()'>1-3 วัน" ?>
               </label>
               <label class="form-check-label" style="margin-left:2%">
-                <input class="form-check-input" type="radio" name="exercise" id="exercise2" value="2" onclick="enabled_TE()">มากกว่า 4-7 วัน
+                <?php echo "<input class='form-check-input' type='radio' name='exercise' id='exercise2' value='$ex' onclick='enabled_TE()'>มากกว่า 4-7 วัน"?>
               </label>
             </div>
+<!--
             <div class="form-check" >
               <div class="form-check form-group row" style="margin-left:10%">
                 <label class="col-8 col-form-label">จำนวนชั่วโมงในวันที่ออกกำลังกาย</label>
@@ -278,20 +311,48 @@
                 </label>
               </div>
             </div>
+-->
             <div class="form-check form-group row" style="margin-left:10%">
               <label class="col-8 col-form-label">สภาพแวดล้อมบริเวณที่เป็นอยู่</label>
             </div>
             <div class="form-check form-group row" style="margin-left:10%">
               <label class="form-check-label"  style="margin-left:5%">
-                <input class="form-check-input" type="checkbox" id="homearea1" name="homeArea1" value="1" aria-label="..." checked="">มีแอ่งน้ำ หรือ พื้นที่น้ำขัง
+                <?php echo"<input class='form-check-input' type='checkbox' id='homearea1' name='homeArea1' value='$env' aria-label='...'>มีแอ่งน้ำ หรือ พื้นที่น้ำขัง" ?>
               </label>
               <label class="form-check-label" style="margin-left:2%">
-                <input class="form-check-input" type="checkbox" id="homearea2" name="homeArea2" value="2" aria-label="...">ใกล้โรงงาน
+                <?php echo "<input class='form-check-input' type='checkbox' id='homearea2' name='homeArea2' value='$env' aria-label='...'>ใกล้โรงงาน" ?>
               </label>
             </div>
             <div class="form-check form-group row" style="margin-left:10%;margin-right:10%" align="right">
               <button type="submit" class="btn btn-primary">Submit</button>
             </div>
+            <?php 
+                if(isset($_POST["send"])){
+                    $query = "UPDATE health_info SET
+                    Date_of_health = '$d',
+                    Blood_group = '$bg',
+                    BP_SYS = '$sys',
+                    BP_DIA = '$dia',
+                    FBS = '$fbs',
+                    Weight = '$w',
+                    Height = '$h',
+                    Chronic_Disease = '$ch',
+                    Intolerance = '$in',
+                    Food_allergies = '$f',
+                    Disability = '$di',
+                    BOA = '$dr',
+                    BOS = '$sm',
+                    Exercise = '$ex',
+                    Environment = '$envi',
+                    Where Hcid = '$cid';
+                    ";
+                    if(mysqli_query($con,$query)){
+                        echo "<script>alert('แก้ไขข้อมูลเรียบร้อย'); location.href = 'adddata.php'</script>";
+                    }else{
+                        echo "<script>alert('ไม่สามารถแก้ไขข้อมูลได้'); location.href= 'adddata-old-case-edit.php'</script>";
+                    }
+                }
+                ?>
           </form>
 
         </div>

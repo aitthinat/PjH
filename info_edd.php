@@ -81,9 +81,10 @@ if (!empty($_POST["age"])) {
                 <tbody>
                   <tr>
                     <?php 
-                      $query = "SELECT Title,Fname,Lname,Status,Citizen_ID,Age,year FROM person,home,health_info WHERE Citizen_ID = Hcid and  HomeID = Hid and HomeNo = '$findhome'"or die("Error:" . mysqli_error()); 
+                      $query = "SELECT Title,Fname,Lname,Status,Citizen_ID,year, Year(CURRENT_DATE)-Year(Birth_date) AS Age FROM person,home,health_info WHERE Citizen_ID = Hcid and  HomeID = Hid and HomeNo = '$findhome' ORDER BY Citizen_ID ASC"or die("Error:" . mysqli_error()); 
                       $result = mysqli_query($con,$query);
                       $i = 1;
+//                      echo mysqli_num_rows($result);
                           while($row = mysqli_fetch_array($result)){
                                 echo "<tr>";
                                     echo "<th >". $i ."</th>";
@@ -91,10 +92,21 @@ if (!empty($_POST["age"])) {
                                     echo "<td>" .$row["Fname"] . "</td>";
                                     echo "<td>" .$row["Lname"] . "</td>";
                                     echo "<td>" .$row["Status"] . "</td>";
-//                                    $id = $row["Citizen_ID"];
-//                                    $sql = "SELECT year FROM health_info,person WHERE health_info.Hcid = person.Citizen_ID and year(current_date) = year and Hcid = '$id' " or die("Error:" . mysqli_error()); 
-//                                    $r = mysqli_query($con,$sql);
-                                    if(mysqli_num_rows($result) == 0){
+                                    $id = $row["Citizen_ID"];
+                                    echo $id;
+//                                    $_SESSION['id'] = $row["Citizen_ID"];
+                                    $_SESSION['tt'] = $row["Title"];
+                                    $_SESSION['fn'] = $row["Fname"];
+                                    $_SESSION['ln'] = $row["Lname"];
+                                    $_SESSION['age'] = $row["Age"];
+                                    $sql = "SELECT health_info.year FROM health_info, person WHERE health_info.Hcid = person.Citizen_ID and year(current_date) = year AND person.Citizen_ID='$id' " or die("Error:" . mysqli_error()); 
+                                    $arr = explode($row["Citizen_ID"]);
+                                    $count = count($arr);
+                                    for($j=0;$j<$count;$j++){
+                                        $_SESSION['id'] = $arr[$j];
+                                    }
+                                    $r = mysqli_query($con,$sql);
+                                    if(mysqli_num_rows($r) == 0){
                                         echo "<td><a href='adddata.php' style='color: red'>ไม่ได้ตรวจ</a></td>"; 
                                     }else{
                                        echo "<td><a href='adddata-old-case.php' style='color: green'>ตรวจแล้ว</a></td>";
@@ -105,11 +117,9 @@ if (!empty($_POST["age"])) {
                                 echo "</tr>";
                                 $i++;
                               #mysqli_close($con);
-                              $_SESSION['id'] = $row["Citizen_ID"];
-                              $_SESSION['tt'] = $row["Title"];
-                              $_SESSION['fn'] = $row["Fname"];
-                              $_SESSION['ln'] = $row["Lname"];
-                              $_SESSION['age'] = $row["Age"];
+                              #echo $_SESSION['id'] = $row["Citizen_ID"]+ "    ";
+                              
+                             
                       }
                       ?>
                   </tr>
