@@ -226,7 +226,33 @@ $(document).ready(function() {
                         </label><label style="padding-right:20px">ปี</label>
                     </label>
                 </div>
-                
+                <div class="form-check form-group row" style="margin-left:10%">
+                        <label class="col-2 col-form-label">โรคประจำตัว</label>
+                        <label class="form-check-label"><?php
+                            echo $chr; ?>
+                        </label>
+                    </div>
+                    <div class="form-check form-group row" style="margin-left:10%">
+                        <label class="col-2 col-form-label">การแพ้ยา</label>
+                        <label class="form-check-label"><?php
+                            echo $into; ?>
+                        </label>
+                    </div>
+                    <div class="form-check form-group row" style="margin-left:10%">
+                        <label class="col-2 col-form-label">อาหารที่แพ้</label>
+                        <label class="form-check-label"><?php
+                            echo $food; ?>
+                        </label>
+                    </div><div class="form-check form-group row" style="margin-left:10%">
+                        <label class="col-2 col-form-label">ความพิการ</label>
+                        <label class="form-check-label"><?php
+                        if($dis == 0){
+                            echo "ไม่พิการ"; 
+                        }else{
+                            echo "พิการ";
+                        }?>
+                        </label>
+                    </div>
                 <div class="form-check form-group row" style="margin-left:10%">
                     <label class="col-8 col-form-label">ข้อมูลในช่วง 1 ปีที่ผ่านมา</label>
                     <div class="form-check form-group row" style="margin-left:10%">

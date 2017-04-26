@@ -1,6 +1,6 @@
 <?php include "head.php" ?>
 <?php include('connection.php'); ?>
-<?php session_start(); ?>
+
 <style>
 .myTable { 
   width: 100%;
