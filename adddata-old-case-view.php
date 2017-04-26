@@ -4,7 +4,7 @@
     $id = $_GET['id'];
 ?>
 
-<script language="Javascript">
+<!-- <script language="Javascript">
   function disabled_TE()
   {
     document.getElementById("TE1").disabled = true;
@@ -90,7 +90,7 @@ $(document).ready(function() {
     });
 
 });
-</script>
+</script> -->
 <?php 
                 $sql = "SELECT Title,Fname,Lname,  Year(CURRENT_DATE)-Year(Birth_date) AS Age FROM person WHERE Citizen_ID = '$id'";
                 $result = mysqli_query($con,$sql);
@@ -125,49 +125,88 @@ $(document).ready(function() {
                       <?php 
                         echo $lname;
                       ?></label></h4>
+                    
                 </label>
           </div>
           <div class="form-check form-group row" style="margin-left:10%">
-          <label class="col-2 col-form-label">ปี (พ.ศ.)</label>
-            <label class="form-check-label">
-                <?php 
-                    echo "<select name = 'select' class='custom-select'>";
-                    $sql = "SELECT year FROM health_info WHERE Hcid = '$id'";
-                    $result = mysqli_query($con,$sql);
+            <!--  -->
+                    <form name="from" method="POST" action="adddata-old-case-view.php?id=<?php echo $id?>">
+
+<br><br>
+<center><select name="type" class="btn btn-default">
+  <option value="2014" style="background-color: #F2A4F2;color: #000000;">2014</option>
+    <option value="2017" style="background-color: #F2A4F2;color: #000000;">2017</option>
+
+
+  
+</select>
+&nbsp;
+
+
+  <input type="submit" name="a" value="ค้นหา"></center>
+  </form>
+ 
+
+
+<?php
+
+function multiple_table($type,$id,$age){
+
+     $servername = "localhost";
+$username = "root";
+$password = "";
+$dbname = "health";
+
+    $conn=new mysqli($servername,$username,$password,$dbname);
+
+    if($conn->connect_error){
+        die("connection failed:".$conn->connect_error);
+    }
+  $conn->set_charset("utf8");
+
+
+   
+   
+$sql = "SELECT * FROM health_info WHERE Hcid = '$id' and years = '$type'";
+
+   
+    $result = $conn->query($sql);
+      
+  
+
+ 
+        if($result->num_rows>0){
+
+
+          
+            while ($row=$result->fetch_assoc()) { 
+          
+                   $y = $row["Years"];
+                        $d = $row["Date_of_Health"];
+                                $w = $row["Weight"];
+                                $h = $row["Height"];
+                                $bg = $row["Blood_group"];
+                                $dis= $row["Disability"];
+                                $into = $row["Intolerance"];
+                                $food = $row["Food_allergies"];
+                                $sys = $row["BP_SYS"];
+                                $dia = $row["BP_DIA"];
+                                $fbs = $row["FBS"];
+                                $chr = $row["Chronic_Disease"];
+                                $bos = $row["BOS"];
+                                $boa = $row["BOA"];
+                                $ex = $row["Exercise"];
+                                $wa = $row["Water_area"];
+                                $nf = $row["Near_factory"];
+                          }
+             ?>
                     
-                    while($res = mysqli_fetch_array($result)){  
-                        echo "<option value='$res[year]'>$res[year]</option>";
-                    $query = "SELECT * FROM health_info WHERE Hcid = '$id'";
-                    $re = mysqli_query($con,$query);
-                    while($row = mysqli_fetch_array($re)){
-                            $id = $row["Hcid"];
-                            $y = $row["Year"];
-                            $d = $row["Date_of_Health"];
-                            $w = $row["Weight"];
-                            $h = $row["Height"];
-                            $bg = $row["Blood_group"];
-                            $dis= $row["Disability"];
-                            $into = $row["Intolerance"];
-                            $food = $row["Food_allergies"];
-                            $sys = $row["BP_SYS"];
-                            $dia = $row["BP_DIA"];
-                            $fbs = $row["FBS"];
-                            $chr = $row["Chronic_Disease"];
-                            $bos = $row["BOS"];
-                            $boa = $row["BOA"];
-                            $ex = $row["Exercise"];
-                            $wa = $row["Water_area"];
-                            $nf = $row["Near_factory"];
-                        }
-                    echo "</select>";
-                }?>
-               
-            </label>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div class="container" style="background-color:#E0E0E0;width: 80%; margin-bottom:30px">
+
+
+                         
+
+                  
+                   <div class="container" style="background-color:#E0E0E0;width: 80%; margin-bottom:30px">
         <div class="form-check form-group row" style="margin-left:10%;margin-top: 30px">
                             <label class="col-2 col-form-label">วันที่</label>
                             <label class="form-check-label">
@@ -317,7 +356,7 @@ $(document).ready(function() {
                         </div>
                     </div>
                     <div class="form-check form-group row" style="margin-left:10%;margin-right:10%" align="right">
-                        <a href="index.php"><button type="button" class="btn btn-primary" onclick="Finish_Check()">กลับ</button></a>
+                        <a href="index.php"><button type="button" name= "back" class="btn btn-primary" onclick="Finish_Check()">กลับ</button></a>
                     </div>
 
                 </div>
@@ -332,6 +371,39 @@ $(document).ready(function() {
     <option value=""> select one  </option>
 </select> -->
   </div>
+            
+       
+
+
+            
+<?php
+        }else{
+           echo "<br><center><h3 >ไม่พบข้อมูล</h3></center>";
+        }
+      
+        
+
+    $conn->close();
+ 
+
+
+}
+
+echo "<br><br>";
+
+
+
+if(isset($_POST['a'])){
+  $type = $_POST['type'];
+     echo "<label class='col-2 col-form-label'>ปี (ค.ศ.) $type</label>";
+
+multiple_table($type,$id,$age);
+
+
+}
+
+
+?>
 
 
 <?php include "foot.php" ?>

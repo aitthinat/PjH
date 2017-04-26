@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 26, 2017 at 06:02 PM
+-- Generation Time: Apr 26, 2017 at 11:23 PM
 -- Server version: 10.1.21-MariaDB
 -- PHP Version: 7.1.1
 
@@ -150,7 +150,7 @@ INSERT INTO `have_health` (`Hhcid`, `Rno`) VALUES
 
 CREATE TABLE `health_info` (
   `Hcid` varchar(13) NOT NULL,
-  `Year` year(4) NOT NULL,
+  `Years` year(4) NOT NULL,
   `Date_of_Health` date NOT NULL,
   `Blood_group` char(2) NOT NULL,
   `BP_SYS` int(3) NOT NULL,
@@ -173,14 +173,14 @@ CREATE TABLE `health_info` (
 -- Dumping data for table `health_info`
 --
 
-INSERT INTO `health_info` (`Hcid`, `Year`, `Date_of_Health`, `Blood_group`, `BP_SYS`, `BP_DIA`, `FBS`, `Weight`, `Height`, `Chronic_Disease`, `Intolerance`, `Food_allergies`, `Disability`, `BOA`, `BOS`, `Exercise`, `Water_area`, `Near_factory`) VALUES
+INSERT INTO `health_info` (`Hcid`, `Years`, `Date_of_Health`, `Blood_group`, `BP_SYS`, `BP_DIA`, `FBS`, `Weight`, `Height`, `Chronic_Disease`, `Intolerance`, `Food_allergies`, `Disability`, `BOA`, `BOS`, `Exercise`, `Water_area`, `Near_factory`) VALUES
 ('1120911201921', 2015, '2015-01-08', 'O', 120, 81, 0, 45, 152, '-', '-', '-', 1, 0, 3, 0, 1, 1),
 ('1120911201921', 2017, '2017-04-09', 'AB', 140, 78, 80, 66, 160, '-', '-', '-', 0, 0, 0, 0, 0, 0),
 ('1234423443546', 2016, '2016-06-17', 'A', 120, 80, 76, 52, 165, '-', '-', '-', 0, 0, 0, 0, 1, 0),
 ('1234423443546', 2017, '2017-04-25', 'O', 123, 87, 78, 56, 150, '-', '-', 'ถั่ว', 0, 0, 0, 1, 0, 0),
 ('1409901496220', 2016, '2016-06-17', 'A', 120, 80, 0, 52, 165, 'ทาลัสซีเมีย, เบาหวาน', 'พาราเซตามอล', 'กุ้ง', 1, 0, 0, 0, 1, 1),
-('1500900334567', 2017, '2017-04-30', 'O', 130, 80, 70, 56, 169, '-', '-', '-', 0, 0, 0, 0, 0, 0),
-('3400123345510', 2014, '2017-04-07', 'B', 123, 80, 76, 56, 169, '-', '-', '-', 0, 0, 0, 0, 0, 0),
+('1500900334567', 2017, '2017-04-02', 'A', 112, 77, 60, 54, 160, 'โรคหัวใจ', 'แอสไพริน', 'กุ้ง', 1, 2, 2, 1, 0, 0),
+('3400123345510', 2014, '2014-04-07', 'B', 123, 80, 76, 56, 169, '-', '-', '-', 0, 0, 0, 0, 0, 0),
 ('3400123345510', 2017, '2017-04-07', 'B', 123, 80, 76, 56, 169, '-', '-', '-', 0, 0, 0, 0, 0, 0),
 ('3401343210123', 2013, '2013-02-12', 'A', 140, 90, 60, 50, 160, '-', '-', 'ปลาหมึก', 0, 2, 2, 0, 1, 0),
 ('3500900445678', 2017, '2017-04-23', 'AB', 130, 80, 76, 45, 150, '-', 'แอสไพริน', '-', 0, 0, 0, 0, 0, 0),
@@ -339,9 +339,9 @@ ALTER TABLE `have_health`
 -- Indexes for table `health_info`
 --
 ALTER TABLE `health_info`
-  ADD PRIMARY KEY (`Hcid`,`Year`),
-  ADD KEY `COMPOSIST KEY` (`Hcid`,`Year`),
-  ADD KEY `Year` (`Year`);
+  ADD PRIMARY KEY (`Hcid`,`Years`),
+  ADD KEY `COMPOSIST KEY` (`Hcid`,`Years`),
+  ADD KEY `Year` (`Years`);
 
 --
 -- Indexes for table `health_risks`
@@ -379,7 +379,7 @@ ALTER TABLE `person`
 -- Constraints for table `chronic_disease_health`
 --
 ALTER TABLE `chronic_disease_health`
-  ADD CONSTRAINT `chronic_disease_health_ibfk_1` FOREIGN KEY (`Cyear`) REFERENCES `health_info` (`Year`),
+  ADD CONSTRAINT `chronic_disease_health_ibfk_1` FOREIGN KEY (`Cyear`) REFERENCES `health_info` (`Years`),
   ADD CONSTRAINT `chronic_disease_health_ibfk_2` FOREIGN KEY (`Ccid`) REFERENCES `person` (`Citizen_ID`);
 
 --
@@ -387,13 +387,13 @@ ALTER TABLE `chronic_disease_health`
 --
 ALTER TABLE `disability_health`
   ADD CONSTRAINT `disability_health_ibfk_1` FOREIGN KEY (`Dcid`) REFERENCES `person` (`Citizen_ID`),
-  ADD CONSTRAINT `disability_health_ibfk_2` FOREIGN KEY (`Dyear`) REFERENCES `health_info` (`Year`);
+  ADD CONSTRAINT `disability_health_ibfk_2` FOREIGN KEY (`Dyear`) REFERENCES `health_info` (`Years`);
 
 --
 -- Constraints for table `environment_health`
 --
 ALTER TABLE `environment_health`
-  ADD CONSTRAINT `environment_health_ibfk_1` FOREIGN KEY (`Eyear`) REFERENCES `health_info` (`Year`),
+  ADD CONSTRAINT `environment_health_ibfk_1` FOREIGN KEY (`Eyear`) REFERENCES `health_info` (`Years`),
   ADD CONSTRAINT `environment_health_ibfk_2` FOREIGN KEY (`Ecid`) REFERENCES `person` (`Citizen_ID`);
 
 --
@@ -401,7 +401,7 @@ ALTER TABLE `environment_health`
 --
 ALTER TABLE `food_allegies_health`
   ADD CONSTRAINT `food_allegies_health_ibfk_1` FOREIGN KEY (`Fcid`) REFERENCES `person` (`Citizen_ID`),
-  ADD CONSTRAINT `food_allegies_health_ibfk_2` FOREIGN KEY (`Fyear`) REFERENCES `health_info` (`Year`);
+  ADD CONSTRAINT `food_allegies_health_ibfk_2` FOREIGN KEY (`Fyear`) REFERENCES `health_info` (`Years`);
 
 --
 -- Constraints for table `have_health`
@@ -421,7 +421,7 @@ ALTER TABLE `health_info`
 --
 ALTER TABLE `intolerance_health`
   ADD CONSTRAINT `intolerance_health_ibfk_1` FOREIGN KEY (`Icid`) REFERENCES `person` (`Citizen_ID`),
-  ADD CONSTRAINT `intolerance_health_ibfk_2` FOREIGN KEY (`Iyear`) REFERENCES `health_info` (`Year`);
+  ADD CONSTRAINT `intolerance_health_ibfk_2` FOREIGN KEY (`Iyear`) REFERENCES `health_info` (`Years`);
 
 --
 -- Constraints for table `person`
