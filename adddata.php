@@ -544,7 +544,7 @@
             </label>
           </div>
           <div class="form-check form-group row" style="margin-left:10%;margin-right:10%" align="right">
-            <button type="submit" name = "insert" class="btn btn-primary">Submit</button>
+            <button type="submit" name = "insert" class="btn btn-primary">เพิ่มข้อมูล</button>
           </div>
         </form>
         

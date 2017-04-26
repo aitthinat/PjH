@@ -80,8 +80,29 @@
 
 </script>
 
-<?php 
-
+ <?php 
+    $sql = "SELECT * FROM health_info WHERE Hcid = '$id' ";
+    $result = mysqli_query($con,$sql);
+    while($row = mysqli_fetch_array($result)){
+        $id = $row["Hcid"];
+        $y = $row["Year"];
+        $d = $row["Date_of_Health"];
+        $w = $row["Weight"];
+        $h = $row["Height"];
+        $bg = $row["Blood_group"];
+        $dis= $row["Disability"];
+        $into = $row["Intolerance"];
+        $food = $row["Food_allergies"];
+        $sys = $row["BP_SYS"];
+        $dia = $row["BP_DIA"];
+        $fbs = $row["FBS"];
+        $chr = $row["Chronic_Disease"];
+        $bos = $row["BOS"];
+        $boa = $row["BOA"];
+        $ex = $row["Exercise"];
+        $wa = $row["Water_area"];
+        $nf = $row["Near_factory"];
+    }
     $derr ="";
     $bgerr= "";
     $syserr = "";
@@ -154,9 +175,8 @@
     }else{
       $nf = $_POST["homearea2"];
     }
-?>
-<?php 
-        if(isset($_SESSION['PHP_SELF'])){
+
+    if(isset($_SESSION['PHP_SELF'])){
         $p = htmlspecialchars($_SESSION['PHP_SELF']);
     }else{
         $p = '';
@@ -176,31 +196,8 @@
         <div class="col-lg-12">
           <div style="width:100%" >
             <div align="center" style="padding-top:10px;padding-bottom:20px"><h1>บันทึกข้อมูลการตรวจสุขภาพ</h1></div>
-            <form name="myForm" action="<?php $p?>" method="POST" onsubmit="return validateForm()">
-              <?php 
-                  $sql = "SELECT * FROM health_info WHERE Hcid = '$id' ";
-                  $result = mysqli_query($con,$sql);
-                  while($row = mysqli_fetch_array($result)){
-                      $id = $row["Hcid"];
-                      $y = $row["Year"];
-                      $d = $row["Date_of_Health"];
-                      $w = $row["Weight"];
-                      $h = $row["Height"];
-                      $bg = $row["Blood_group"];
-                      $dis= $row["Disability"];
-                      $into = $row["Intolerance"];
-                      $food = $row["Food_allergies"];
-                      $sys = $row["BP_SYS"];
-                      $dia = $row["BP_DIA"];
-                      $fbs = $row["FBS"];
-                      $chr = $row["Chronic_Disease"];
-                      $bos = $row["BOS"];
-                      $boa = $row["BOA"];
-                      $ex = $row["Exercise"];
-                      $wa = $row["Water_area"];
-                      $nf = $row["Near_factory"];
-                  }
-              ?>
+            <form name="myForm" action="<?php echo $p?>" method="POST" onsubmit="return validateForm()">
+             
               <div class="form-group row" style="margin-left:10%;margin-right:10%" id="lname_div">
             <label class="col-2 col-form-label">วันที่</label>
             <div class="col-10">
@@ -378,7 +375,7 @@
               </label>
             </div>
             <div class="form-check form-group row" style="margin-left:10%;margin-right:10%" align="right">
-              <button type="submit" name = "send" class="btn btn-primary" >Submit</button>
+              <button type="submit" name = "send" class="btn btn-primary" >แก้ไขข้อมูล</button>
             </div>
             <?php 
                 if(isset($_POST["send"])){
@@ -397,9 +394,9 @@
                     BOA = '$boa',
                     BOS = '$bos',
                     Exercise = '$ex',
-                    Water_area = $wa,
-                    Near_factory = $nf
-                    Where Hcid = '$id';
+                    Water_area = '$wa',
+                    Near_factory = '$nf'
+                    Where Hcid = '$id'
                     ";
                     if(mysqli_query($con,$query)){
                         echo "<script>alert('แก้ไขข้อมูลเรียบร้อย'); location.href = 'adddata-old-case.php?id=$id'</script>";

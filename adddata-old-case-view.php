@@ -109,9 +109,11 @@ $(document).ready(function() {
         <div style="width:100%" >
           <div align="center" style="padding-top:10px;padding-bottom:20px"><h1>บันทึกข้อมูลการตรวจสุขภาพ</h1></div>
           <div align="center" style="padding-top:10px;padding-bottom:20px"><h3>ดูข้อมูลย้อนหลัง</h3></div>
+
           <div class="form-check form-group row" style="margin-left:10%">
             <label class="col-2 col-form-label">ชื่อ - สกุล</label>
             <label class="form-check-label">
+            
                   <h4><label style="padding-right:10px"><?php 
                         echo $title;
                       ?>
@@ -127,51 +129,87 @@ $(document).ready(function() {
           </div>
           <div class="form-check form-group row" style="margin-left:10%">
           <label class="col-2 col-form-label">ปี (พ.ศ.)</label>
-            <label class="form-check-label"><?php
-                $sql = "SELECT * FROM health_info WHERE Hcid = '$id'";
-                $re = mysqli_query($con,$sql);
-                echo "<select class='custom-select'>";
-                echo "<option selected>-----กรุณาเลือกปีที่ต้องการทราบ-----</option>";
-                    while($res = mysqli_fetch_array($re)){  
-                        echo "<option value='$res[Hcid]'>$re[year]</option>";
-                }
-                echo "</select>";
-                
-                ?>
+            <label class="form-check-label">
+                <?php 
+                    echo "<select name = 'select' class='custom-select'>";
+                    $sql = "SELECT year FROM health_info WHERE Hcid = '$id'";
+                    $result = mysqli_query($con,$sql);
+                    
+                    while($res = mysqli_fetch_array($result)){  
+                        echo "<option value='$res[year]'>$res[year]</option>";
+                    $query = "SELECT * FROM health_info WHERE Hcid = '$id'";
+                    $re = mysqli_query($con,$query);
+                    while($row = mysqli_fetch_array($re)){
+                            $id = $row["Hcid"];
+                            $y = $row["Year"];
+                            $d = $row["Date_of_Health"];
+                            $w = $row["Weight"];
+                            $h = $row["Height"];
+                            $bg = $row["Blood_group"];
+                            $dis= $row["Disability"];
+                            $into = $row["Intolerance"];
+                            $food = $row["Food_allergies"];
+                            $sys = $row["BP_SYS"];
+                            $dia = $row["BP_DIA"];
+                            $fbs = $row["FBS"];
+                            $chr = $row["Chronic_Disease"];
+                            $bos = $row["BOS"];
+                            $boa = $row["BOA"];
+                            $ex = $row["Exercise"];
+                            $wa = $row["Water_area"];
+                            $nf = $row["Near_factory"];
+                        }
+                    echo "</select>";
+                }?>
+               
             </label>
           </div>
         </div>
       </div>
     </div>
     <div class="container" style="background-color:#E0E0E0;width: 80%; margin-bottom:30px">
+        <div class="form-check form-group row" style="margin-left:10%;margin-top: 30px">
+                            <label class="col-2 col-form-label">วันที่</label>
+                            <label class="form-check-label">
+                                <label style="padding-right:10px"><?php
+                                    echo $d;
+                                ?>
+                                </label>
+                            </label>
+                        </div>
             <div class="form-check form-group row" style="margin-left:10%;margin-top: 30px">
                         <label class="col-2 col-form-label">กรุ๊ปเลือด</label>
                         <label class="form-check-label">
-                            <label style="padding-right:10px">AB</label>
+                            <label style="padding-right:10px"><?php
+                                echo $bg;
+                            ?>
+                            </label>
                         </label>
                     </div>
                     <div class="form-check form-group row" style="margin-left:10%">
                         <label class="col-2 col-form-label">ความดันโลหิต</label>
                         <label class="form-check-label">
-                            <label style="padding-right:10px">119 / 78</label>
+                            <label style="padding-right:10px"><?php
+                                echo $sys; echo "/"; echo $dia; ?>
+                            </label>
                         </label>
                     </div>
                     <div class="form-check form-group row" style="margin-left:10%">
                         <label class="col-2 col-form-label">ระดับน้ำตาลในเลือด</label>
-                        <label class="form-check-label">
-                              
+                        <label class="form-check-label"><?php
+                            echo $fbs; ?>
                         </label>
                     </div>
                     <div class="form-check form-group row" style="margin-left:10%">
                         <label class="col-2 col-form-label">น้ำหนัก</label>
-                        <label class="form-check-label">
-                            49
+                        <label class="form-check-label"><?php
+                            echo $w; ?>
                         </label>
                     </div>
                     <div class="form-check form-group row" style="margin-left:10%">
                         <label class="col-2 col-form-label">ส่วนสูง</label>
-                        <label class="form-check-label">
-                            160
+                        <label class="form-check-label"><?php
+                            echo $h; ?>
                         </label>
                     </div>
                     <div class="form-group row" style="margin-left:10%;margin-right:10%">
@@ -183,7 +221,9 @@ $(document).ready(function() {
                    <div class="form-check form-group row" style="margin-left:10%">
                     <label class="col-2 col-form-label">อายุ</label>
                     <label class="form-check-label">
-                        <label style="padding-right:10px">58</label><label style="padding-right:20px">ปี</label>
+                        <label style="padding-right:10px"><?php
+                            echo $age; ?>
+                        </label><label style="padding-right:20px">ปี</label>
                     </label>
                 </div>
                 
@@ -191,33 +231,62 @@ $(document).ready(function() {
                     <label class="col-8 col-form-label">ข้อมูลในช่วง 1 ปีที่ผ่านมา</label>
                     <div class="form-check form-group row" style="margin-left:10%">
                         <label class="col-5 col-form-label">พฤติกรรมการดื่มสุรา(จำนวนครั้งต่อสัปดาห์)</label>
-                        <label class="form-check-label">
-                            1-2 ครั้ง / สัปดาห์
+                        <label class="form-check-label"><?php
+                            if($boa == 0){
+                                echo "ไม่ดื่ม";
+                            }else if($boa == 1){
+                                echo "1-2 ครั้ง / สัปดาห์";
+                            }else if($boa == 2){
+                                echo "3-5ครั้ง/สัปดาห์";
+                            }elseif ($boa == 3) {
+                                echo "6 ครั้งขึ้นไป/สัปดาห์";
+                            }?>
                         </label>
                     </div>
                     <div class="form-check form-group row" style="margin-left:10%">
                         <label class="col-5 col-form-label">พฤติกรรมการสูบบุหรี่(จำนวนมวนต่อวัน)</label>
                         <label class="form-check-label">
-                            ไม่สูบบุหรี่
+                            <?php
+                            if($bos == 0){
+                                echo "ไม่สูบบุหรี่";
+                            }else if($bos == 1){
+                                echo "1-5 มวน / วัน";
+                            }else if($bos == 2){
+                                echo "6-10 มวน/วัน";
+                            }elseif ($bos == 3) {
+                                echo "11-19 มวน/วัน";
+                            }elseif($bos == 4){
+                                echo "1 ซองขึ้นไป/วัน";
+                            }?>
                         </label>
                     </div>
                     <div class="form-check form-group row" style="margin-left:10%">
                         <label class="col-5 col-form-label">พฤติกรรมการออกกำลังกาย (วันต่อสัปดาห์)</label>
                         <label class="form-check-label">
-                            ไม่ได้ออกกำลังกาย
+                            <?php
+                            if($ex == 0){
+                                echo "ไม่ได้ออกกำลังกาย";
+                            }else if($ex == 1){
+                                echo "1-3 วัน/สัปดาห์";
+                            }else if($ex == 2){
+                                echo "มากกว่า 4 วัน/สัปดาห์";
+                            }?>
                         </label>
                     </div>
                     <div class="form-check form-group row" style="margin-left:10%">
-                        <label class="col-5 col-form-label">จำนวนชั่วโมงในวันที่ออกกำลังกาย</label>
-                        <label class="form-check-label">
-                            -
-                            </label>
-                        </div>
-
-                        <div class="form-check form-group row" style="margin-left:10%">
                             <label class="col-5 col-form-label">สภาพแวดล้อมบริเวณที่เป็นอยู่</label>
-                            <label class="form-check-label">
-                            มีแอ่งน้ำ / น้ำขัง
+                            <label class="form-check-label"><?php
+                                if($wa == 1 && $nf == 1){
+                                    echo "มีแอ่งน้ำ หรือ พื้นที่น้ำขัง, ใกล้โรงงาน";
+                                } 
+                                if($wa == 1){
+                                    echo "มีแอ่งน้ำ หรือ พื้นที่น้ำขัง";
+                                }if($nf == 1){
+                                    echo "ใกล้โรงงาน";
+                                }else{
+                                    echo "สภาพแวดล้อมปกติ";
+                                }?>
+                            
                             </label>
                         </div>
                     </div>
@@ -228,14 +297,14 @@ $(document).ready(function() {
                 </div>
     </div>
 
-<select id="type">
+<!-- <select id="type">
     <option value="item1">item1</option>
     <option value="item2">item2</option>
     <option value="item3">item3</option>
 </select>
 <select id="size">
-    <option value="">-- select one -- </option>
-</select>
+    <option value=""> select one  </option>
+</select> -->
   </div>
 
 
