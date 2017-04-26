@@ -122,9 +122,7 @@
         $derr = "";
     }else{
         $d = $_POST["date"];
-    }if(empty($_POST["BloodGroup"])){
-        $bgerr = "";
-    }else{
+    }if(!empty($_POST["BloodGroup"])){
         $bg = $_POST["BloodGroup"];
     }if(empty($_POST["SYS"])){
         $syserr = "";
@@ -161,9 +159,9 @@
     }else{
         $in = $_POST["into"];
     }if(!empty($_POST["Smoke"])){
-        $sm = $_POST["Smoke"];
+        $bos = $_POST["Smoke"];
     }if(!empty($_POST["Drink"])){
-        $dr = $_POST["Drink"];
+        $boa = $_POST["Drink"];
     }if(!empty($_POST["exercise"])){
         $ex = $_POST["exercise"];
     }if(empty($_POST["homearea1"])){
@@ -201,7 +199,7 @@
               <div class="form-group row" style="margin-left:10%;margin-right:10%" id="lname_div">
             <label class="col-2 col-form-label">วันที่</label>
             <div class="col-10">
-              <?php echo "<input class='form-control' type='date' class='form-control' id='date' placeholder='Date' maxlength='0' value='$d'>"?>
+              <?php echo "<input class='form-control' type='date' class='form-control' id='date' name = 'date' placeholder='Date' maxlength='0' value='$d'>"?>
             </div>
             </div>
             <?php 
@@ -235,16 +233,16 @@
               <div class="form-check form-group row" style="margin-left:10%">
                 <label class="col-2 col-form-label">กรุ๊ปเลือด</label>
                 <label class="form-check-label">
-                  <input class="form-check-input" type="radio" name="BloodGroup" id="inlineRadioA" value='$bg' <?php if($bg == 'A') echo "checked"; ?>>A
+                  <input class="form-check-input" type="radio" name="BloodGroup" id="inlineRadioA" value="A" <?php if($bg == "A") echo "checked"; ?>>A
                 </label>
                 <label class="form-check-label" style="margin-left:2%">
-                  <input class='form-check-input' type='radio' name='BloodGroup' id='inlineRadioA' value='$bg' <?php if($bg == 'B') echo "checked"; ?>>B
+                  <input class='form-check-input' type='radio' name='BloodGroup' id='inlineRadioA' value="B" <?php if($bg == "B") echo "checked"; ?>>B
                 </label>
                 <label class="form-check-label" style="margin-left:2%">
-                  <input class='form-check-input' type='radio' name='BloodGroup' id='inlineRadioA' value='$bg'<?php if($bg == 'AB') echo "checked"; ?>>AB
+                  <input class='form-check-input' type='radio' name='BloodGroup' id='inlineRadioA' value="AB"<?php if($bg == "AB") echo "checked"; ?>>AB
                 </label>
                 <label class="form-check-label" style="margin-left:2%">
-                  <input  class='form-check-input' type='radio' name='BloodGroup' id='inlineRadioA' value='$bg' <?php if($bg == 'O') echo "checked";?>>O
+                  <input  class='form-check-input' type='radio' name='BloodGroup' id='inlineRadioA' value="O" <?php if($bg == "O") echo "checked";?>>O
                 </label>
               </div>
               <div class="form-group row" style="margin-left:10%;margin-right:10%">
@@ -303,30 +301,30 @@
           </div>
           <div class="form-check form-group row" style="margin-left:10%" >
             <label class="form-check-label"  style="margin-left:5%">
-              <input class='form-check-input' type='radio' name='disa' id='disa0' value='$dis' <?php if($dis == 0) echo "checked"?>>ไม่พิการ
+              <input class='form-check-input' type='radio' name='disa' id='disa0' value="0" <?php if($dis == 0) echo "checked"?>>ไม่พิการ
             </label>
             <label class="form-check-label" style="margin-left:2%">
-              <input class='form-check-input' type='radio' name='disa' id='disa1' value='$dis' <?php if($dis == 1) echo "checked"?>>พิการ
+              <input class='form-check-input' type='radio' name='disa' id='disa1' value="1" <?php if($dis == 1) echo "checked"?>>พิการ 
             </label>
           </div>
             <div class="form-check form-group row" style="margin-left:10%">
               <label class="col-8 col-form-label">ข้อมูลในช่วง 1 ปีที่ผ่านมา</label>
             </div>
             <div class="form-check form-group row" style="margin-left:10%">
-              <label class="col-8 col-form-label">พฤติกรรมการดื่มสุา(จำนวนครั้งต่อสัปดาห์)</label>
+              <label class="col-8 col-form-label">พฤติกรรมการดื่มสุรา(จำนวนครั้งต่อสัปดาห์)</label>
             </div>
             <div class="form-check form-group row" style="margin-left:10%">
               <label class="form-check-label" style="margin-left:5%">
-                <input class='form-check-input' type='radio' name='Drink' id='drink0' value='$boa' <?php if($boa == 0) echo "checked"?>> ไม่ดื่ม
+                <input class='form-check-input' type='radio' name='Drink' id='drink0' value="0" <?php if($boa == 0) echo "checked"?>> ไม่ดื่ม
               </label>
               <label class="form-check-label" style="margin-left:2%">
-                <input  class='form-check-input' type='radio' name='Drink' id='drink1' value='$boa' <?php if($boa == 1) echo "checked"?>> 1-2
+                <input  class='form-check-input' type='radio' name='Drink' id='drink1' value="1" <?php if($boa == 1) echo "checked"?>> 1-2
               </label>
               <label class="form-check-label" style="margin-left:2%">
-                <input  class='form-check-input' type='radio' name='Drink' id='drink2' value='$boa' <?php if($boa == 2) echo "checked"?>> 3-5
+                <input  class='form-check-input' type='radio' name='Drink' id='drink2' value="2" <?php if($boa == 2) echo "checked"?>> 3-5
               </label>
               <label class="form-check-label" style="margin-left:2%">
-                <input  class='form-check-input' type='radio' name='Drink' id='drink3' value='$boa' <?php if($boa == 3) echo "checked"?>> 6 ครั้งขึ้นไป
+                <input  class='form-check-input' type='radio' name='Drink' id='drink3' value="3" <?php if($boa == 3) echo "checked"?>> 6 ครั้งขึ้นไป
               </label>
             </div>
             <div class="form-check form-group row" style="margin-left:10%">
@@ -334,19 +332,19 @@
             </div>
             <div class="form-check form-group row" style="margin-left:10%">
               <label class="form-check-label"  style="margin-left:5%">
-                <input  class='form-check-input' type='radio' name='Smoke' id='Smoke0' value='$bos' <?php if($bos == 0) echo "checked"?>> ไม่สูบ
+                <input  class='form-check-input' type='radio' name='Smoke' id='Smoke0' value="0" <?php if($bos == 0) echo "checked"?>> ไม่สูบ
               </label>
               <label class="form-check-label" style="margin-left:2%">
-                <input class='form-check-input' type='radio' name='Smoke' id='Smoke1' value='$bos' <?php if($bos == 1) echo "checked"?>> 1-5
+                <input class='form-check-input' type='radio' name='Smoke' id='Smoke1' value="1" <?php if($bos == 1) echo "checked"?>> 1-5
               </label>
               <label class="form-check-label" style="margin-left:2%">
-                <input class='form-check-input' type='radio' name='Smoke' id='Smoke2' value='$bos' <?php if($bos == 2) echo "checked"?>> 6-10
+                <input class='form-check-input' type='radio' name='Smoke' id='Smoke2' value="2" <?php if($bos == 2) echo "checked"?>> 6-10
               </label>
               <label class="form-check-label" style="margin-left:2%">
-                <input  class='form-check-input' type='radio' name='Smoke' id='Smoke3' value='$bos' <?php if($bos == 3) echo "checked"?>> 11-19
+                <input  class='form-check-input' type='radio' name='Smoke' id='Smoke3' value="3" <?php if($bos == 3) echo "checked"?>> 11-19
               </label>
               <label class="form-check-label" style="margin-left:2%">
-                <input  class='form-check-input' type='radio' name='Smoke' id='Smoke4' value='$bos'<?php if($bos == 4) echo "checked"?>> 1 ซองขึ้นไป
+                <input  class='form-check-input' type='radio' name='Smoke' id='Smoke4' value="4" <?php if($bos == 4) echo "checked"?>> 1 ซองขึ้นไป
               </label>
             </div>
             <div class="form-check form-group row" style="margin-left:10%">
@@ -354,13 +352,13 @@
             </div>
             <div class="form-check form-group row" style="margin-left:10%">
               <label class="form-check-label"  style="margin-left:5%">
-                <input  class='form-check-input' type='radio' name='exercise' id='exercise0' value='$ex' <?php if($ex == 0) echo "checked" ?>>ไม่ได้ออกกำลังกาย
+                <input  class='form-check-input' type='radio' name='exercise' id='exercise0' value="0" <?php if($ex == 0) echo "checked" ?>>ไม่ได้ออกกำลังกาย
               </label>
               <label class="form-check-label" style="margin-left:2%">
-                <input  class='form-check-input' type='radio' name='exercise' id='exercise1' value='$ex' <?php if($ex == 1) echo "checked"?>>1-3 วัน
+                <input  class='form-check-input' type='radio' name='exercise' id='exercise1' value="1" <?php if($ex == 1) echo "checked"?>>1-3 วัน
               </label>
               <label class="form-check-label" style="margin-left:2%">
-                <input  class='form-check-input' type='radio' name='exercise' id='exercise2' value='$ex' <?php if($ex == 2) echo "checked"?>>4-7 วัน
+                <input  class='form-check-input' type='radio' name='exercise' id='exercise2' value="2" <?php if($ex == 2) echo "checked"?>>4-7 วัน
               </label>
             </div>
             <div class="form-check form-group row" style="margin-left:10%">
@@ -368,10 +366,10 @@
             </div>
             <div class="form-check form-group row" style="margin-left:10%">
               <label class="form-check-label"  style="margin-left:5%">
-                <input  class='form-check-input' type='checkbox' id='homearea1' name='homeArea1' value='$wa' <?php if($wa == 1) echo "checked"?> aria-label='...'>มีแอ่งน้ำ หรือ พื้นที่น้ำขัง
+                <input  class='form-check-input' type='checkbox' id='homearea1' name='homeArea1' value="1" <?php if($wa == 1) echo "checked"?> aria-label='...'>มีแอ่งน้ำ หรือ พื้นที่น้ำขัง
               </label>
               <label class="form-check-label" style="margin-left:2%">
-                <input  class='form-check-input' type='checkbox' id='homearea2' name='homeArea2' value='$nf' <?php if($nf == 1) echo "checked"?> aria-label='...'>ใกล้โรงงาน
+                <input  class='form-check-input' type='checkbox' id='homearea2' name='homeArea2' value="1" <?php if($nf == 1) echo "checked"?> aria-label='...'>ใกล้โรงงาน
               </label>
             </div>
             <div class="form-check form-group row" style="margin-left:10%;margin-right:10%" align="right">
@@ -396,7 +394,7 @@
                     Exercise = '$ex',
                     Water_area = '$wa',
                     Near_factory = '$nf'
-                    Where Hcid = '$id'
+                    Where Hcid = '$id';
                     ";
                     if(mysqli_query($con,$query)){
                         echo "<script>alert('แก้ไขข้อมูลเรียบร้อย'); location.href = 'adddata-old-case.php?id=$id'</script>";

@@ -92,7 +92,7 @@
     $result = mysqli_query($con,$sql);
     while($row = mysqli_fetch_array($result)){
         $id = $row["Hcid"];
-        $y = $row["Year"];
+        $y = $row["Years"];
         $d = $row["Date_of_Health"];
         $w = $row["Weight"];
         $h = $row["Height"];
