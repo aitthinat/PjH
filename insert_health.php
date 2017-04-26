@@ -1,5 +1,5 @@
 <?php include "connection.php"; 
-    $cid = isset($_SESSION['id'])? $_SESSION['id']: '';
+    $id = isset($_POST['id'])? $_SESSION['id']: '';
     $d = isset($_POST['date'])? $_POST['date']: '';
     $bg = isset($_POST['BloodGroup'])? $_POST['BloodGroup']: '';
     $sys = isset($_POST['SYS'])? $_POST['SYS']: '';
@@ -17,10 +17,10 @@
     $wa = isset($_POST['homeArea1'])? $_POST['homearea1']: '';
     $nf = isset($_POST['homeArea2'])? $_POST['homearea2']: '';
 
-    $insert = "INSERT INTO health_info VALUES($cid,year($d),$d,$bg,$sys,$dia,$fbs,$w,$h,$ch,$in,$f,$di,$boa,$bos,$ex,$wa,$nf)";
+    $insert = "INSERT INTO health_info VALUES($cid,year($d),$d,$bg,$sys,$dia,$fbs,$w,$h,$ch,$in,$f,$di,$dr,$sm,$ex,$wa,$nf)";
     $query = mysqli_query($con,$insert);
     if($query){
-        echo "<script>alert('เพิ่มข้อมูลเรียบร้อย'); location.href = 'index.php';</script>";
+        echo "<script>alert('เพิ่มข้อมูลเรียบร้อย'); location.href = 'info_edd.php';</script>";
     }else{
         echo "<script>alert('ไม่สามารถเพิ่มข้อมูลได้'); location.href='adddata.php'; </script>";
     }

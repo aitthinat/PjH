@@ -4,23 +4,36 @@
     $id = $_GET['id'];
 ?>
 <?php 
-if (!empty($_POST["findhome"])) {
-  $findhome = $_POST["findhome"];
-}
-if (!empty($_POST["findFname"])) {
-  $findFname = $_POST["findFname"];
-}
-if (!empty($_POST["findLname"])) {
-  $findLname = $_POST["findLname"];
-}
-if (!empty($_POST["sex"])) {
-  $sex = $_POST["sex"];
-}
-if (!empty($_POST["age"])) {
-  $age = $_POST["age"];
-}
-?>
+    
+    $d = isset($_POST['date'])? $_POST['date']: '';
+    $bg = isset($_POST['BloodGroup'])? $_POST['BloodGroup']: '';
+    $sys = isset($_POST['SYS'])? $_POST['SYS']: '';
+    $dia = isset($_POST['DIA'])? $_POST['DIA']: '';
+    $fbs = isset($_POST['FBS'])? $_POST['FBS']: '';
+    $w = isset($_POST['weight'])? $_POST['weight']: '';
+    $h = isset($_POST['height'])? $_POST['height']: '';
+    $ch = isset($_POST['chr'])? $_POST['chr']: '';
+    $in = isset($_POST['into'])? $_POST['into']: '';
+    $di = isset($_POST['disa'])? $_POST['disa']: '';
+    $f = isset($_POST['food'])? $_POST['food']: '';
+    $bos = isset($_POST['Smoke'])? $_POST['Smoke']: '';
+    $boa = isset($_POST['Drink'])? $_POST['Drink']: '';
+    $ex = isset($_POST['exercise'])? $_POST['exercise']: '';
+    $wa = isset($_POST['homeArea1'])? $_POST['homearea1']: '';
+    $nf = isset($_POST['homeArea2'])? $_POST['homearea2']: '';
+    $year = explode("-", $d);
+    
 
+    if(isset($_POST["insert"])){
+        $query = "INSERT INTO health_info VALUES('$id','$year[0]','$d','$bg','$sys','$dia','$fbs','$w','$h','$ch','$in','$f','$di','$bos','$bos','$ex','$wa','$nf')";
+        $result = mysqli_query($con,$query);
+        if($result){
+            echo "<script>alert('เพิ่มข้อมูลเรียบร้อย'); location.href = 's_record.php';</script>";
+        }else{
+            echo "<script>alert('ไม่สามารถเพิ่มข้อมูลได้'); location.href='adddata.php?id=$id'; </script>";
+        }
+    }
+?>
 
 <script language="Javascript">
   function disabled_TE()
@@ -52,7 +65,7 @@ if (!empty($_POST["age"])) {
     var date = document.forms["myForm"]["date"].value;
     var chr = document.forms["myForm"]["chr"].value;
     var fbs = document.forms["myForm"]["FBS"].value;
-    var selfh = document.forms["myForm"]["sh"].value;
+    
 
     var sys_oper = 0
     var bg_oper = 0
@@ -263,8 +276,31 @@ if (!empty($_POST["age"])) {
         document.getElementById("fl2").style.visibility = 'hidden';    
         fbs_oper = 0;
       }
+    } if ( disa == null || disa == "" ) {
+      document.getElementById("dis_DIV").className += " has-danger";
+      disa_oper = 1;
+    } else {
+      if ( document.getElementById("dis_DIV").className.match(/(?:^|\s)has-danger(?!\S)/) ){
+        document.getElementById("dis_DIV").className = document.getElementById("dis_DIV").className.replace( /(?:^|\s)has-danger(?!\S)/g , " " );
+        document.getElementById("dis_DIV").className += " has-success";
+        disa_oper = 0;
+      } else {
+        document.getElementById("dis_DIV").className += " has-success";
+        disa_oper = 0;
+      }
     }
-    if (sys_oper || bg_oper || dia_oper || w_oper || h_oper || d_oper || s_oper || ex_oper || tex_oper || fbs_oper){
+    if(food == null || food == ""){
+       alert("กรุณากรอกข้อมูลให้ครบถ้วน");
+       return false;
+    }
+    if(into == null || into == "" ){
+        alert("กรุณากรอกข้อมูลให้ครบถ้วน");
+        return false;
+    }if(ch == null||ch == ""){
+        alert("กรุณากรอกข้อมูลให้ครบถ้วน");
+        return false;
+    }
+    if (sys_oper || bg_oper || dia_oper || w_oper || h_oper || d_oper || s_oper || ex_oper || tex_oper || fbs_oper||disa_oper){
      alert("กรุณากรอกข้อมูลให้ครบถ้วน");
      return false;
    }
@@ -281,7 +317,7 @@ if (!empty($_POST["age"])) {
       <div class="col-lg-12">
         <div style="width:100%" >
           <div align="center" style="padding-top:10px;padding-bottom:20px"><h1>บันทึกข้อมูลการตรวจสุขภาพ</h1></div>
-          <form name="myForm" action = "insert_health.php" onsubmit="return validateForm()">
+          <form name="myForm"  method="POST" onsubmit="return validateForm()">
               <div class="form-group row" style="margin-left:10%;margin-right:10%" id="lname_div">
             <label class="col-2 col-form-label">วันที่</label>
             <div class="col-10">
@@ -290,12 +326,13 @@ if (!empty($_POST["age"])) {
             </div>
             </div>
             <?php 
-                $sql = "SELECT Title,Fname,Lname FROM person WHERE Citizen_ID = '$id'";
+                $sql = "SELECT Title,Fname,Lname, Year(CURRENT_DATE)-Year(Birth_date) AS Age FROM person WHERE Citizen_ID = '$id'";
                 $result = mysqli_query($con,$sql);
                 while($row = mysqli_fetch_array($result)){
                     $title = $row["Title"];
                     $fname = $row["Fname"];
                     $lname = $row["Lname"];
+                    $age = $row["Age"];
                 }
             ?>
               <div class="form-check form-group row" style="margin-left:10%">
@@ -375,7 +412,7 @@ if (!empty($_POST["age"])) {
             <label class="col-2 col-form-label">อายุ</label>
             <label class="form-check-label">
               <label style="padding-right:10px"><?php
-                  echo $Age; ?>
+                  echo $age; ?>
                 </label><label style="padding-right:20px">ปี</label>
             </label>
           </div>

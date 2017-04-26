@@ -3,6 +3,7 @@
 <?php
     $id = $_GET['id'];
 ?>
+
 <script language="Javascript">
   function disabled_TE()
   {
@@ -91,14 +92,15 @@ $(document).ready(function() {
 });
 </script>
 <?php 
-    $sql = "SELECT Title,Fname,Lname FROM person WHERE Citizen_ID = '$id'";
-    $result = mysqli_query($con,$sql);
-    while($row = mysqli_fetch_array($result)){
-        $title = $row["Title"];
-        $fname = $row["Fname"];
-        $lname = $row["Lname"];
-    }
-?>
+                $sql = "SELECT Title,Fname,Lname,  Year(CURRENT_DATE)-Year(Birth_date) AS Age FROM person WHERE Citizen_ID = '$id'";
+                $result = mysqli_query($con,$sql);
+                while($row = mysqli_fetch_array($result)){
+                    $title = $row["Title"];
+                    $fname = $row["Fname"];
+                    $lname = $row["Lname"];
+                    $age = $row["Age"];
+                }
+            ?>
 <div>
   
   <div class="container" style="background:white" >
@@ -126,7 +128,7 @@ $(document).ready(function() {
           <div class="form-check form-group row" style="margin-left:10%">
           <label class="col-2 col-form-label">ปี (พ.ศ.)</label>
             <label class="form-check-label"><?php
-                $sql = "SELECT * FROM health_info WHERE Hcid = '$cid'";
+                $sql = "SELECT * FROM health_info WHERE Hcid = '$id'";
                 $re = mysqli_query($con,$sql);
                 echo "<select class='custom-select'>";
                 echo "<option selected>-----กรุณาเลือกปีที่ต้องการทราบ-----</option>";

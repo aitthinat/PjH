@@ -3,71 +3,7 @@
 <?php
     $id = $_GET['id'];
 ?>
-<?php 
-    $derr ="";
-    $bgerr= "";
-    $syserr = "";
-    $diaerr = "";
-    $fbserr = "";
-    $werr = "";
-    $herr = "";
-    $cherr = "";
-    $inerr = "";
-    $dierr = "";
-    $ferr = "";
-    $smerr = "";
-    $drerr = "";
-    $envierr = "";
-    if(empty($_POST["date"])){
-        $derr = "";
-    }else{
-        $d = $_POST["date"];
-    }if(empty($_POST["BloodGroup"])){
-        $bgerr = "";
-    }else{
-        $bg = $_POST["BloodGroup"];
-    }if(empty($_POST["SYS"])){
-        $syserr = "";
-    }else{
-        $sys = $_POST["SYS"];
-    }if(empty($_POST["DIA"])){
-        $diaerr = "";
-    }else{
-        $dia = $_POST["DIA"];
-    }if(empty($_POST["FBS"])){
-        $fbserr = "";
-    }else{
-        $fbs = $_POST["FBS"];
-    }if(empty($_POST["weight"])){
-        $werr = "";
-    }else{
-        $w = $_POST["weight"];
-    }if(empty($_POST["height"])){
-        $herr = "";
-    }else{
-        $h = $_POST["height"];
-    }if(empty($_POST["chr"])){
-        $cherr = "";
-    }else{
-        $ch = $_POST["chr"];
-    }if(!empty($_POST["disa"])){
-        $di = $_POST["disa"];
-    }if(empty($_POST["food"])){
-        $ferr = "";
-    }else{
-        $f = $_POST["food"];
-    }if(empty($_POST["into"])){
-        $inerr = "";
-    }else{
-        $in = $_POST["into"];
-    }if(!empty($_POST["Smoke"])){
-        $sm = $_POST["Smoke"];
-    }if(!empty($_POST["Drink"])){
-        $dr = $_POST["Drink"];
-    }if(!empty($_POST["exercise"])){
-        $ex = $_POST["exercise"];
-    }
-?>
+
 <script language="Javascript">
   function disabled_TE()
   {
@@ -185,10 +121,10 @@
 <div>
 <div class="row">
 <div class="form-check form-group col" style="margin-left:10%">
-    <label class="col-form-label"><a href="adddata-old-case-edit.php" style="color: red"><u>แก้ไขข้อมูล</u></a></label>
+    <label class="col-form-label"><?php echo "<a href='adddata-old-case-edit.php?id=$id' style='color: red'>"?><u>แก้ไขข้อมูล</u></a></label>
   </div>
   <div class="form-check form-group col" style="margin-right:10%" align="right">
-    <label class="col-form-label"><a href="#" style="color: red"><u>ดูข้อมูลย้อนหลัง</u></a></label>
+    <label class="col-form-label"><?php echo "<a href='adddata-old-case-view.php?id=$id' style='color: red'>"?><u>ดูข้อมูลย้อนหลัง</u></a></label>
   </div>
 </div>
     <div class="container" style="background:white" d>
@@ -204,12 +140,13 @@
             </div>
             </div>
             <?php 
-                $sql = "SELECT Title,Fname,Lname FROM person WHERE Citizen_ID = '$id'";
+                $sql = "SELECT Title,Fname,Lname, Year(CURRENT_DATE)-Year(Birth_date) AS Age FROM person WHERE Citizen_ID = '$id'";
                 $result = mysqli_query($con,$sql);
                 while($row = mysqli_fetch_array($result)){
                     $title = $row["Title"];
                     $fname = $row["Fname"];
                     $lname = $row["Lname"];
+                    $age = $row["Age"];
                 }
             ?>
               <div class="form-check form-group row" style="margin-left:10%">
@@ -270,9 +207,9 @@
               <label class="col-2 col-form-label">อายุ</label>
               <label class="form-check-label">
                 <label style="padding-right:10px">
-                   <!--  <?php 
-                        echo $Age;
-                    ?>--> 
+                   <?php 
+                        echo $age;
+                    ?> 
                   </label><label style="padding-right:20px">ปี</label>
               </label>
             </div>

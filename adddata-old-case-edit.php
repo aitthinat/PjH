@@ -79,29 +79,80 @@
 }
 
 </script>
+
 <?php 
-    $sql = "SELECT * FROM health_info WHERE Hcid = '$cid' ";
-    $result = mysqli_query($con,$sql);
-    #echo mysqli_num_rows($result);
-    while($row = mysqli_fetch_array($result)){
-        $id = $row["Hcid"];
-        $y = $row["Year"];
-        $d = $row["Date_of_Health"];
-        $w = $row["Weight"];
-        $h = $row["Height"];
-        $bg = $row["Blood_group"];
-        $dis= $row["Disability"];
-        $into = $row["Intolerance"];
-        $food = $row["Food_allergies"];
-        $sys = $row["BP_SYS"];
-        $dia = $row["BP_DIA"];
-        $fbs = $row["FBS"];
-        $chr = $row["Chronic_Disease"];
-        $bos = $row["BOS"];
-        $boa = $row["BOA"];
-        $ex = $row["Exercise"];
-        $wa = $row["Water_area"];
-        $nf = $row["Near_factory"];
+
+    $derr ="";
+    $bgerr= "";
+    $syserr = "";
+    $diaerr = "";
+    $fbserr = "";
+    $werr = "";
+    $herr = "";
+    $cherr = "";
+    $inerr = "";
+    $dierr = "";
+    $ferr = "";
+    $smerr = "";
+    $drerr = "";
+    $waerr = "";
+    $nferr = "";
+    if(empty($_POST["date"])){
+        $derr = "";
+    }else{
+        $d = $_POST["date"];
+    }if(empty($_POST["BloodGroup"])){
+        $bgerr = "";
+    }else{
+        $bg = $_POST["BloodGroup"];
+    }if(empty($_POST["SYS"])){
+        $syserr = "";
+    }else{
+        $sys = $_POST["SYS"];
+    }if(empty($_POST["DIA"])){
+        $diaerr = "";
+    }else{
+        $dia = $_POST["DIA"];
+    }if(empty($_POST["FBS"])){
+        $fbserr = "";
+    }else{
+        $fbs = $_POST["FBS"];
+    }if(empty($_POST["weight"])){
+        $werr = "";
+    }else{
+        $w = $_POST["weight"];
+    }if(empty($_POST["height"])){
+        $herr = "";
+    }else{
+        $h = $_POST["height"];
+    }if(empty($_POST["chr"])){
+        $cherr = "";
+    }else{
+        $ch = $_POST["chr"];
+    }if(!empty($_POST["disa"])){
+        $di = $_POST["disa"];
+    }if(empty($_POST["food"])){
+        $ferr = "";
+    }else{
+        $f = $_POST["food"];
+    }if(empty($_POST["into"])){
+        $inerr = "";
+    }else{
+        $in = $_POST["into"];
+    }if(!empty($_POST["Smoke"])){
+        $sm = $_POST["Smoke"];
+    }if(!empty($_POST["Drink"])){
+        $dr = $_POST["Drink"];
+    }if(!empty($_POST["exercise"])){
+        $ex = $_POST["exercise"];
+    }if(empty($_POST["homearea1"])){
+        $waerr = '';
+    }else{
+      $wa = $_POST["homearea1"];
+    }if(empty($_POST["homearea2"])){
+      $nferr = '';
+    }else{
+      $nf = $_POST["homearea2"];
     }
 ?>
 <?php 
@@ -114,10 +165,10 @@
 <div>
 <div class="row">
 <div class="form-check form-group col" style="margin-left:10%">
-    <label class="col-form-label"><a href="adddata-old-case-edit.php" style="color: red"><u>แก้ไขข้อมูล</u></a></label>
+    <label class="col-form-label"><a href="#" style="color: red"><u>แก้ไขข้อมูล</u></a></label>
   </div>
   <div class="form-check form-group col" style="margin-right:10%" align="right">
-    <label class="col-form-label"><a href="adddata-old-case-view.php" style="color: red"><u>ดูข้อมูลย้อนหลัง</u></a></label>
+    <label class="col-form-label"><?php echo "<a href='adddata-old-case-view.php?id=$id' style='color: red'>"?><u>ดูข้อมูลย้อนหลัง</u></a></label>
   </div>
 </div>
     <div class="container" style="background:white" d>
@@ -125,7 +176,31 @@
         <div class="col-lg-12">
           <div style="width:100%" >
             <div align="center" style="padding-top:10px;padding-bottom:20px"><h1>บันทึกข้อมูลการตรวจสุขภาพ</h1></div>
-            <form name="myForm" action="<?$p?>" method="post" onsubmit="return validateForm()">
+            <form name="myForm" action="<?php $p?>" method="POST" onsubmit="return validateForm()">
+              <?php 
+                  $sql = "SELECT * FROM health_info WHERE Hcid = '$id' ";
+                  $result = mysqli_query($con,$sql);
+                  while($row = mysqli_fetch_array($result)){
+                      $id = $row["Hcid"];
+                      $y = $row["Year"];
+                      $d = $row["Date_of_Health"];
+                      $w = $row["Weight"];
+                      $h = $row["Height"];
+                      $bg = $row["Blood_group"];
+                      $dis= $row["Disability"];
+                      $into = $row["Intolerance"];
+                      $food = $row["Food_allergies"];
+                      $sys = $row["BP_SYS"];
+                      $dia = $row["BP_DIA"];
+                      $fbs = $row["FBS"];
+                      $chr = $row["Chronic_Disease"];
+                      $bos = $row["BOS"];
+                      $boa = $row["BOA"];
+                      $ex = $row["Exercise"];
+                      $wa = $row["Water_area"];
+                      $nf = $row["Near_factory"];
+                  }
+              ?>
               <div class="form-group row" style="margin-left:10%;margin-right:10%" id="lname_div">
             <label class="col-2 col-form-label">วันที่</label>
             <div class="col-10">
@@ -133,12 +208,13 @@
             </div>
             </div>
             <?php 
-                $sql = "SELECT Title,Fname,Lname FROM person WHERE Citizen_ID = '$id'";
+                $sql = "SELECT Title,Fname,Lname, Year(CURRENT_DATE)-Year(Birth_date) AS Age FROM person WHERE Citizen_ID = '$id'";
                 $result = mysqli_query($con,$sql);
                 while($row = mysqli_fetch_array($result)){
                     $title = $row["Title"];
                     $fname = $row["Fname"];
                     $lname = $row["Lname"];
+                    $age = $row["Age"];
                 }
             ?>
               <div class="form-check form-group row" style="margin-left:10%">
@@ -202,7 +278,7 @@
               <label class="form-check-label">
                 <label style="padding-right:10px">
                     <?php 
-                        echo $Age;
+                        echo $age;
                     ?>
                   </label><label style="padding-right:20px">ปี</label>
               </label>
@@ -236,21 +312,6 @@
               <input class='form-check-input' type='radio' name='disa' id='disa1' value='$dis' <?php if($dis == 1) echo "checked"?>>พิการ
             </label>
           </div>
-<!--
-          <div class="form-check">
-            <div class="form-check form-group row" style="margin-left:10%">
-              <label class="col-8 col-form-label">ความสามารถในการช่วยเหลือตนเอง</label>
-            </div>
-            <div class="form-check form-group row" style="margin-left:10%">
-              <label class="form-check-label"  style="margin-left:5%">
-                <input disabled="" class="form-check-input" type="radio" name="selfhelp" value="0" id="TE1" disabled>ช่วยเหลือตนเองไม่ได้
-              </label>
-              <label class="form-check-label" style="margin-left:2%">
-                <input disabled="" class="form-check-input" type="radio" name="selfhelp" value="1" id="TE2" disabled>ช่วยเหลือตนเองได้
-              </label>
-            </div>
-          </div>
--->
             <div class="form-check form-group row" style="margin-left:10%">
               <label class="col-8 col-form-label">ข้อมูลในช่วง 1 ปีที่ผ่านมา</label>
             </div>
@@ -305,24 +366,6 @@
                 <input  class='form-check-input' type='radio' name='exercise' id='exercise2' value='$ex' <?php if($ex == 2) echo "checked"?>>4-7 วัน
               </label>
             </div>
-<!--
-            <div class="form-check" >
-              <div class="form-check form-group row" style="margin-left:10%">
-                <label class="col-8 col-form-label">จำนวนชั่วโมงในวันที่ออกกำลังกาย</label>
-              </div>
-              <div class="form-check form-group row" style="margin-left:10%">
-                <label class="form-check-label"  style="margin-left:5%">
-                  <input class="form-check-input" type="radio" name="time-exercise" value="0" id="TE1" disabled>น้อยกว่า 1 ชั่วโมง
-                </label>
-                <label class="form-check-label" style="margin-left:2%">
-                  <input class="form-check-input" type="radio" name="time-exercise" value="1" id="TE2" disabled>1-3 ชั่วโมง
-                </label>
-                <label class="form-check-label" style="margin-left:2%">
-                  <input class="form-check-input" type="radio" name="time-exercise" value="2" id="TE3" disabled>มากกว่า 3 ชั่วโมง
-                </label>
-              </div>
-            </div>
--->
             <div class="form-check form-group row" style="margin-left:10%">
               <label class="col-8 col-form-label">สภาพแวดล้อมบริเวณที่เป็นอยู่</label>
             </div>
@@ -351,16 +394,17 @@
                     Intolerance = '$in',
                     Food_allergies = '$f',
                     Disability = '$di',
-                    BOA = '$dr',
-                    BOS = '$sm',
+                    BOA = '$boa',
+                    BOS = '$bos',
                     Exercise = '$ex',
-                    Environment = '$envi',
-                    Where Hcid = '$cid';
+                    Water_area = $wa,
+                    Near_factory = $nf
+                    Where Hcid = '$id';
                     ";
                     if(mysqli_query($con,$query)){
-                        echo "<script>alert('แก้ไขข้อมูลเรียบร้อย'); location.href = 'adddata.php'</script>";
+                        echo "<script>alert('แก้ไขข้อมูลเรียบร้อย'); location.href = 'adddata-old-case.php?id=$id'</script>";
                     }else{
-                        echo "<script>alert('ไม่สามารถแก้ไขข้อมูลได้'); location.href= 'adddata-old-case-edit.php'</script>";
+                        echo "<script>alert('ไม่สามารถแก้ไขข้อมูลได้'); location.href= 'adddata-old-case-edit.php?id=$id'</script>";
                     }
                 }
                 ?>

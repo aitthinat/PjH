@@ -102,21 +102,21 @@ if (!empty($_POST["age"])) {
                   <tr>
                     <?php 
                       if((!empty($_POST["findhome"]))&&(!empty($_POST["findFname"]))&&(!empty($_POST["findLname"]))){
-                        $query = "SELECT Title,Fname,Lname,HomeNo,Citizen_ID,year, Year(CURRENT_DATE)-Year(Birth_date) AS Age FROM person,home,health_info WHERE Citizen_ID = Hcid and HomeID = Hid and HomeNo = '$findhome' and Fname = '$findFname' and Lname = '$findLname' ORDER BY HomeNo ASC" or die("Error:" . mysqli_error());
+                        $query = "SELECT Title,Fname,Lname,HomeNo,Citizen_ID,year, Year(CURRENT_DATE)-Year(Birth_date) AS Age FROM person,home,health_info WHERE Citizen_ID = Hcid and year(current_date) = year and HomeID = Hid and HomeNo = '$findhome'  and Fname = '$findFname' and Lname = '$findLname' ORDER BY HomeNo ASC" or die("Error:" . mysqli_error());
                       }else if((!empty($_POST["findhome"]))&& (!empty($_POST["findFname"]))){
-                          $query = "SELECT Title,Fname,Lname,HomeNo,Citizen_ID,year, Year(CURRENT_DATE)-Year(Birth_date) AS Age FROM person,home,health_info WHERE Citizen_ID = Hcid and HomeID = Hid and HomeNo = '$findhome' AND Fname = '$findFname' ORDER BY HomeNo ASC" or die("Error:" . mysqli_error());
+                          $query = "SELECT Title,Fname,Lname,HomeNo,Citizen_ID,year, Year(CURRENT_DATE)-Year(Birth_date) AS Age FROM person,home,health_info WHERE Citizen_ID = Hcid and year(current_date) = year and HomeID = Hid and HomeNo = '$findhome' AND Fname = '$findFname' ORDER BY HomeNo ASC" or die("Error:" . mysqli_error());
                       }else if((!empty($_POST["findhome"]))&&(!empty($_POST["findLname"]))){
-                          $query = "SELECT Title,Fname,Lname,HomeNo,Citizen_ID,year, Year(CURRENT_DATE)-Year(Birth_date) AS Age FROM person LEFT OUTER JOIN health_info ON Citizen_id = Hcid JOIN home ON Hid = HomeID AND HomeNo = '$findhome' AND Lname = '$findLname' ORDER BY HomeNo ASC" or die("Error:" . mysqli_error());
+                          $query = "SELECT Title,Fname,Lname,HomeNo,Citizen_ID,year, Year(CURRENT_DATE)-Year(Birth_date) AS Age FROM person LEFT OUTER JOIN health_info ON Citizen_id = Hcid and year(current_date) = year JOIN home ON Hid = HomeID AND HomeNo = '$findhome' AND Lname = '$findLname' ORDER BY HomeNo ASC" or die("Error:" . mysqli_error());
                       }else if((!empty($_POST["findFname"]))&&(!empty($_POST["findLname"]))){
-                          $query = "SELECT Title,Fname,Lname,HomeNo,Citizen_ID,year, Year(CURRENT_DATE)-Year(Birth_date) AS Age FROM person,home,health_info WHERE Citizen_ID = Hcid and HomeID = Hid and Fname = '$findFname' and Lname = '$findLname' ORDER BY HomeNo ASC" or die("Error:" . mysqli_error());
+                          $query = "SELECT Title,Fname,Lname,HomeNo,Citizen_ID,year, Year(CURRENT_DATE)-Year(Birth_date) AS Age FROM person,home,health_info WHERE Citizen_ID = Hcid and year(current_date) = year and HomeID = Hid and Fname = '$findFname' and Lname = '$findLname' ORDER BY HomeNo ASC" or die("Error:" . mysqli_error());
                       }
                     
                       else if(!empty($_POST["findhome"])){
-                        $query = "SELECT Title,Fname,Lname,HomeNo,Citizen_ID,year, Year(CURRENT_DATE)-Year(Birth_date) AS Age FROM person LEFT OUTER JOIN health_info ON Citizen_id = Hcid JOIN home ON Hid = HomeID AND HomeNo = '$findhome' ORDER BY HomeNo ASC" or die("Error:" . mysqli_error());
+                        $query = "SELECT Title,Fname,Lname,HomeNo,Citizen_ID,year, Year(CURRENT_DATE)-Year(Birth_date) AS Age FROM person LEFT OUTER JOIN health_info ON Citizen_id = Hcid and year(current_date) = year JOIN home ON Hid = HomeID AND HomeNo = '$findhome' ORDER BY HomeNo ASC" or die("Error:" . mysqli_error());
                       }else if(!empty($_POST["findFname"])){
-                          $query = "SELECT Title,Fname,Lname,HomeNo,Citizen_ID,year, Year(CURRENT_DATE)-Year(Birth_date) AS Age FROM person LEFT OUTER JOIN health_info ON   Citizen_id = Hcid JOIN home ON Hid = HomeID  AND Fname = '$findFname'  ORDER BY HomeNo ASC" or die("Error:" . mysqli_error());
+                          $query = "SELECT Title,Fname,Lname,HomeNo,Citizen_ID,year, Year(CURRENT_DATE)-Year(Birth_date) AS Age FROM person LEFT OUTER JOIN health_info ON   Citizen_id = Hcid and year(current_date) = year JOIN home ON Hid = HomeID  AND Fname = '$findFname'  ORDER BY HomeNo ASC" or die("Error:" . mysqli_error());
                       }else if(!empty($_POST["findLname"])){
-                          $query = "SELECT Title,Fname,Lname,HomeNo,Citizen_ID,year, Year(CURRENT_DATE)-Year(Birth_date) AS Age FROM person LEFT OUTER JOIN health_info ON Citizen_id = Hcid JOIN home ON Hid = HomeID AND Lname = '$findLname' ORDER BY HomeNo ASC" or die("Error:" . mysqli_error());
+                          $query = "SELECT Title,Fname,Lname,HomeNo,Citizen_ID,year, Year(CURRENT_DATE)-Year(Birth_date) AS Age FROM person LEFT OUTER JOIN health_info ON Citizen_id = Hcid and year(current_date) = year JOIN home ON Hid = HomeID AND Lname = '$findLname' ORDER BY HomeNo ASC" or die("Error:" . mysqli_error());
                       }
                       $result = mysqli_query($con,$query);
                       $i = 1;
