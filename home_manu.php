@@ -39,6 +39,7 @@ if (!empty($_POST["age"])) {
 <div style="margin-bottom: 50px">
   <div class="container">
   <div><h2><label class="col-3 col-form-label">ข้อมูลบ้าน</label></h2></div>
+  <a href="form_home.php">เพิ่มข้อมูลบ้าน</a>
     <div>
      <table class="table table-bordered">
                 <thead>

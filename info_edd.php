@@ -102,26 +102,27 @@ if (!empty($_POST["age"])) {
                   <tr>
                     <?php 
                       if((!empty($_POST["findhome"]))&&(!empty($_POST["findFname"]))&&(!empty($_POST["findLname"]))){
-                        $query = "SELECT Title,Fname,Lname,HomeNo,Citizen_ID,year, Year(CURRENT_DATE)-Year(Birth_date) AS Age FROM person,home,health_info WHERE Citizen_ID = Hcid and year(current_date) = year and HomeID = Hid and HomeNo = '$findhome'  and Fname = '$findFname' and Lname = '$findLname' ORDER BY HomeNo ASC" or die("Error:" . mysqli_error());
+                        $query = "SELECT Title,Fname,Lname,HomeNo,Citizen_ID,year, Year(CURRENT_DATE)-Year(Birth_date) AS Age, Hid FROM person,home,health_info WHERE Citizen_ID = Hcid and year(current_date) = year and HomeID = Hid and HomeNo = '$findhome'  and Fname = '$findFname' and Lname = '$findLname' ORDER BY HomeNo ASC" or die("Error:" . mysqli_error());
                       }else if((!empty($_POST["findhome"]))&& (!empty($_POST["findFname"]))){
-                          $query = "SELECT Title,Fname,Lname,HomeNo,Citizen_ID,year, Year(CURRENT_DATE)-Year(Birth_date) AS Age FROM person,home,health_info WHERE Citizen_ID = Hcid and year(current_date) = year and HomeID = Hid and HomeNo = '$findhome' AND Fname = '$findFname' ORDER BY HomeNo ASC" or die("Error:" . mysqli_error());
+                          $query = "SELECT Title,Fname,Lname,HomeNo,Citizen_ID,year, Year(CURRENT_DATE)-Year(Birth_date) AS Age, Hid FROM person,home,health_info WHERE Citizen_ID = Hcid and year(current_date) = year and HomeID = Hid and HomeNo = '$findhome' AND Fname = '$findFname' ORDER BY HomeNo ASC" or die("Error:" . mysqli_error());
                       }else if((!empty($_POST["findhome"]))&&(!empty($_POST["findLname"]))){
-                          $query = "SELECT Title,Fname,Lname,HomeNo,Citizen_ID,year, Year(CURRENT_DATE)-Year(Birth_date) AS Age FROM person LEFT OUTER JOIN health_info ON Citizen_id = Hcid and year(current_date) = year JOIN home ON Hid = HomeID AND HomeNo = '$findhome' AND Lname = '$findLname' ORDER BY HomeNo ASC" or die("Error:" . mysqli_error());
+                          $query = "SELECT Title,Fname,Lname,HomeNo,Citizen_ID,year, Year(CURRENT_DATE)-Year(Birth_date) AS Age, Hid FROM person LEFT OUTER JOIN health_info ON Citizen_id = Hcid and year(current_date) = year JOIN home ON Hid = HomeID AND HomeNo = '$findhome' AND Lname = '$findLname' ORDER BY HomeNo ASC" or die("Error:" . mysqli_error());
                       }else if((!empty($_POST["findFname"]))&&(!empty($_POST["findLname"]))){
-                          $query = "SELECT Title,Fname,Lname,HomeNo,Citizen_ID,year, Year(CURRENT_DATE)-Year(Birth_date) AS Age FROM person,home,health_info WHERE Citizen_ID = Hcid and year(current_date) = year and HomeID = Hid and Fname = '$findFname' and Lname = '$findLname' ORDER BY HomeNo ASC" or die("Error:" . mysqli_error());
+                          $query = "SELECT Title,Fname,Lname,HomeNo,Citizen_ID,year, Year(CURRENT_DATE)-Year(Birth_date) AS Age, Hid FROM person,home,health_info WHERE Citizen_ID = Hcid and year(current_date) = year and HomeID = Hid and Fname = '$findFname' and Lname = '$findLname' ORDER BY HomeNo ASC" or die("Error:" . mysqli_error());
                       }
                     
                       else if(!empty($_POST["findhome"])){
-                        $query = "SELECT Title,Fname,Lname,HomeNo,Citizen_ID,year, Year(CURRENT_DATE)-Year(Birth_date) AS Age FROM person LEFT OUTER JOIN health_info ON Citizen_id = Hcid and year(current_date) = year JOIN home ON Hid = HomeID AND HomeNo = '$findhome' ORDER BY HomeNo ASC" or die("Error:" . mysqli_error());
+                        $query = "SELECT Title,Fname,Lname,HomeNo,Citizen_ID,year, Year(CURRENT_DATE)-Year(Birth_date) AS Age, Hid FROM person LEFT OUTER JOIN health_info ON Citizen_id = Hcid and year(current_date) = year JOIN home ON Hid = HomeID AND HomeNo = '$findhome' ORDER BY HomeNo ASC" or die("Error:" . mysqli_error());
                       }else if(!empty($_POST["findFname"])){
-                          $query = "SELECT Title,Fname,Lname,HomeNo,Citizen_ID,year, Year(CURRENT_DATE)-Year(Birth_date) AS Age FROM person LEFT OUTER JOIN health_info ON   Citizen_id = Hcid and year(current_date) = year JOIN home ON Hid = HomeID  AND Fname = '$findFname'  ORDER BY HomeNo ASC" or die("Error:" . mysqli_error());
+                          $query = "SELECT Title,Fname,Lname,HomeNo,Citizen_ID,year, Year(CURRENT_DATE)-Year(Birth_date) AS Age, Hid FROM person LEFT OUTER JOIN health_info ON   Citizen_id = Hcid and year(current_date) = year JOIN home ON Hid = HomeID  AND Fname = '$findFname'  ORDER BY HomeNo ASC" or die("Error:" . mysqli_error());
                       }else if(!empty($_POST["findLname"])){
-                          $query = "SELECT Title,Fname,Lname,HomeNo,Citizen_ID,year, Year(CURRENT_DATE)-Year(Birth_date) AS Age FROM person LEFT OUTER JOIN health_info ON Citizen_id = Hcid and year(current_date) = year JOIN home ON Hid = HomeID AND Lname = '$findLname' ORDER BY HomeNo ASC" or die("Error:" . mysqli_error());
+                          $query = "SELECT Title,Fname,Lname,HomeNo,Citizen_ID,year, Year(CURRENT_DATE)-Year(Birth_date) AS Age, Hid FROM person LEFT OUTER JOIN health_info ON Citizen_id = Hcid and year(current_date) = year JOIN home ON Hid = HomeID AND Lname = '$findLname' ORDER BY HomeNo ASC" or die("Error:" . mysqli_error());
                       }
                       $result = mysqli_query($con,$query);
                       $i = 1;
                           while($row = mysqli_fetch_array($result)){
                             $id = $row["Citizen_ID"];
+                            $idhome = $row["Hid"];
                                 echo "<tr>";
                                     echo "<th >". $i ."</th>";
                                     echo "<th>" .$row["Title"] . "</th>";  
@@ -136,48 +137,22 @@ if (!empty($_POST["age"])) {
                                        echo "<td><a href='adddata-old-case.php?id=$id' style='color: green'>ตรวจแล้ว</a></td>";
                                        
                                     }
-                                    echo "<td><a href='adddata-old-case-edit.php'><button type='button' class='btn btn-primary'>แก้ไขข้อมูล</button></a></td>";
-                                    echo "<td><a href='adddata-old-case-edit.php'><button type='button' class='btn btn-primary'>ลบข้อมูล</button></a></td>";
+                                    echo "<td><a href='edit_inval.php?id=$id'><button type='button' class='btn btn-primary'>แก้ไขข้อมูล</button></a></td>";
+                                    echo "<td><a href='delete_person.php?id=$id'><button type='button' class='btn btn-primary'>ลบข้อมูล</button></a></td>";
                                 echo "</tr>";
                                 $i++;
                               #mysqli_close($con);
-                              #echo $_SESSION['id'] = $row["Citizen_ID"]+ "    ";
-                              
-                             
+                              #echo $_SESSION['id'] = $row["Citizen_ID"]+ "    ";           
                       }
                       ?>
                   </tr>
               </tbody>
             </table>
-            <div class="form-check form-group row " style="margin-left:8px;margin-bottom:-12px">
-              <h2>
-                <label class="col-form-label">ข้อมูลที่อยู่อาศัยและที่ทำงาน</label>
-              </h2>
-            </div>
-            <div align="right"><a href=""><button type="button" class="btn btn-primary">Edit</button></a></div>
-          </div>
-          <table class="table table-bordered">
-            <tbody>
-              <tr>
-                <th scope="row">ขนาดที่อยู่อาศัย</th>
-                <th>มี</th>
-                <th>1 ไร่</th>
-                <th>20 ตารางเมตร</th>
-              </tr>
-              <tr>
-                <th scope="row">ขนาดที่ประกอบอาชีพ</th>
-                <th>ไม่มี</th>
-                <th>0 ไร่</th>
-                <th>0 ตารางเมตร</th>
-              </tr>
-            </tbody>
-          </table>
-
         </div>
       </div>
     </div>
   </div>
-  <div style="padding-right:80px;padding-top: 20px" align="right"><a href="add_inval.php"><img class="img-responsive" src="img/onpage_1-2.png" height="200" width="200"></a></div>
+  <div style="padding-right:80px;padding-top: 20px" align="right"><?php echo ";<a href='add_inval.php?Hid=$idhome' >" ?> <img class="img-responsive" src="img/onpage_1-2.png" height="200" width="200"></a></div> 
 <!--</div>-->
 
 <!--?php include "foot.php" ?>

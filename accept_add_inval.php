@@ -1,7 +1,9 @@
 <?php include "head.php" ?>
 <?php include "connection.php" ?>
-<?php 
 
+<?php 
+$idhome = $_GET['Hid'];
+$title = $_POST["title"]; 
 $fname = $_POST["fname"]; 
 $lname = $_POST["lname"]; 
 $sex = $_POST["sex"]; 
@@ -10,8 +12,16 @@ $txtID2 = $_POST["txtID2"];
 $txtID3 = $_POST["txtID3"]; 
 $txtID4 = $_POST["txtID4"]; 
 $txtID5 = $_POST["txtID5"]; 
+$txtresult = $txtID1.$txtID2.$txtID3.$txtID4.$txtID5;
+
+$Bdate = $_POST["Bdate"];
 
 $status = $_POST["status"]; 
+if ($status == "1") {
+    $RWO = "1";
+} else {
+    $RWO = $_POST["RWO"]; 
+}
 $educate = $_POST["educate"]; 
 $job = $_POST["job"]; 
 $salary = $_POST["salary"]; 
@@ -24,14 +34,25 @@ $tel = $_POST["tel"];
 
 </script>
 
+<?php 
+//Sending form data to sql db.
+$sql_insert = "INSERT INTO Person VALUES('$txtresult','$title','$fname','$lname','$Bdate','$tel',$educate,$job,$salary,'$RWO','$idhome')";
+mysqli_query($con,$sql_insert); ?>
 
 <div>
     <div class="container" style="background:white">
         <div class="row">
             <div class="col-lg-12">
                 <div style="width:100%" >
-                    <div align="center" style="padding-top:10px;padding-bottom:20px"><h1>ตรวจสอบข้อมูลการบันทึกข้อมูลการตรวจสุขภาพ</h1>   
+                    <div align="center" style="padding-top:10px;padding-bottom:20px"><h1>เพิ่มข้อมูลเสร็จสิ้น</h1>   
                     </div>
+                    <div class="form-check form-group row" style="margin-left:10%">
+                        <label class="col-2 col-form-label">คำนำหน้าชื่อ</label>
+                        <label class="form-check-label">
+
+                            <h4><label style="padding-right:10px"></label><label style="padding-right:20px"><?php echo $title; ?></label></h4>
+                        </label>
+                    </div>                    
                     <div class="form-check form-group row" style="margin-left:10%">
                         <label class="col-2 col-form-label">ชื่อ - สกุล</label>
                         <label class="form-check-label">
@@ -55,17 +76,30 @@ $tel = $_POST["tel"];
                     <div class="form-check form-group row" style="margin-left:10%">
                         <label class="col-2 col-form-label">รหัสประจำตัวประชาชน</label>
                         <label class="form-check-label">
-                            <label style="padding-right:10px"><?php echo $txtID1;?> - <?php echo $txtID2;?> - <?php echo $txtID3;?> - <?php echo $txtID4;?> - <?php echo $txtID5;?></label>
+                            <!-- <label style="padding-right:10px"><?php echo $txtID1;?> - <?php echo $txtID2;?> - <?php echo $txtID3;?> - <?php echo $txtID4;?> - <?php echo $txtID5;?></label> -->
+                            <label style="padding-right:10px"><?php echo $txtresult;?></label>
+                        </label>
+                    </div>
+                    <div class="form-check form-group row" style="margin-left:10%">
+                        <label class="col-2 col-form-label">วันเดือนปีเกิด</label>
+                        <label class="form-check-label">
+                            <?php  echo $Bdate;?>
                         </label>
                     </div>
                     <div class="form-check form-group row" style="margin-left:10%">
                         <label class="col-2 col-form-label">สถานะ</label>
                         <label class="form-check-label">
                             <?php  
-                            if ($status == '1') {
-                                echo "เจ้าบ้าน";
+                            if ($RWO == 1) {
+                                echo "เจ้าบ้าน ";
+                            } else if ($RWO == 2) {
+                                echo "เป็น สามี/ภรรยา กับเจ้าของบ้าน";
+                            } else if ($RWO == 3) {
+                                echo "เป็น บุตร/หลาน กับเจ้าของบ้าน";
+                            } else if ($RWO == 4) {
+                                echo "เป็น พี่/น้อง กับเจ้าของบ้าน";
                             } else {
-                                echo "ลูกบ้าน";
+                                echo "เป็น บิดา/มารดา กับเจ้าของบ้าน";
                             }
                             ?>
                         </label>
@@ -145,7 +179,7 @@ $tel = $_POST["tel"];
                     </label>
                 </div>
                 <div class="form-check form-group row" style="margin-left:10%;margin-right:10%" align="right">
-                    <a href="index.php"><button type="button" class="btn btn-primary" onclick="Finish_Check()">ยืนยันข้อมูล</button></a>
+                    <a href="index.php"><button type="button" class="btn btn-primary" onclick="Finish_Check()">กลับสู่หน้าหลัก</button></a>
                 </div>
             </div>
         </div>

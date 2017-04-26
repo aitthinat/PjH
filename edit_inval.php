@@ -1,6 +1,6 @@
 <?php include "head.php" ?>
 <?php include "connection.php";
-$idhome = $_GET['Hid'];
+$id = $_GET['id'];
 ?>
 <script type="text/javascript"> 
   function keyup(obj,e){
@@ -420,12 +420,29 @@ function isNumber(evt, value) {
     return true;
 }
 </script>
+
+<?php 
+    $sql = "SELECT * FROM person WHERE Citizen_ID = '$id' ";
+    $result = mysqli_query($con,$sql);
+    while($row = mysqli_fetch_array($result)){
+        $id = $row["Citizen_ID"];
+        $title = $row["Title"];
+        $fname = $row["Fname"];
+        $lname = $row["Lname"];
+        $Bdate = $row["Birth_date"];
+        $Tel = $row["Tel"];
+        $Edu= $row["Education"];
+        $Job = $row["Job"];
+        $Salary = $row["Salary"];
+        $RWO = $row["RWO"];
+    }
+?>
 <div>
   <div class="form-check form-group row" style="margin-left:10%;margin-bottom:-12px">
     <h2>
       <label class="col-3 col-form-label">บ้านเลขที่ :</label>
       <label class="col-form-label"><?php 
-            $sql = "SELECT HomeNo,HomeID FROM home WHERE HomeID = '$idhome' ";
+            $sql = "SELECT HomeNo,HomeID FROM home,person WHERE HomeID = Hid and Citizen_ID = '$id' ";
             $result = mysqli_query($con,$sql);
             $res = mysqli_fetch_assoc($result);
             echo $res["HomeNo"];
@@ -435,7 +452,7 @@ function isNumber(evt, value) {
   <div class="form-check form-group row" style="margin-left:10%">
     <h4>
       <label class="col-3 col-form-label">เลขที่ประจำบ้าน :</label>
-      <label class="col-form-label"><?php echo $idhome; ?></label>
+      <label class="col-form-label"><?php echo $res["HomeID"]; ?></label>
     </h4>
   </div>
   <div class="container" style="background:white">
@@ -443,15 +460,15 @@ function isNumber(evt, value) {
       <div class="col-lg-12">
         <div style="width:100%" >
           <div align="center" style="padding-top:10px;margin-bottom:20px"></div>
-          <form name="myForm" action="accept_add_inval.php?Hid=<?php echo "$idhome" ?>" method="POST" onsubmit="return validateForm()">
+          <form name="myForm" action="updatecomplete.php?id=<?php echo "$id" ?>" method="POST" onsubmit="return validateForm()">
           <div class="form-group row" style="margin-left:10%;margin-right:10%" id="title_div">
        <label class="col-2 col-form-label">คำนำหน้าชื่อ</label>
        <div class="col-10">
         <select name="title" class="form-control form-control-lg">
           <option selected value="">----- เลือกคำนำหน้าชื่อ-----</option>
-          <option value="นาย">นาย</option>
-          <option value="นาง">นาง</option>
-          <option value="นางสาว">นางสาว</option>
+          <option value="นาย"<?php if($title == 'นาย') echo "selected"; ?>>นาย</option>
+          <option value="นาง"<?php if($title == 'นาง') echo "selected"; ?>>นาง</option>
+          <option value="นางสาว"<?php if($title == 'นางสาว') echo "selected"; ?>>นางสาว</option>
         </select>
       </div>
       <label class="col-2 col-form-label" id="al" style="visibility: hidden;"></label>
@@ -460,7 +477,7 @@ function isNumber(evt, value) {
             <div class="form-group row" style="margin-left:10%;margin-right:10%" id="fname_div">
               <label class="col-2 col-form-label">ชื่อ - สกุล</label>
               <div class="col-10">
-                <input class="form-control" type="text" id="fname" name="fname" placeholder="ชื่อ" onkeyup="clean_not_char(this)" onkeydown="clean_not_char(this)" onkeypress="return lettersOnly(event)">
+                <input class="form-control" type="text" id="fname" name="fname" placeholder="ชื่อ" onkeyup="clean_not_char(this)" onkeydown="clean_not_char(this)" onkeypress="return lettersOnly(event)" value=<?php echo $fname?>>
               </div>
               <label class="col-2 col-form-label" id="al" style="visibility: hidden;"></label>
               <div class="col-10" id="al3"  style="visibility: hidden;color: red">*กรุณากรอกเฉพาะตัวอักษร</div>
@@ -469,7 +486,7 @@ function isNumber(evt, value) {
           <div class="form-group row" style="margin-left:10%;margin-right:10%" id="lname_div">
             <label class="col-2 col-form-label"></label>
             <div class="col-10">
-              <input class="form-control" type="text" id="lname" name="lname"  placeholder="สกุล" onkeyup="clean_not_char2(this)" onkeydown="clean_not_char2(this)" onkeypress="return lettersOnly(event)">
+              <input class="form-control" type="text" id="lname" name="lname"  placeholder="สกุล" onkeyup="clean_not_char2(this)" onkeydown="clean_not_char2(this)" onkeypress="return lettersOnly(event)" value=<?php echo $lname?>>
             </div>
             <label class="col-2 col-form-label" id="al" style="visibility: hidden;"></label>
             <div class="col-10" id="al4"  style="visibility: hidden;color: red">*กรุณากรอกเฉพาะตัวอักษร</div>
@@ -477,10 +494,10 @@ function isNumber(evt, value) {
           <div class="form-check form-group row" style="margin-left:10%" id="sex_div">
             <label class="col-2 col-form-label">เพศ</label>
             <label class="form-check-label">
-              <input class="form-check-input" type="radio" name="sex" id="sex" value="M"> ชาย
+              <input class="form-check-input" type="radio" name="sex" id="sex" value="M" <?php if($title == 'นาย') echo "checked"?> > ชาย
             </label>
             <label class="form-check-label" style="margin-left:2%">
-              <input class="form-check-input" type="radio" name="sex" id="sex" value="W"> หญิง
+              <input class="form-check-input" type="radio" name="sex" id="sex" value="W" <?php if($title == 'นาง' || $title == 'นางสาว') echo "checked"?>> หญิง
             </label>
           </div>
           <div class="form-group row" style="margin-left:10%;margin-right:10%" id="sex_div">
@@ -490,11 +507,11 @@ function isNumber(evt, value) {
           <div class="form-inline row" style="margin-left:10%;margin-right:10%;margin-bottom: 10px" id="hal6">
             <label class="col-2 col-form-label">รหัสประจำตัวประชาชน : </label>
             <div class="col-10 form-inline">
-              <div><input class="form-control" type="text" name="txtID1" id="txtID1" size="3px" pattern="{1}" maxlength=1 onkeyup="keyup(this,event)" onkeypress="return Numbers(event)"></div><div>-</div>
-              <div><input class="form-control" type="text" name="txtID2" id="txtID2" size="7px" pattern="{4}" maxlength=4 onkeyup="keyup(this,event)" onkeypress="return Numbers(event)"></div><div>-</div>
-              <div><input class="form-control" type="text" name="txtID3" id="txtID3" size="7px" pattern="{5}" maxlength=5 onkeyup="keyup(this,event)" onkeypress="return Numbers(event)"></div><div>-</div>
-              <div><input class="form-control" type="text" name="txtID4" id="txtID4" size="5px" pattern="{2}" maxlength=2 onkeyup="keyup(this,event)" onkeypress="return Numbers(event)"></div><div>-</div>
-              <div><input class="form-control" type="text" name="txtID5" id="txtID5" size="3px" pattern="{1}" maxlength=1 onkeyup="keyup(this,event)" onkeypress="return Numbers(event)"></div><div></div>
+              <div><input class="form-control" type="text" name="txtID1" id="txtID1" size="3px" pattern="{1}" maxlength=1 onkeyup="keyup(this,event)" onkeypress="return Numbers(event)" value=<?php echo $id[0]?> ></div><div>-</div>
+              <div><input class="form-control" type="text" name="txtID2" id="txtID2" size="7px" pattern="{4}" maxlength=4 onkeyup="keyup(this,event)" onkeypress="return Numbers(event)" value=<?php echo $id[1].$id[2].$id[3].$id[4]?> ></div><div>-</div>
+              <div><input class="form-control" type="text" name="txtID3" id="txtID3" size="7px" pattern="{5}" maxlength=5 onkeyup="keyup(this,event)" onkeypress="return Numbers(event)" value=<?php echo $id[5].$id[6].$id[7].$id[8].$id[9]?> ></div><div>-</div>
+              <div><input class="form-control" type="text" name="txtID4" id="txtID4" size="5px" pattern="{2}" maxlength=2 onkeyup="keyup(this,event)" onkeypress="return Numbers(event)" value=<?php echo $id[10].$id[11]?> ></div><div>-</div>
+              <div><input class="form-control" type="text" name="txtID5" id="txtID5" size="3px" pattern="{1}" maxlength=1 onkeyup="keyup(this,event)" onkeypress="return Numbers(event)" value=<?php echo $id[12]?> ></div><div></div>
             </div>
             <label class="col-2 col-form-label" id="al" style="visibility: hidden;"></label>
             <div class="col-10"  style="visibility: hidden;color: red"  id="al6">*กรุณาตรวจสอบใหม่อีกครั้ง</div>
@@ -502,7 +519,7 @@ function isNumber(evt, value) {
           <div class="form-group row" style="margin-left:10%;margin-right:10%" id="lname_div">
             <label class="col-2 col-form-label">วันเดือนปีเกิด</label>
             <div class="col-10">
-              <input class="form-control" type="date" class="form-control" id="Bdate" name="Bdate" placeholder="Date of Birth" maxlength="0">
+              <input class="form-control" type="date" class="form-control" id="Bdate" name="Bdate" placeholder="Date of Birth" maxlength="0" value=<?php echo $Bdate?>>
             </div>
             </div>
           <div class="form-group row" style="margin-left:10%;margin-right:10%" id="status_div">
@@ -511,7 +528,7 @@ function isNumber(evt, value) {
               <div class="form-check">
                <div class="form-inline style">
                 <label class="form-check-label">
-                  <input class="form-check-input" type="radio" name="status" id="status1" value="1" onclick="disabled_RWO()">
+                  <input class="form-check-input" type="radio" name="status" id="status1" value="1" onclick="disabled_RWO()" <?php if($RWO == '1') echo "checked"?>>
                   เจ้าบ้าน
                 </label>
               </div>
@@ -519,7 +536,7 @@ function isNumber(evt, value) {
             <div class="form-check">
               <div class="form-inline style">
                 <label class="form-check-label">
-                  <input class="form-check-input" type="radio" name="status" id="status2" value="2" onclick="enabled_RWO()">
+                  <input class="form-check-input" type="radio" name="status" id="status2" value="2" onclick="enabled_RWO()" <?php if($RWO == '2' ||$RWO == '3' ||$RWO == '4' ||$RWO == '5') echo "checked"?>>
                   ผู้อาศัย
                 </label>
               </div>
@@ -531,12 +548,12 @@ function isNumber(evt, value) {
         <div class="form-group row" style="margin-left:10%;margin-right:10%" id="RWO_div">
          <label class="col-2 col-form-label">ความสัมพันธ์กับเจ้าของบ้าน</label>
          <div class="col-10">
-          <select name="RWO" class="form-control form-control-lg" id="RWO" disabled>
+          <select name="RWO" class="form-control form-control-lg" id="RWO" <?php if($RWO == '2' ||$RWO == '3' ||$RWO == '4' ||$RWO == '5') echo "enabled"?>>
             <option selected value="1">----- เลือกความสัมพันธ์กับเจ้าของบ้าน -----</option>
-            <option value="2">สามี/ภรรยา</option>
-            <option value="3">บุตร/หลาน</option>
-            <option value="4">พี่/น้อง</option>
-            <option value="5">บิดา/มารดา</option>
+            <option value="2" <?php if($RWO == '2') echo "selected"; ?>>สามี/ภรรยา</option>
+            <option value="3"<?php if($RWO == '3') echo "selected"; ?>>บุตร/หลาน</option>
+            <option value="4"<?php if($RWO == '4') echo "selected"; ?>>พี่/น้อง</option>
+            <option value="5"<?php if($RWO == '5') echo "selected"; ?>>บิดา/มารดา</option>
           </select>
         </div>
         <label class="col-2 col-form-label" id="al" style="visibility: hidden;"></label>
@@ -547,11 +564,11 @@ function isNumber(evt, value) {
          <div class="col-10">
           <select name="educate" class="form-control form-control-lg">
             <option selected value="">----- เลือกระดับการศึกษา -----</option>
-            <option value="1">ไม่ได้ศึกษา</option>
-            <option value="2">ประถมศึกษา</option>
-            <option value="3">มัธยมศึกษาตอนต้น</option>
-            <option value="4">มัธยมศึกษาตอนปลาย หรือ อาชีวะศึกษา</option>
-            <option value="5">อุดมศึกษา</option>
+            <option value="1"<?php if($Edu == '1') echo "selected"; ?>>ไม่ได้ศึกษา</option>
+            <option value="2"<?php if($Edu == '2') echo "selected"; ?>>ประถมศึกษา</option>
+            <option value="3"<?php if($Edu == '3') echo "selected"; ?>>มัธยมศึกษาตอนต้น</option>
+            <option value="4"<?php if($Edu == '4') echo "selected"; ?>>มัธยมศึกษาตอนปลาย หรือ อาชีวะศึกษา</option>
+            <option value="5"<?php if($Edu == '5') echo "selected"; ?>>อุดมศึกษา</option>
           </select>
         </div>
         <label class="col-2 col-form-label" id="al" style="visibility: hidden;"></label>
@@ -562,11 +579,11 @@ function isNumber(evt, value) {
         <div class="col-10">
           <select name="job" class="form-control form-control-lg">
             <option selected value="">----- เลือกอาชีพ -----</option>
-            <option value="1">เกษตรกรรม</option>
-            <option value="2">รับจ้าง</option>
-            <option value="3">รับราชการ/รัฐวิสาหกิจ</option>
-            <option value="4">ค้าขาย</option>
-            <option value="5">อื่นๆ</option>
+            <option value="1"<?php if($Job == '1') echo "selected"; ?>>เกษตรกรรม</option>
+            <option value="2"<?php if($Job == '2') echo "selected"; ?>>รับจ้าง</option>
+            <option value="3"<?php if($Job == '3') echo "selected"; ?>>รับราชการ/รัฐวิสาหกิจ</option>
+            <option value="4"<?php if($Job == '4') echo "selected"; ?>>ค้าขาย</option>
+            <option value="5"<?php if($Job == '5') echo "selected"; ?>>อื่นๆ</option>
           </select>
         </div>
         <label class="col-2 col-form-label" id="al" style="visibility: hidden;"></label>
@@ -577,11 +594,11 @@ function isNumber(evt, value) {
        <div class="col-10">
         <select name="salary" class="form-control form-control-lg">
           <option selected value="">----- เลือกรายได้-----</option>
-          <option value="1">ไม่มีรายได้</option>
-          <option value="2">ต่ำกว่า 5,000 บาท</option>
-          <option value="3">5,001 - 9,000 บาท</option>
-          <option value="4">9,001 - 13,000 บาท</option>
-          <option value="5">มากกว่า 13,000 บาท</option>
+          <option value="1"<?php if($Salary == '1') echo "selected"; ?>>ไม่มีรายได้</option>
+          <option value="2"<?php if($Salary == '2') echo "selected"; ?>>ต่ำกว่า 5,000 บาท</option>
+          <option value="3"<?php if($Salary == '3') echo "selected"; ?>>5,001 - 9,000 บาท</option>
+          <option value="4"<?php if($Salary == '4') echo "selected"; ?>>9,001 - 13,000 บาท</option>
+          <option value="5"<?php if($Salary == '5') echo "selected"; ?>>มากกว่า 13,000 บาท</option>
         </select>
       </div>
       <label class="col-2 col-form-label" id="al" style="visibility: hidden;"></label>
@@ -590,7 +607,7 @@ function isNumber(evt, value) {
     <div class="form-group row" style="margin-left:10%;margin-right:10%" id="tel_div">
      <label class="col-2 col-form-label">เบอร์โทรศัพท์</label>
      <div class="col-10">
-      <input class="form-control" type="tel" id="tel" name="tel" placeholder="0960000xxx" onkeyup="validatetel(this)" onkeydown="validatetel(this)">
+      <input class="form-control" type="tel" id="tel" name="tel" placeholder="0960000xxx" onkeyup="validatetel(this)" onkeydown="validatetel(this)" value=<?php echo $Tel?>>
     </div>
     <label class="col-2 col-form-label" id="al" style="visibility: hidden;"></label>
     <div class="col-10"  style="visibility: hidden;color: red"  id="al5">*กรุณาตรวจสอบใหม่อีกครั้ง หากไม่มี ให้เว้นไว้</div>
