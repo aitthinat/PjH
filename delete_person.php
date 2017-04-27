@@ -1,29 +1,11 @@
-
+<?php include "head.php" ?>
 <?php include "connection.php"; 
     $id = $_GET['id'];
 //Sending form data to sql db.
-$sql_deleteC = " DELETE FROM chronic_disease_health WHERE Ccid == '$id' ";
-mysqli_query($con,$sql_deleteC); 
-
-$sql_deleteD = " DELETE FROM disability_health WHERE Dcid == '$id' ";
-mysqli_query($con,$sql_deleteD); 
-
-$sql_deleteE = " DELETE FROM environment_health WHERE Ecid == '$id' ";
-mysqli_query($con,$sql_deleteE); 
-
-$sql_deleteF = " DELETE FROM food_allegies_health WHERE Fcid == '$id' ";
-mysqli_query($con,$sql_deleteF); 
-
-$sql_deleteHh = " DELETE FROM have_health WHERE Hhcid == '$id' ";
-mysqli_query($con,$sql_deleteHh); 
-
-$sql_deleteH = " DELETE FROM health_info WHERE Hcid == '$id' ";
-mysqli_query($con,$sql_deleteH); 
-
-$sql_delete = " DELETE FROM person WHERE Citizen_ID == '$id' ";
+$sql_delete = " DELETE FROM person WHERE Citizen_ID = '$id' ";
 mysqli_query($con,$sql_delete); ?>
 
-<!-- 
+
 <div>
     <div class="container" style="background:white">
         <div class="row">
@@ -40,10 +22,11 @@ mysqli_query($con,$sql_delete); ?>
     </div>
 </div>
 </div>
- -->
 
 
 
 
 
 
+
+<?php include "foot.php" ?>

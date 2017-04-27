@@ -613,7 +613,7 @@ function isNumber(evt, value) {
     <div class="col-10"  style="visibility: hidden;color: red"  id="al5">*กรุณาตรวจสอบใหม่อีกครั้ง หากไม่มี ให้เว้นไว้</div>
   </div>
   <div class="form-check form-group row" style="margin-left:10%;margin-right:10%" align="right">
-    <button type="submit" class="btn btn-primary">Submit</button>
+    <button type="submit"  class="btn btn-primary">Submit</button>
   </div>
 </form>
 </div>
