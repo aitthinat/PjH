@@ -89,18 +89,18 @@ if (empty($_POST["selectDis1"])) {?>
 
             // ================ Different => Array For Delete =====================
 
-            $re_for_del = array_diff($result_hh_b,$result_hh_a);
+            $re_for_del1 = array_values(array_diff($result_hh_b,$result_hh_a));
             
             // ====================================================================
 
             $re_hh = mysqli_query($con, $sql_hh);
-            $n = sizeof($re_for_del); 
-            $count = 0;
+            $n = sizeof($re_for_del1); 
+            $count = 1;
             // ----------------------------------- Delete ---------------------------------------
             while($count != $n+1){ // diff_in_array
                 while($row_all = mysqli_fetch_assoc($re_hh)){ // all_in_array 
-                    if ($re_for_del[$count]==$row_all["Hhcid"]) {
-                        $sql_de = "DELETE FROM have_health WHERE Hhcid='$re_for_del[$count]'";
+                    if ($re_for_del1[$count]==$row_all["Hhcid"]) {
+                        $sql_de = "DELETE FROM have_health WHERE Hhcid='$re_for_del1[$count]'";
                         $result_de = mysqli_query($con, $sql_de);
                     }
                 }
@@ -158,7 +158,7 @@ if (empty($_POST["selectDis2"])) {?>
                                 # code...
                                 echo "<tr><td>" . $i . "</td><td>" . $row["Title"]. "</td><td>" . $row["Fname"]. "</td><td>" . $row["Lname"]. "</td><td>" . $row_h["HomeNo"] . "\tตำบล" . $row_h["Sub_district"] . " อำเภอ". $row_h["District"] . " จังหวัด". $row_h["Province"] . " ". $row_h["Postal_Code"] . "</td></tr>";
 
-                            $result_hh_a[$i-1] = $row["Citizen_ID"];
+                            $result_hh_a2[$i-1] = $row["Citizen_ID"];
                             $i+=1;
                             // ================= INSERT INTO HAVE_HEALTH ====================
                             $sql_check = "SELECT * FROM have_health, person WHERE have_health.Hhcid=person.Citizen_ID AND person.Citizen_ID='$ci' AND have_health.Rno='02'";
@@ -187,24 +187,24 @@ if (empty($_POST["selectDis2"])) {?>
             for ($c = 0; $c < $numOfRows; $c++) 
             { 
                 $row_arr = mysqli_fetch_array($re_hh); 
-                $result_hh_b[$c] = $row_arr["Hhcid"]; 
+                $result_hh_b2[$c] = $row_arr["Hhcid"]; 
             }
             // =======================================
 
             // ================ Different => Array For Delete =====================
 
-            $re_for_del = array_diff($result_hh_b,$result_hh_a);
+            $re_for_del2 = array_values(array_diff($result_hh_b2,$result_hh_a2));
             
             // ====================================================================
 
             $re_hh = mysqli_query($con, $sql_hh);
-            $n = sizeof($re_for_del); 
-            $count = 0;
+            $n = sizeof($re_for_del2); 
+            $count = 1;
             // ----------------------------------- Delete ---------------------------------------
             while($count != $n+1){ // diff_in_array
                 while($row_all = mysqli_fetch_assoc($re_hh)){ // all_in_array 
-                    if ($re_for_del[$count]==$row_all["Hhcid"]) {
-                        $sql_de = "DELETE FROM have_health WHERE Hhcid='$re_for_del[$count]'";
+                    if ($re_for_del2[$count]==$row_all["Hhcid"]) {
+                        $sql_de = "DELETE FROM have_health WHERE Hhcid='$re_for_del2[$count]'";
                         $result_de = mysqli_query($con, $sql_de);
                     }
                 }
@@ -297,20 +297,20 @@ if (empty($_POST["selectDis3"])) {?>
             // =======================================
 
             // ================ Different => Array For Delete =====================
-            $re_for_del = [];
-            $re_for_del = array_diff($result_hh_b,$result_hh_a);
+            // $re_for_del = [];
+            $re_for_del3 = array_values(array_diff($result_hh_b,$result_hh_a));
             
             // ====================================================================
 
             $re_hh = mysqli_query($con, $sql_hh);
-            $n = sizeof($re_for_del); 
-            $count = 0;
-            // print_r($re_for_del);
+            $n = sizeof($re_for_del3); 
+            $count = 1;
+            // print_r($re_for_del3);
             // ----------------------------------- Delete ---------------------------------------
             while($count != $n+1){ // diff_in_array
                 while($row_all = mysqli_fetch_assoc($re_hh)){ // all_in_array 
-                    if ($re_for_del[$count]==$row_all["Hhcid"]) {
-                        $sql_de = "DELETE FROM have_health WHERE Hhcid='$re_for_del[$count]'";
+                    if ($re_for_del3[$count]==$row_all["Hhcid"]) {
+                        $sql_de = "DELETE FROM have_health WHERE Hhcid='$re_for_del3[$count]'";
                         $result_de = mysqli_query($con, $sql_de);
                     }
                 }
