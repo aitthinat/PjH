@@ -60,7 +60,7 @@ if (empty($_POST["selectDis1"])) {?>
                             $sql_check = "SELECT * FROM have_health, person WHERE have_health.Hhcid=person.Citizen_ID AND person.Citizen_ID='$ci' AND have_health.Rno='01'";
                             $re_check = mysqli_query($con, $sql_check);
                             if (mysqli_num_rows($re_check) == 0) {
-                                echo "Insert" . mysqli_num_rows($re_check) . $row["Citizen_ID"];
+                                // echo "Insert" . mysqli_num_rows($re_check) . $row["Citizen_ID"];
                                 $sql_in = "INSERT INTO have_health VALUES('$ci', '01')";
                                 $re_in = mysqli_query($con, $sql_in);
                             }
@@ -95,7 +95,7 @@ if (empty($_POST["selectDis1"])) {?>
 
             $re_hh = mysqli_query($con, $sql_hh);
             $n = sizeof($re_for_del); 
-            $count = 1;
+            $count = 0;
             // ----------------------------------- Delete ---------------------------------------
             while($count != $n+1){ // diff_in_array
                 while($row_all = mysqli_fetch_assoc($re_hh)){ // all_in_array 
@@ -164,7 +164,7 @@ if (empty($_POST["selectDis2"])) {?>
                             $sql_check = "SELECT * FROM have_health, person WHERE have_health.Hhcid=person.Citizen_ID AND person.Citizen_ID='$ci' AND have_health.Rno='02'";
                             $re_check = mysqli_query($con, $sql_check);
                             if (mysqli_num_rows($re_check) == 0) {
-                                echo "Insert" . mysqli_num_rows($re_check) . $row["Citizen_ID"];
+                                // echo "Insert" . mysqli_num_rows($re_check) . $row["Citizen_ID"];
                                 $sql_in = "INSERT INTO have_health VALUES('$ci', '02')";
                                 $re_in = mysqli_query($con, $sql_in);
                             }
@@ -199,7 +199,7 @@ if (empty($_POST["selectDis2"])) {?>
 
             $re_hh = mysqli_query($con, $sql_hh);
             $n = sizeof($re_for_del); 
-            $count = 1;
+            $count = 0;
             // ----------------------------------- Delete ---------------------------------------
             while($count != $n+1){ // diff_in_array
                 while($row_all = mysqli_fetch_assoc($re_hh)){ // all_in_array 
@@ -269,7 +269,7 @@ if (empty($_POST["selectDis3"])) {?>
                             $sql_check = "SELECT * FROM have_health, person WHERE have_health.Hhcid=person.Citizen_ID AND person.Citizen_ID='$ci' AND have_health.Rno='03'";
                             $re_check = mysqli_query($con, $sql_check);
                             if (mysqli_num_rows($re_check) == 0) {
-                                echo "Insert" . mysqli_num_rows($re_check) . $row["Citizen_ID"];
+                                // echo "Insert" . mysqli_num_rows($re_check) . $row["Citizen_ID"];
                                 $sql_in = "INSERT INTO have_health VALUES('$ci', '03')";
                                 $re_in = mysqli_query($con, $sql_in);
                             }
@@ -304,7 +304,7 @@ if (empty($_POST["selectDis3"])) {?>
 
             $re_hh = mysqli_query($con, $sql_hh);
             $n = sizeof($re_for_del); 
-            $count = 1;
+            $count = 0;
             // print_r($re_for_del);
             // ----------------------------------- Delete ---------------------------------------
             while($count != $n+1){ // diff_in_array
