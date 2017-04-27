@@ -134,8 +134,13 @@ $(document).ready(function() {
 
 <br><br>
 <center><select name="type" class="btn btn-default">
-  <option value="2014" style="background-color: #F2A4F2;color: #000000;">2014</option>
-    <option value="2017" style="background-color: #F2A4F2;color: #000000;">2017</option>
+<?php 
+  $sql = "SELECT years FROM health_info WHERE Hcid = '$id'";
+  $res = mysqli_query($con,$sql);
+  while($row = mysqli_fetch_array($res)){
+    echo "<option value='$row[years]' style='background-color: #F2A4F2;color: #000000'>$row[years]</option>";    
+  }
+?>
 
 
   
@@ -152,7 +157,7 @@ $(document).ready(function() {
 
 function multiple_table($type,$id,$age){
 
-     $servername = "localhost";
+$servername = "localhost";
 $username = "root";
 $password = "";
 $dbname = "health";

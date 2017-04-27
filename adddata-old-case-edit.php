@@ -85,7 +85,7 @@
     $result = mysqli_query($con,$sql);
     while($row = mysqli_fetch_array($result)){
         $id = $row["Hcid"];
-        $y = $row["Year"];
+        $y = $row["Years"];
         $d = $row["Date_of_Health"];
         $w = $row["Weight"];
         $h = $row["Height"];
@@ -165,13 +165,13 @@
     }if(!empty($_POST["exercise"])){
         $ex = $_POST["exercise"];
     }if(empty($_POST["homearea1"])){
-        $waerr = '';
+        $wa = 0;
     }else{
-      $wa = $_POST["homearea1"];
+      $wa = 1;
     }if(empty($_POST["homearea2"])){
-      $nferr = '';
+      $nf = 0;
     }else{
-      $nf = $_POST["homearea2"];
+      $nf = 1;
     }
 
     if(isset($_SESSION['PHP_SELF'])){

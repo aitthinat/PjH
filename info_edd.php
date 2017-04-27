@@ -1,5 +1,7 @@
 <?php include "head.php" ?>
-
+<?php
+  $homeid = $_GET['homeid'];
+?>
 <?php 
 session_start();
 include "connection.php";
