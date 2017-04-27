@@ -35,7 +35,7 @@ if (empty($_POST["selectDis1"])) {?>
             <!-- ################################## Link Database ##################################-->
             <br/>
             <?php
-            $sql = "SELECT * FROM person AS p INNER JOIN (SELECT Hcid, MAX(Year) AS Y FROM health_info GROUP BY Hcid) AS dtbl ON p.Citizen_ID = dtbl.Hcid";
+            $sql = "SELECT * FROM person AS p INNER JOIN (SELECT Hcid, MAX(Years) AS Y FROM health_info GROUP BY Hcid) AS dtbl ON p.Citizen_ID = dtbl.Hcid";
             $result = mysqli_query($con, $sql);
 
             if (mysqli_num_rows($result) > 0) {
@@ -48,7 +48,7 @@ if (empty($_POST["selectDis1"])) {?>
                     $sql_h = "SELECT * FROM person, home, health_info WHERE person.Hid=home.HomeID AND person.Citizen_ID=health_info.Hcid";
                     $result_h = mysqli_query($con, $sql_h);
                     while ($row_h = mysqli_fetch_assoc($result_h)) {
-                        if ($row_h["Year"]==$row["Y"] and $row_h["Hcid"]==$row["Citizen_ID"]) {
+                        if ($row_h["Years"]==$row["Y"] and $row_h["Hcid"]==$row["Citizen_ID"]) {
                             # ประมวลผลความเสี่ยง
                             if (((($row_h["Weight"]/pow(($row_h["Height"]*0.01),2)) > 23) AND ($row_h["FBS"] > 100) AND ($row_h["Exercise"]=0)) OR ($row_h["BP_SYS"] >= 120 OR $row_h["BP_DIA"] >= 80)) {
                                 # code...
@@ -139,7 +139,7 @@ if (empty($_POST["selectDis2"])) {?>
             <!-- ################################## Link Database ##################################-->
             <br/>
             <?php
-            $sql = "SELECT * FROM person AS p INNER JOIN (SELECT Hcid, MAX(Year) AS Y FROM health_info GROUP BY Hcid) AS dtbl ON p.Citizen_ID = dtbl.Hcid";
+            $sql = "SELECT * FROM person AS p INNER JOIN (SELECT Hcid, MAX(Years) AS Y FROM health_info GROUP BY Hcid) AS dtbl ON p.Citizen_ID = dtbl.Hcid";
             $result = mysqli_query($con, $sql);
 
             if (mysqli_num_rows($result) > 0) {
@@ -152,7 +152,7 @@ if (empty($_POST["selectDis2"])) {?>
                     $sql_h = "SELECT * FROM person, home, health_info WHERE person.Hid=home.HomeID AND person.Citizen_ID=health_info.Hcid";
                     $result_h = mysqli_query($con, $sql_h);
                     while ($row_h = mysqli_fetch_assoc($result_h)) {
-                        if ($row_h["Year"]==$row["Y"] and $row_h["Hcid"]==$row["Citizen_ID"]) {
+                        if ($row_h["Years"]==$row["Y"] and $row_h["Hcid"]==$row["Citizen_ID"]) {
                             # ประมวลผลความเสี่ยง
                             if ($row_h["BP_SYS"] >= 120 OR $row_h["BP_DIA"] >= 80) {
                                 # code...
@@ -244,7 +244,7 @@ if (empty($_POST["selectDis3"])) {?>
             <br/>
 
             <?php
-            $sql = "SELECT * FROM person AS p INNER JOIN (SELECT Hcid, MAX(Year) AS Y FROM health_info GROUP BY Hcid) AS dtbl ON p.Citizen_ID = dtbl.Hcid";
+            $sql = "SELECT * FROM person AS p INNER JOIN (SELECT Hcid, MAX(Years) AS Y FROM health_info GROUP BY Hcid) AS dtbl ON p.Citizen_ID = dtbl.Hcid";
             $result = mysqli_query($con, $sql);
 
             if (mysqli_num_rows($result) > 0) {
@@ -257,7 +257,7 @@ if (empty($_POST["selectDis3"])) {?>
                     $sql_h = "SELECT * FROM person, home, health_info WHERE person.Hid=home.HomeID AND person.Citizen_ID=health_info.Hcid";
                     $result_h = mysqli_query($con, $sql_h);
                     while ($row_h = mysqli_fetch_assoc($result_h)) {
-                        if ($row_h["Year"]==$row["Y"] and $row_h["Hcid"]==$row["Citizen_ID"]) {
+                        if ($row_h["Years"]==$row["Y"] and $row_h["Hcid"]==$row["Citizen_ID"]) {
                             # ประมวลผลความเสี่ยง
                             if ((($row_h["Weight"]/pow(($row_h["Height"]*0.01),2)) > 25 AND $row_h["FBS"] > 100 AND $row_h["Exercise"]=0) OR ($row_h["BOA"]>0 OR $row_h["BOS"]>0)) {
                                 # code...
@@ -297,7 +297,7 @@ if (empty($_POST["selectDis3"])) {?>
             // =======================================
 
             // ================ Different => Array For Delete =====================
-
+            $re_for_del = [];
             $re_for_del = array_diff($result_hh_b,$result_hh_a);
             
             // ====================================================================
@@ -305,6 +305,7 @@ if (empty($_POST["selectDis3"])) {?>
             $re_hh = mysqli_query($con, $sql_hh);
             $n = sizeof($re_for_del); 
             $count = 1;
+            // print_r($re_for_del);
             // ----------------------------------- Delete ---------------------------------------
             while($count != $n+1){ // diff_in_array
                 while($row_all = mysqli_fetch_assoc($re_hh)){ // all_in_array 
